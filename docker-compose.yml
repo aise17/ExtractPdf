@@ -1,0 +1,73 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:1.15
+    ports:
+      - "8001:80"   # I like working on 80 since you don't need to specify and looking neat on URL
+
+    volumes:
+      - .:/code
+      - ./Extract_refactor/config/nginx:/etc/nginx/conf.d
+      - ./Extract_refactor/static:/static
+    depends_on:
+      - api_web
+
+  dbpostgres:
+    restart: always
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=ExtractPdf
+    ports:
+    - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+
+  redis:
+    image: redis:latest
+    hostname: redis
+    ports:
+     - '6379:6379'
+
+
+  api_web:
+    build: .
+    command: bash -c "cd Extract_refactor && python manage.py makemigrations && python manage.py migrate && gunicorn Extract_refactor.wsgi -b 0.0.0.0:8000"     #production mode
+    #command: bash -c "cd Extract_refactor && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"  # develop mode
+    volumes:
+      - .:/code
+      - ./Extract_refactor/static:/static
+    ports:
+      - "8000:8000"
+    depends_on:
+      - dbpostgres
+      - redis
+      - worker
+    links:
+      - dbpostgres
+      - redis
+
+  # Celery worker
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /code/Extract_refactor
+    command: celery worker -A Extract_refactor.celery --loglevel=info
+    volumes:
+      - .:/code
+    links:
+      - redis
+    depends_on:
+      - redis
+
+volumes:
+  postgres_data:
+
+
+
+
+
