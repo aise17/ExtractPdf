@@ -1,0 +1,43 @@
+<div class="contenedor">
+<div *ngIf="!register">
+  <h1 mat-dialog-title>Sing In</h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.username" placeholder="Username">
+    </mat-form-field>
+    <mat-form-field>
+        <input type="password" matInput [(ngModel)]="data.password" placeholder="Password">
+      </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="registrar(true)">Registrar</button>
+    <button mat-button [mat-dialog-close]="[data.username, data.password]" cdkFocusInitial>Ok</button>
+  </div>
+</div>
+
+<div *ngIf="register">
+    <h1 mat-dialog-title>Registrar</h1>
+    <div mat-dialog-content>
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Porfavor introduce los datos correctamente
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Es <strong>necesario</strong> introducir todos los datos
+          </mat-error>
+      <mat-form-field>
+        <input matInput [(ngModel)]="user.username" placeholder="Username" [formControl]="emailFormControl">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="password" matInput [(ngModel)]="user.password" placeholder="Password" [formControl]="emailFormControl">
+        </mat-form-field>
+        <mat-form-field>
+            <input type="email" matInput  [(ngModel)]="user.email" placeholder="Email" [formControl]="emailFormControl">
+            
+          </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="registrar(false)">Sing In</button>
+      <button mat-button (click)="enviarRegistro()" cdkFocusInitial>Registrar</button>
+    </div>
+</div>
+</div>

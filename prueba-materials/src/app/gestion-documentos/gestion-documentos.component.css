@@ -1,0 +1,17 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .contenedor-prin{
+      max-width: 50%;
+      margin: auto auto;
+      margin-top: 20px;
+  }
+  .mat-paginator{
+    
+  }

@@ -1,0 +1,25 @@
+<app-menu>
+  <div class="contenedor">
+      <div class="info-container">
+        <label>Asunto:</label>
+          <mat-form-field>
+            <input id="asunto" matInput #input_user [(ngModel)]="contacto.asunto" maxlength="100" placeholder="Asunto">
+            <mat-hint align="end">{{input_user.value?.length || 0}}/100</mat-hint>
+          </mat-form-field>
+  
+        <label>Contenido:</label>
+          <mat-form-field>
+            <textarea matInput #input_password [(ngModel)]="contacto.contenido" rows="20" cols="50">
+          </textarea>
+
+          </mat-form-field>
+  
+          <div  >
+            <button mat-raised-button color="primary" (click)='sendEmail()'>Enviar</button>
+          </div>
+        </div>
+      
+        
+      
+      </div>
+    </app-menu>

@@ -1,0 +1,92 @@
+
+<app-menu>
+  <div class="contenedor">
+    <div class="info-container">
+      <label>Usuario:</label>
+      
+          <mat-error *ngIf="passFormControl.hasError('required')">
+            Para modificar<br>
+              Es <strong>necesario</strong> introducir una contraseña y usuario
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Porfavor introduce un email valido
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                Es <strong>necesario</strong> introducir un Email valido
+              </mat-error>
+
+        <mat-form-field>
+          <input matInput #input_user [(ngModel)]="newusuario.username" maxlength="100" 
+          [formControl]="passFormControl" placeholder="{{usuario.username}}">
+          <mat-hint align="end">{{input_user.value?.length || 0}}/100</mat-hint>
+        </mat-form-field>
+
+      <label>Password:</label>
+        <mat-form-field>
+          <input type="password" matInput #input_password [(ngModel)]="newusuario.password" 
+          [formControl]="passFormControl"  maxlength="100" placeholder="password">
+          <mat-hint align="end">{{input_password ?.length || 0}}/100</mat-hint>
+
+        </mat-form-field>
+
+      <label>E-mail:</label>
+        <mat-form-field>
+          <input matInput type="email" #input_email [(ngModel)]="newusuario.email" 
+          placeholder="{{usuario.email}}" [formControl]="emailFormControl" maxlength="100"> 
+
+        </mat-form-field>
+
+      <label>Nombre:</label>
+        <mat-form-field>
+          <input matInput #input_nombre [(ngModel)]="newusuario.first_name" 
+          maxlength="100" placeholder="{{usuario.first_name}}">
+          <mat-hint align="end">{{input_nombre.value?.length || 0}}/100</mat-hint>
+        </mat-form-field>
+
+      <label>Apellido:</label>
+        <mat-form-field>
+          <input matInput #input_apellido [(ngModel)]="newusuario.last_name" 
+          maxlength="100" placeholder="{{usuario.last_name}}">
+          <mat-hint align="end">{{input_apellido?.length || 0}}/100</mat-hint>
+        </mat-form-field>
+        
+
+        <button mat-raised-button disabled *ngIf="emailFormControl.hasError('email') || emailFormControl.hasError('required')">Actualizar</button>
+        <button mat-raised-button color="primary" *ngIf="!emailFormControl.hasError('email') && !emailFormControl.hasError('required')" (click)='change()' >Actualizar</button> 
+           
+      </div>
+    
+      
+    
+    </div>
+
+
+    <div class="col" >
+        <div class="col-md-15">
+          <div style="display: block;">
+          <canvas baseChart width="400" height="100"
+                      [datasets]="lineChartData"
+                      [labels]="lineChartLabels"
+                      [options]="lineChartOptions"
+                      [colors]="lineChartColors"
+                      [legend]="lineChartLegend"
+                      [chartType]="lineChartType"
+                    
+                      ></canvas>
+          </div>
+        </div>
+        <div class="col-md-6" style="margin-bottom: 10px" >
+          <table class="table table-responsive table-condensed">
+            <tr>
+              <th *ngFor="let label of lineChartLabels">{{label}}</th>
+            </tr>
+            <tr *ngFor="let d of lineChartData">
+              <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+            </tr>
+          </table>
+         
+        </div>
+      </div>
+    
+
+</app-menu>

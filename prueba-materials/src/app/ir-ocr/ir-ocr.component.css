@@ -1,0 +1,23 @@
+
+.contenedor{
+    display: flex;
+    justify-content: center;
+    margin: auto auto;
+}
+
+.boton{
+    position: relative;
+    float: left;
+    justify-content: center;
+    height: 100%;
+    width: 600px;
+
+    background-color: transparent;
+    border: solid;
+    border-radius: 10% 10%;
+    text-decoration: none;
+    text-align: center;
+    margin: 10px;
+    color: orangered;
+    font-size: 50px;
+}
