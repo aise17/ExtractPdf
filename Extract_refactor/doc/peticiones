@@ -1,0 +1,9 @@
+
+
+peticion para api token.
+
+se vasara en el usuario y contraseña + id_user y client_secret de la aplicacion.
+
+- curl -X POST -d "grant_type=password&username=admin&password=admin" -u"iQ4VatZNxqlv5kdXodq1jp47Nc57qCML4giA0vvD:6QQEnH8OfLICc45i2ynUU7RjOj5F6o3yvQKAHCOTQqoiaRS9aP9SeGe0OoKiVCPiOvzh0exGv3mS8hxRu79W0CGkc0Ly5kQ3IS1KpS9u6GGraUKBQwr56y7cEL7900Rq" http://localhost:8000/o/token/
+
+- http://localhost:8001/o/token/?grant_type=password&username=admin&password=admin&client_id=iQ4VatZNxqlv5kdXodq1jp47Nc57qCML4giA0vvD&client_secret=6QQEnH8OfLICc45i2ynUU7RjOj5F6o3yvQKAHCOTQqoiaRS9aP9SeGe0OoKiVCPiOvzh0exGv3mS8hxRu79W0CGkc0Ly5kQ3IS1KpS9u6GGraUKBQwr56y7cEL7900Rq

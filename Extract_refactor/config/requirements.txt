@@ -5,7 +5,7 @@ celery==4.2.0
 djangorestframework==3.8.2
 kombu==4.2.1
 numpy==1.14.5
-opencv-python==3.4.1.15
+opencv-python
 Pillow==5.1.0
 pytesseract==0.2.2
 pytz==2018.4
@@ -18,3 +18,5 @@ gunicorn==19.9.0
 django-ckeditor
 django-ipware
 geoip2
+django-oauth-toolkit
+django-cors-headers

@@ -40,7 +40,26 @@ INSTALLED_APPS = [
     'ocr_api.apps.OcrApiConfig',
     'rest_framework',
     'ckeditor',
+    'oauth2_provider',
+    'corsheaders'
+
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
 
 
 MIDDLEWARE = [
@@ -51,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'Extract_refactor.urls'
@@ -154,7 +174,7 @@ CKEDITOR_CONFIGS = {
         'height': 300,
         'width': '100%',
         'language': 'es',
-        'skin': 'Moono',
+        'skin': 'moono',
 
     },
     'code': {
@@ -164,7 +184,7 @@ CKEDITOR_CONFIGS = {
         'removePlugins': 'stylesheetparser',
         'extraPlugins': 'codesnippet',
         'language': 'es',
-        'skin': 'Moono',
+        'skin': 'moono',
 
     },
 }
