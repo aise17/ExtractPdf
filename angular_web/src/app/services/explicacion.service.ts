@@ -9,6 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ExplicacionService {
 
   private explicacionUrl = 'http://localhost:8001/file/explicacion/';
@@ -16,7 +17,7 @@ export class ExplicacionService {
 
   constructor(private http: HttpClient) { }
 
-
+  
   getExplicacion (): Observable<Explicacion[]> {
     return this.http.get<Explicacion[]>(this.explicacionUrl)
       .pipe(

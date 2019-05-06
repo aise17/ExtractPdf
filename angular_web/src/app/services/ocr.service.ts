@@ -25,7 +25,7 @@ export class OcrService {
   constructor(private http: HttpClient) { }
 
 
-  addFile (orc: Ocr): Observable<Response> {
+  addFile (orc: Ocr, api_token: string): Observable<Response> {
 
 
     const headers = new HttpHeaders();
@@ -33,6 +33,7 @@ export class OcrService {
     headers.append('Access-Control-Allow-Origin', '*');
     headers.append('Access-Control-Allow-Headers', 'Content-Type');
     headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Authorization', api_token);
     headers.append('Accept', 'plain/text');
     headers.append('responseType', 'blob');
 

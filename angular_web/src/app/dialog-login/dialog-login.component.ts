@@ -7,6 +7,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { UsuarioService } from '../services/usuario.service';
 import { Usuario } from '../models/usuario.model';
 import { Router } from '@angular/router';
+import { Oauth2Service } from '../services/oauth2.service';
 @Component({
   selector: 'app-dialog-login',
   templateUrl: './dialog-login.component.html',
@@ -24,7 +25,7 @@ export class DialogLoginComponent implements OnInit {
   ]);
 
   constructor(public dialogRef: MatDialogRef<DialogLoginComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, public userService: UsuarioService) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, public userService: UsuarioService, public oauthService: Oauth2Service) { }
 
   ngOnInit() {
   }
@@ -34,8 +35,22 @@ export class DialogLoginComponent implements OnInit {
   }
 
 
+  peticionToken(){
+    this.oauthService.getToken(this.user.username, this.user.password)
+    .subscribe(res => {
+          
+      console.log('peticion de token realizada');
+      console.log(res);
+
+    });
+  }
+
+
   enviarRegistro() {
     if (!this.emailFormControl.hasError('email') && !this.emailFormControl.hasError('required')) {
+
+
+
       this.userService.register(this.user)
       .subscribe(res => {
         console.log(res);
@@ -49,11 +64,19 @@ export class DialogLoginComponent implements OnInit {
         sessionStorage.setItem('email', this.user.email);
         sessionStorage.setItem('first_name', this.user.first_name);
         sessionStorage.setItem('last_name', this.user.last_name);
+
+
+
         this.user = new Usuario();
         window.location.href = '/index';
-      }
+        }
       });
+
+
     }
+  
+  
+  
   }
 
 }

@@ -8,7 +8,9 @@ from django.shortcuts import render
 # Create your views here.
 
 from rest_framework import generics, mixins
+from rest_framework.decorators import permission_classes
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import ArchivoSerializer, ExplicaionSerializer, AnuncioInferiroSerializer, AnuncioLateralSerializer, \
@@ -78,26 +80,27 @@ class FileView(generics.ListCreateAPIView):
 
 
 
+@permission_classes([AllowAny])
 class ExplicacionContent(generics.ListCreateAPIView):
     queryset = Explicacion.objects.filter(publicado=True).order_by('fecha_publicacion')[:3]
     serializer_class = ExplicaionSerializer
 
-
+@permission_classes([AllowAny])
 class AnuncioSuperiroView(generics.ListCreateAPIView):
     queryset = AnuncioSuperior.objects.filter(publicado=True).order_by('fecha_publicacion')[:1]
     serializer_class = AnuncioSuperiorSerializer
 
-
+@permission_classes([AllowAny])
 class AnuncioInferiorView(generics.ListCreateAPIView):
     queryset = AnuncioInferior.objects.filter(publicado=True).order_by('fecha_publicacion')[:1]
     serializer_class = AnuncioInferiroSerializer
 
-
+@permission_classes([AllowAny])
 class AnuncioLateralView(generics.ListCreateAPIView):
     queryset = AnuncioLateral.objects.filter(publicado=True).order_by('fecha_publicacion')[:1]
     serializer_class = AnuncioLateralSerializer
 
-
+@permission_classes([AllowAny])
 class ContactoView(generics.ListCreateAPIView):
     queryset = Incidencia.objects.all()
     serializer_class = IncidenciaSerializers
@@ -156,8 +159,8 @@ class RequestProcessOcrForUser(generics.ListCreateAPIView):
         if request.data.get('id') is not None:
 
             salida['ok'] = True
-            res = self.get_object()
-            ser = IpsFileSerializers(res, many=True)
+            #res = self.get_object()
+            #ser = IpsFileSerializers(res, many=True)
             salida['enero'] = len(IpsFiles.objects.filter(fecha_conexion__month='01', usuario=request.data.get('id')))
             salida['febrero'] = len(IpsFiles.objects.filter(fecha_conexion__month='02', usuario=request.data.get('id')))
             salida['marzo'] = len(IpsFiles.objects.filter(fecha_conexion__month='03', usuario=request.data.get('id')))
@@ -219,7 +222,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
             salida['ok'] = False
         return Response(salida, status=status.HTTP_200_OK)
 
-
+@permission_classes([AllowAny])
 class AuthentificacionUsuario(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -237,7 +240,7 @@ class AuthentificacionUsuario(generics.ListCreateAPIView):
             salida['ok'] = False
         return Response(salida, status=status.HTTP_200_OK)
 
-
+@permission_classes([AllowAny])
 class LogoutUser(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -248,11 +251,12 @@ class LogoutUser(generics.ListCreateAPIView):
         salida['ok'] = True
         return Response(salida, status=status.HTTP_200_OK)
 
-
+@permission_classes([AllowAny])
 class QuienesSomos(generics.ListAPIView):
     queryset = QuienSomos.objects.filter(publicado=True).order_by('fecha_publicacion')[:1]
     serializer_class = QuienSomosSerializer
 
+@permission_classes([AllowAny])
 class RegisterUser(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer

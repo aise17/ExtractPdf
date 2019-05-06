@@ -54,7 +54,7 @@ export class FormOcrComponent implements OnInit {
     this.is_progres = true;
     this.ver_form = false;
 
-    this.ser.addFile( orc )
+    this.ser.addFile( orc, sessionStorage.getItem('api_token') )
       .subscribe(res => {
         if (res !== undefined) {
           this.archivo = res['salida'];
