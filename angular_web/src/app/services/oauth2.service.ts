@@ -18,18 +18,26 @@ export class Oauth2Service {
   getToken (usuario: string, pass: string): Observable<Response> {
 
 
-    const headers = new HttpHeaders();
-    headers.append('Access-Control-Allow-Methods', 'POST');
-    headers.append('Access-Control-Allow-Origin', '*');
-    headers.append('Access-Control-Allow-Headers', 'Content-Type');
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'plain/text');
-    headers.append('responseType', 'blob');
 
-    var token = new ApiToken(usuario, pass);
+   
 
-    console.log(token);
-    return this.http.post<Response>(this.createApiTokenUrl, token, {headers: headers}  ).pipe(
+    var token = new ApiToken(usuario.toString(), pass.toString());
+
+
+    console.log(token)
+
+    const fd = new FormData();
+    fd.append('grant_type', token.grant_type);
+    fd.append('username', token.usuario);
+    fd.append('password', token.pass);
+    fd.append('client_id', token.client_id);
+    fd.append('client_secret', token.client_secret);
+  
+
+  
+
+    console.log(fd);
+    return this.http.post<Response>(this.createApiTokenUrl, fd ).pipe(
       tap((res: Response) => this.log(`get token w/ token=${res}`)),
       catchError(this.handleError<Response>('getToken'))
     );

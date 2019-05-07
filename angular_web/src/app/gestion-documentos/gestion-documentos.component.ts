@@ -63,7 +63,7 @@ export class GestionDocumentosComponent implements OnInit {
   }
 
   getFiles() {
-    this.userService.getFiles(this.usuario)
+    this.userService.getFiles(this.usuario, sessionStorage.getItem('api_token'))
     .subscribe(res => {
       this.files = res['request'];
 

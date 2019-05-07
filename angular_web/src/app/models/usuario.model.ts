@@ -5,6 +5,7 @@ export class Usuario {
     first_name: string;
     last_name: string;
     email: string;
+    access_token: string;
 
     constructor(username?: string, password?: string) {
         this.username = username;

@@ -88,7 +88,7 @@ export class UsuarioDetalleComponent implements OnInit {
 
     console.log( this.newusuario);
     this.newusuario.id = sessionStorage.getItem('id');
-    this.userService.change(this.newusuario)
+    this.userService.change(this.newusuario, sessionStorage.getItem('api_token'))
     .subscribe(res => {
       console.log('salida de cahnge()= ' + res['ok']);
       if (res['ok'] === true ) {
@@ -107,7 +107,7 @@ export class UsuarioDetalleComponent implements OnInit {
 
   getRequest() {
     console.log('get request' + this.usuario.id);
-    this.userService.getRequest(this.usuario)
+    this.userService.getRequest(this.usuario, sessionStorage.getItem('api_token'))
     .subscribe(res => {
        console.log(res);
       this.dict = res;

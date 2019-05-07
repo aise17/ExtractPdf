@@ -4,6 +4,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
 import { UserRequest } from '../models/userRequest.model';
+import { JsonArray } from '@angular-devkit/core';
 
 @Injectable({
   providedIn: 'root'
@@ -20,15 +21,20 @@ export class UsuarioService {
   private filesUrl = 'http://localhost:8001/file/list_files/';
   private registerUrl = 'http://localhost:8001/file/register/';
 
-  getRequest(user: Usuario): Observable<UserRequest> {
+  getRequest(user: Usuario, authorization: string): Observable<UserRequest> {
 
-    const headers = new HttpHeaders();
+    const headers = new HttpHeaders({"Authorization": "Bearer " + authorization});
     headers.append('Access-Control-Allow-Methods', 'POST');
     headers.append('Access-Control-Allow-Origin', '*');
     headers.append('Access-Control-Allow-Headers', 'Content-Type');
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
     headers.append('responseType', 'application/json');
+    headers.append('Authorization', "Bearer " + authorization);
+
+    user.access_token = authorization;
+
+ 
 
     return this.http.post(this.userRequestUrl, user, {headers: headers}  ).pipe(
       tap((res: UserRequest) => this.log(`usuario recivido= ${res}`)),
@@ -36,15 +42,16 @@ export class UsuarioService {
     );
   }
 
-  getFiles(user: Usuario): Observable<UserRequest> {
+  getFiles(user: Usuario, authorization: string): Observable<UserRequest> {
 
-    const headers = new HttpHeaders();
-    headers.append('Access-Control-Allow-Methods', 'POST');
+    const headers = new HttpHeaders({"Authorization": "Bearer " + authorization});
+      headers.append('Access-Control-Allow-Methods', 'POST');
     headers.append('Access-Control-Allow-Origin', '*');
     headers.append('Access-Control-Allow-Headers', 'Content-Type');
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
     headers.append('responseType', 'application/json');
+    headers.append('Authorization', authorization);
 
     return this.http.post(this.filesUrl, user, {headers: headers}  ).pipe(
       tap((res: UserRequest) => this.log(`usuario recivido= ${res}`)),
@@ -109,15 +116,16 @@ export class UsuarioService {
     );
   }
 
-  change(user: Usuario): Observable<Usuario> {
+  change(user: Usuario, authorization: string): Observable<Usuario> {
 
-    const headers = new HttpHeaders();
+    const headers = new HttpHeaders({"Authorization": "Bearer " + authorization});
     headers.append('Access-Control-Allow-Methods', 'PUT');
     headers.append('Access-Control-Allow-Origin', '*');
     headers.append('Access-Control-Allow-Headers', 'Content-Type');
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
     headers.append('responseType', 'blob');
+    
 
     return this.http.put<Usuario>(this.userChangeUrl + user.id, user, {headers: headers}  ).pipe(
       tap((res: Usuario) => this.log(`usuario recivido= ${res['username']}`)),

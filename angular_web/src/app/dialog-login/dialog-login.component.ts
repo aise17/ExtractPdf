@@ -7,7 +7,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { UsuarioService } from '../services/usuario.service';
 import { Usuario } from '../models/usuario.model';
 import { Router } from '@angular/router';
-import { Oauth2Service } from '../services/oauth2.service';
 @Component({
   selector: 'app-dialog-login',
   templateUrl: './dialog-login.component.html',
@@ -25,7 +24,7 @@ export class DialogLoginComponent implements OnInit {
   ]);
 
   constructor(public dialogRef: MatDialogRef<DialogLoginComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, public userService: UsuarioService, public oauthService: Oauth2Service) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, public userService: UsuarioService) { }
 
   ngOnInit() {
   }
@@ -34,16 +33,6 @@ export class DialogLoginComponent implements OnInit {
     this.register = is_register;
   }
 
-
-  peticionToken(){
-    this.oauthService.getToken(this.user.username, this.user.password)
-    .subscribe(res => {
-          
-      console.log('peticion de token realizada');
-      console.log(res);
-
-    });
-  }
 
 
   enviarRegistro() {

@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material';
 import { DialogLoginComponent } from '../dialog-login/dialog-login.component';
 import { UsuarioService } from '../services/usuario.service';
 import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
+import { Oauth2Service } from '../services/oauth2.service';
 
 
 
@@ -26,7 +27,7 @@ export class MenuComponent implements OnInit   {
   username: string;
   password: string;
   usuario: Usuario;
-  constructor(public dialog: MatDialog, private userService: UsuarioService) {
+  constructor(public dialog: MatDialog, private userService: UsuarioService, private oauthService: Oauth2Service) {
    }
    openDialog(): void {
     const dialogRef = this.dialog.open(DialogLoginComponent, {
@@ -51,8 +52,24 @@ export class MenuComponent implements OnInit   {
         sessionStorage.setItem('email', this.user.email);
         sessionStorage.setItem('first_name', this.user.first_name);
         sessionStorage.setItem('last_name', this.user.last_name);
+        console.log('enviando peticion de token')
+        this.peticionToken(this.user.username, this.password);
       }
       });
+    });
+  }
+
+  peticionToken(username: string, password: string) {
+    this.oauthService.getToken(username, password)
+    .subscribe(res => {
+
+      console.log('peticion de token realizada');
+      console.log(res);
+
+      sessionStorage.setItem('api_token', res['access_token']);
+
+      
+      //window.location.href = '/ocr';
     });
   }
 
