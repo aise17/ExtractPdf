@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import File, Explicacion, AnuncioInferior, AnuncioLateral, AnuncioSuperior, IpsFiles, Incidencia, \
+from .models import File, Explicacion, IpsFiles, Incidencia, \
     QuienSomos
 
 
@@ -17,23 +17,6 @@ class ExplicacionAdmin(admin.ModelAdmin):
     search_fields = ['titulo']
 
 
-class AnuncioSuperiorAdmin(admin.ModelAdmin):
-    list_display = ['titulo', 'fecha_creacion', 'fecha_publicacion', 'publicado' ]
-    list_filter =['publicado', 'fecha_creacion', 'fecha_publicacion']
-    list_editable = ['publicado']
-    search_fields = ['titulo']
-
-class AnuncioLateralAdmin(admin.ModelAdmin):
-    list_display = ['titulo', 'fecha_creacion', 'fecha_publicacion', 'publicado' ]
-    list_filter =['publicado', 'fecha_creacion', 'fecha_publicacion']
-    list_editable = ['publicado']
-    search_fields = ['titulo']
-
-class AnuncioInferiorAdmin(admin.ModelAdmin):
-    list_display = ['titulo', 'fecha_creacion', 'fecha_publicacion', 'publicado' ]
-    list_filter =['publicado', 'fecha_creacion', 'fecha_publicacion']
-    list_editable = ['publicado']
-    search_fields = ['titulo']
 
 class IpsFilesAdmin(admin.ModelAdmin):
     list_display = ['id', 'file_id', 'fecha_conexion', 'ip', 'usuario', 'lat', 'lon', 'is_routeable' ]
@@ -61,9 +44,7 @@ admin.site.site_title = 'HTML title from adminsitration'
 
 admin.site.register(File, FileAdmin)
 admin.site.register(Explicacion, ExplicacionAdmin)
-admin.site.register(AnuncioLateral, AnuncioLateralAdmin)
-admin.site.register(AnuncioSuperior, AnuncioSuperiorAdmin)
-admin.site.register(AnuncioInferior, AnuncioInferiorAdmin)
+
 admin.site.register(IpsFiles, IpsFilesAdmin)
 admin.site.register(Incidencia, IncidenciasAdmin)
 admin.site.register(QuienSomos, QuienSomosAdmin)

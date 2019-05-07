@@ -2,7 +2,7 @@
 <app-menu>
   <div class="contenedor">
     <div class="info-container">
-      <label>Usuario:</label>
+      
       
           <mat-error *ngIf="passFormControl.hasError('required')">
             Para modificar<br>
@@ -14,7 +14,7 @@
               <mat-error *ngIf="emailFormControl.hasError('required')">
                 Es <strong>necesario</strong> introducir un Email valido
               </mat-error>
-
+      <label>Usuario:</label>
         <mat-form-field>
           <input matInput #input_user [(ngModel)]="newusuario.username" maxlength="100" 
           [formControl]="passFormControl" placeholder="{{usuario.username}}">

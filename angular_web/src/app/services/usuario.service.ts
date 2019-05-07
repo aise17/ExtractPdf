@@ -14,12 +14,12 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
-  private loginUrl = 'http://localhost:8001/file/login/';
-  private userChangeUrl = 'http://localhost:8001/file/user/';
-  private userRequestUrl = 'http://localhost:8001/file/request_for_user/';
-  private logoutUrl = 'http://localhost:8001/file/logout/';
-  private filesUrl = 'http://localhost:8001/file/list_files/';
-  private registerUrl = 'http://localhost:8001/file/register/';
+  private loginUrl = 'http://localhost:8001/usuarios/login/';
+  private userChangeUrl = 'http://localhost:8001/usuarios/user/';
+  private userRequestUrl = 'http://localhost:8001/usuarios/request_for_user/';
+  private logoutUrl = 'http://localhost:8001/usuarios/logout/'; 
+  private filesUrl = 'http://localhost:8001/usuarios/list_files/';
+  private registerUrl = 'http://localhost:8001/usuarios/register/';
 
   getRequest(user: Usuario, authorization: string): Observable<UserRequest> {
 
