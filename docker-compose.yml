@@ -4,7 +4,7 @@ services:
   nginx:
     image: nginx:1.15
     ports:
-      - "8001:80"   # I like working on 80 since you don't need to specify and looking neat on URL
+      - "8001:80"   # servicos api y admin e localhost:8001 para dejar libre localhost:80 pra angular
 
     volumes:
       - .:/code

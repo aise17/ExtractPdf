@@ -1,0 +1,62 @@
+
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+      <button mat-button (click)="drawer.toggle()">
+          
+        <mat-icon  class="icon">menu</mat-icon>
+      </button>
+    <span>OCR</span>
+    <span class="spacer"></span>
+    <span *ngIf='user'>{{user.username }}</span>
+    <button mat-button [matMenuTriggerFor]="menu" *ngIf='user; else notUser'>
+          <mat-icon class="icon" >face</mat-icon>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/usuario']">Informacion Usuario</button>
+            <button mat-menu-item [routerLink]="['/bonos']">Compra Bono</button>
+            <button mat-menu-item [routerLink]="['/gestio-archivos']">Gestion de documentos</button>
+            <button mat-menu-item (click)='logout()' [routerLink]="['/']">Desconectar</button>
+          </mat-menu>
+    </button>
+   
+    <ng-template #notUser>
+       <button mat-button (click)='openDialog()'><mat-icon class="icon" >face</mat-icon></button>
+    </ng-template>
+    
+
+  </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-drawer-container class="container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="side">
+      
+      <mat-nav-list>
+          <mat-list-item [routerLink]="['/index']">
+          Principal
+          </mat-list-item>
+          <mat-list-item [routerLink]="['/ocr']">
+            Ocr
+          </mat-list-item>
+          <mat-list-item  [routerLink]="['/contacto']">
+          Contacto
+          </mat-list-item>
+          <mat-list-item [routerLink]="['/quienSomos']">
+           Quienes somos
+          </mat-list-item>
+        </mat-nav-list>
+        
+
+    </mat-drawer>
+  
+    <div class="sidenav-content">
+        <ng-content></ng-content>
+    </div>
+  
+  </mat-drawer-container>
+  <mat-toolbar color="primary" class="footer">
+      <mat-toolbar-row>
+      <div layout="row" layout-align="center center">
+          <h2>Pie de pagina</h2>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  

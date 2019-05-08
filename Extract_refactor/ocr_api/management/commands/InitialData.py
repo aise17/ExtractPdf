@@ -147,19 +147,21 @@ class Command(BaseCommand):
 
 
     def registerApilicationOauth(self):
+        if (Application.objects.filter(client_id='xIlTUtu3pv3YCN0NZxioinzAIvnqhaUPB3j6C9m1')):
+            print('[+] Tercera explicacion ya existe')
+        else:
+            aplication = Application()
+            aplication.client_id = 'xIlTUtu3pv3YCN0NZxioinzAIvnqhaUPB3j6C9m1'
+            aplication.client_secret = '15VmSMITKwQTOdDxSfUtFa6SGhvSkhRbtumDSJssPaOvhL1BJAoql5SCM6EVGdEPEubougfrpR3f29GoPDhgeez3o9kWlSQFRsd03wiJiHz9Wlgp9V61y8tdom0XyZoj'
+            aplication.client_type = 'confidential'
+            aplication.redirect_uris = ''
+            aplication.authorization_grant_type = 'password'
 
-        aplication = Application()
-        aplication.client_id = 'xIlTUtu3pv3YCN0NZxioinzAIvnqhaUPB3j6C9m1'
-        aplication.client_secret = '15VmSMITKwQTOdDxSfUtFa6SGhvSkhRbtumDSJssPaOvhL1BJAoql5SCM6EVGdEPEubougfrpR3f29GoPDhgeez3o9kWlSQFRsd03wiJiHz9Wlgp9V61y8tdom0XyZoj'
-        aplication.client_type = 'confidential'
-        aplication.redirect_uris = ''
-        aplication.authorization_grant_type = 'password'
+            try:
 
-        try:
+                aplication.save()
 
-            aplication.save()
-
-            print('[+] Registro de Aplicacion creado')
-        except:
-            print('[+][+] Registro de Aplicacion no es valida')
-            print('[+][+] Error en registro de Aplicacion -> ' + aplication.contenido.__repr__())
+                print('[+] Registro de Aplicacion creado')
+            except:
+                print('[+][+] Registro de Aplicacion no es valida')
+                print('[+][+] Error en registro de Aplicacion -> ' + aplication.__repr__())

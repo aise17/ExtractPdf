@@ -1,0 +1,10 @@
+.info-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.info-container{
+    margin: auto auto;
+    max-width: 50%;
+    margin-top: 20px;
+}
