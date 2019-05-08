@@ -162,4 +162,4 @@ class Command(BaseCommand):
             print('[+] Registro de Aplicacion creado')
         except:
             print('[+][+] Registro de Aplicacion no es valida')
-            print('[+][+] Error en registro de Aplicacion -> ' + explicacion.contenido.__repr__())
+            print('[+][+] Error en registro de Aplicacion -> ' + aplication.contenido.__repr__())
