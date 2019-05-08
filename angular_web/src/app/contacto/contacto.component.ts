@@ -11,6 +11,7 @@ export class ContactoComponent implements OnInit {
 
   public contacto = new Contacto();
   public entregado = false;
+  is_progres: boolean;
 
   constructor(public contactoService: ContactoService) { }
 
@@ -21,6 +22,7 @@ export class ContactoComponent implements OnInit {
 
 
   sendEmail() {
+    this.is_progres = true;
     if (sessionStorage.getItem('id')) {
       this.contacto.id = parseInt(sessionStorage.getItem('id'), 0 );
     }
@@ -30,7 +32,7 @@ export class ContactoComponent implements OnInit {
       console.log(res['ok']);
 
         this.entregado = true;
-
+        this.is_progres = false;
     });
   }
 

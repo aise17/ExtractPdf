@@ -30,9 +30,9 @@ export class UsuarioService {
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
     headers.append('responseType', 'application/json');
-    headers.append('Authorization', "Bearer " + authorization);
+   
 
-    user.access_token = authorization;
+  
 
  
 
@@ -51,7 +51,6 @@ export class UsuarioService {
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
     headers.append('responseType', 'application/json');
-    headers.append('Authorization', authorization);
 
     return this.http.post(this.filesUrl, user, {headers: headers}  ).pipe(
       tap((res: UserRequest) => this.log(`usuario recivido= ${res}`)),

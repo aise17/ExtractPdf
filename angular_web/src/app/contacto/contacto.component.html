@@ -18,7 +18,13 @@
             <button mat-raised-button color="primary" (click)='sendEmail()'>Enviar</button>
           </div>
         </div>
-      
+        
+      <div *ngIf="is_progres" class="progress">
+        <br>
+        <br>
+        <br>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
         
       
       </div>

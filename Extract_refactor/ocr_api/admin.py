@@ -49,3 +49,5 @@ admin.site.register(IpsFiles, IpsFilesAdmin)
 admin.site.register(Incidencia, IncidenciasAdmin)
 admin.site.register(QuienSomos, QuienSomosAdmin)
 
+admin.site.site_url = 'http://localhost:4200'
+

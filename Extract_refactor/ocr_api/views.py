@@ -9,14 +9,15 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
+import sys
+
+sys.path.append("..")
+
+from seguridad.views import IsAuthenticatedOrPost
 from .serializers import ArchivoSerializer, ExplicaionSerializer, IncidenciaSerializers, IpsFileSerializers,\
     QuienSomosSerializer
 from .models import File, Explicacion, Incidencia, IpsFiles, QuienSomos
 from django.http import HttpResponse
-
-import sys
-
-sys.path.append("../orc")
 
 
 from .tasks import orc
@@ -27,7 +28,7 @@ from django.contrib.gis.geoip2 import GeoIP2
 
 from .utils import fileIpCreate
 
-
+@permission_classes([IsAuthenticatedOrPost])
 class FileView(generics.ListCreateAPIView):
     queryset = File.objects.all()
     serializer_class = ArchivoSerializer
@@ -43,6 +44,8 @@ class FileView(generics.ListCreateAPIView):
 
                 proceso = file_serializer.data.get('proceso')
                 nombre: str = file_serializer.data.get('documento').__str__()
+
+
                 nombre = nombre.split('/')[-1]
 
                 # TODO leer proceso de los datos de entrada y configurar orc
@@ -96,10 +99,6 @@ class ContactoView(generics.ListCreateAPIView):
                 'ok': 'false'
             }
         return Response(salida, status=status.HTTP_200_OK)
-
-
-
-
 
 
 class RequestForMonth(generics.ListAPIView):

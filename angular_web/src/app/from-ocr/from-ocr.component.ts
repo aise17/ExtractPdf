@@ -25,9 +25,6 @@ export class FormOcrComponent implements OnInit {
   }
 
 
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
-}
 
   async send() {
     const orc: Ocr = new Ocr();
@@ -68,7 +65,7 @@ export class FormOcrComponent implements OnInit {
     }
 
   saveFile() {
-    const blob = new Blob([this.archivo], {type: 'text/plain;charset=ansi'});
+    const blob = new Blob([this.archivo], {type: 'text/plain;charset=UTF-8'});
     saveAs(blob, 'resultado.docx');
     this.is_progres = false;
     this.ver_form = true;
