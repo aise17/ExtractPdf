@@ -175,9 +175,12 @@ class ContactoView(generics.ListCreateAPIView):
     serializer_class = IncidenciaSerializers
 
     def post(self, request, *args, **kwargs):
+        usuario = User.objects.get()
         incidencia = IncidenciaSerializers(data=request.data)
         if (incidencia.is_valid()):
-            incidencia.save()
+
+            i = incidencia.save()
+
 
             email = EmailMessage(incidencia.data.get('asunto'), incidencia.data.get('contenido'),
                                  to=['sergio.martinez-g@hotmail.com'])

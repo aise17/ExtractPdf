@@ -3,7 +3,7 @@ export class Contacto {
     id: number;
     asunto: string;
     contenido: string;
-    usuario: number;
+    usuarioId: string;
     fecha_creacion: Date;
     resuelta: boolean;
 

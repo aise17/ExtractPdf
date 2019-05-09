@@ -24,7 +24,7 @@ export class ContactoComponent implements OnInit {
   sendEmail() {
     this.is_progres = true;
     if (sessionStorage.getItem('id')) {
-      this.contacto.id = parseInt(sessionStorage.getItem('id'), 0 );
+      this.contacto.usuarioId = sessionStorage.getItem('id');
     }
     console.log(this.contacto);
     this.contactoService.sendEmail(this.contacto)

@@ -8,7 +8,8 @@ from .models import IpsFiles, Traza
 def fileIpCreate(request, file):
     client_ip, is_routable = get_client_ip(request)
     if request.data.get('usuario'):
-        ip_file = IpsFiles(usuario=User(id=request.data.get('usuario')))
+        user = User.objects.get(id=request.data.get('usuario'))
+        ip_file = IpsFiles(usuario=user)
     else:
         ip_file = IpsFiles()
     if client_ip is None:
