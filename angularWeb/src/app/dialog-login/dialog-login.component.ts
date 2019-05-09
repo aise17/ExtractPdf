@@ -44,9 +44,9 @@ export class DialogLoginComponent implements OnInit {
         if (res['ok'] === true ) {
         this.user = res['user'];
         console.log(res);
-        console.log('user:' + this.user.username);
+        console.log('user:' + this.user.usuario);
         sessionStorage.setItem('id', this.user.id);
-        sessionStorage.setItem('username', this.user.username);
+        sessionStorage.setItem('username', this.user.usuario);
         sessionStorage.setItem('password', this.user.password);
         sessionStorage.setItem('email', this.user.email);
         sessionStorage.setItem('first_name', this.user.first_name);

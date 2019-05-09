@@ -1,6 +1,6 @@
 from datetime import date
 
-
+from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 
 
@@ -14,9 +14,9 @@ import sys
 sys.path.append("..")
 
 from seguridad.views import IsAuthenticatedOrPost
-from .serializers import ArchivoSerializer, ExplicaionSerializer, IncidenciaSerializers, IpsFileSerializers,\
-    QuienSomosSerializer
-from .models import File, Explicacion, Incidencia, IpsFiles, QuienSomos
+from .serializers import ArchivoSerializer, ExplicaionSerializer, IncidenciaSerializers, IpsFileSerializers, \
+    QuienSomosSerializer, TrazaSerializer
+from .models import File, Explicacion, Incidencia, IpsFiles, QuienSomos, Traza
 from django.http import HttpResponse
 
 
@@ -26,7 +26,8 @@ from ipware import get_client_ip
 
 from django.contrib.gis.geoip2 import GeoIP2
 
-from .utils import fileIpCreate
+from .utils import fileIpCreate, servicioTraza
+
 
 @permission_classes([IsAuthenticatedOrPost])
 class FileView(generics.ListCreateAPIView):
@@ -57,17 +58,12 @@ class FileView(generics.ListCreateAPIView):
 
         text = text.get()
 
-        # file_serializer.data
 
         salida = {
             "salida": text,
         }
 
-        filename = nombre + '.txt'
-        content = text
-        response = HttpResponse(content, content_type='text/plain')
-        response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
-        # return response
+        servicioTraza(request, salida, FileView.__name__)
 
         return Response(salida, status=status.HTTP_201_CREATED)
 
@@ -76,6 +72,8 @@ class FileView(generics.ListCreateAPIView):
 class ExplicacionContent(generics.ListCreateAPIView):
     queryset = Explicacion.objects.filter(publicado=True).order_by('fecha_publicacion')[:3]
     serializer_class = ExplicaionSerializer
+
+
 
 @permission_classes([AllowAny])
 class ContactoView(generics.ListCreateAPIView):
@@ -98,6 +96,9 @@ class ContactoView(generics.ListCreateAPIView):
             salida = {
                 'ok': 'false'
             }
+
+        servicioTraza(request, salida, ContactoView.__name__)
+
         return Response(salida, status=status.HTTP_200_OK)
 
 
@@ -124,6 +125,9 @@ class CoordenadasWithRequest(generics.ListAPIView):
         salida = []
         for ip in IpsFiles.objects.all():
             salida.append({'usuario': ip.usuario, 'lat': ip.lat, 'lon': ip.lon})
+
+        servicioTraza(request, salida, CoordenadasWithRequest.__name__)
+
         return Response(salida, status=status.HTTP_200_OK)
 
 

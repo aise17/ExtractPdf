@@ -20,7 +20,7 @@ export class Oauth2Service {
 
    
 
-    var token = new ApiToken(usuario.toString(), pass.toString());
+    var token = new ApiToken(usuario, pass.toString());
 
 
     console.log(token)

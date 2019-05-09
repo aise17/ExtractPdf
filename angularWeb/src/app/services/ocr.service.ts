@@ -45,10 +45,10 @@ export class OcrService {
     );
   }
 
-  addFileJson (orc: JsonOcr): Observable<Response> {
+  addFileJson (orc: JsonOcr, authorization: string): Observable<Response> {
 
 
-    const headers = new HttpHeaders();
+    const headers = new HttpHeaders({"Authorization": "Bearer " + authorization});
     headers.append('Access-Control-Allow-Methods', 'POST');
     headers.append('Access-Control-Allow-Origin', '*');
     headers.append('Access-Control-Allow-Headers', 'Content-Type');

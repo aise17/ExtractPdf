@@ -33,9 +33,9 @@ export class FormOcrComponent implements OnInit {
       orc.documento = fileBrowser.files[0];
       orc.proceso = this.formulario.proceso;
       if (sessionStorage.getItem('id')) {
-        orc.usuario = parseInt( sessionStorage.getItem('id'), 0);
+        orc.id =  sessionStorage.getItem('id');
       }
-
+    console.log(orc);
     await this.add(orc);
     }
   }

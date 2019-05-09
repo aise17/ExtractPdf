@@ -1,5 +1,6 @@
 
 import sys
+
 sys.path.append("..")
 
 from django.contrib.auth import authenticate, login, logout
@@ -11,7 +12,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import ArchivoSerializer, UserSerializer, IpsFileSerializers
-from ocr_api.models import File, IpsFiles
+from ocr_api.models import File, IpsFiles, Traza
+from ocr_api.utils import servicioTraza
 
 
 
@@ -38,6 +40,9 @@ class RegisterUser(generics.ListCreateAPIView):
             salida['ok'] = False
 
             salida['user'] = user.errors
+
+        servicioTraza(request, salida, RegisterUser.__name__)
+
         return Response(salida, status=status.HTTP_200_OK)
 
 
@@ -50,6 +55,7 @@ class LogoutUser(generics.ListCreateAPIView):
         salida = dict()
         logout(request)
         salida['ok'] = True
+        servicioTraza(request, salida, LogoutUser.__name__)
         return Response(salida, status=status.HTTP_200_OK)
 
 
@@ -67,6 +73,9 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
             salida['user'] = serializer.data
         else:
             salida['ok'] = False
+
+        servicioTraza(request, salida, UserDetail.__name__)
+
         return Response(salida, status=status.HTTP_200_OK)
 
 @permission_classes([AllowAny])
@@ -77,7 +86,7 @@ class AuthentificacionUsuario(generics.ListCreateAPIView):
     def post(self, request, *args, **kwargs):
         salida = dict()
 
-        s = authenticate(username=request.data.get('username'), password=request.data.get('password'))
+        s = authenticate(username=request.data.get('usuario'), password=request.data.get('password'))
         if s is not None:
             login(request, s)
             salida['ok'] = True
@@ -85,6 +94,10 @@ class AuthentificacionUsuario(generics.ListCreateAPIView):
             salida['user'] = ser.data
         else:
             salida['ok'] = False
+
+        #servicioTraza(request, salida, AuthentificacionUsuario)
+
+
         return Response(salida, status=status.HTTP_200_OK)
 
 
@@ -119,6 +132,9 @@ class RequestProcessOcrForUser(generics.ListCreateAPIView):
 
         else:
             salida['ok'] = False
+
+        servicioTraza(request, salida, RequestProcessOcrForUser.__name__)
+
         return Response(salida, status=status.HTTP_200_OK)
 
 class FilesForUser(generics.ListCreateAPIView):
@@ -141,4 +157,7 @@ class FilesForUser(generics.ListCreateAPIView):
             salida['request'] = ser.data
         else:
             salida['ok'] = False
+
+        servicioTraza(request, salida, FilesForUser.__name__)
+
         return Response(salida, status=status.HTTP_200_OK)

@@ -54,7 +54,7 @@ export class GestionDocumentosComponent implements OnInit {
   ngOnInit() {
     this.usuario = new Usuario;
     this.usuario.id = sessionStorage.getItem('id');
-    this.usuario.username = sessionStorage.getItem('username');
+    this.usuario.usuario = sessionStorage.getItem('username');
     this.usuario.password = sessionStorage.getItem('password');
     this.usuario.first_name = sessionStorage.getItem('first_name');
     this.usuario.last_name = sessionStorage.getItem('last_name');
@@ -68,8 +68,8 @@ export class GestionDocumentosComponent implements OnInit {
       this.files = res['request'];
 
       console.log('keys: ' + this.files.keys());
-      console.log('files: ' + this.files);
-      console.log('res: ' + res['request']);
+      console.log('files: ' + this.files.toString());
+      console.log('res: ' + res);
 
       this.dataSource = new MatTableDataSource(this.files);
       this.dataSource.paginator = this.paginator;
@@ -93,9 +93,9 @@ export class GestionDocumentosComponent implements OnInit {
       return;
     }
     this.is_progres = true;
-
-
-    this.ser.addFileJson( orc )
+    orc.id = sessionStorage.getItem('id');
+    
+    this.ser.addFileJson( orc, sessionStorage.getItem('api_token') )
       .subscribe(res => {
         if (res !== undefined) {
         this.archivo = res['salida'];

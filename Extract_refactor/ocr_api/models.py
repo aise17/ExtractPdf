@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import JSONField
 
 from ckeditor.fields import RichTextField, CKEditorWidget
 
@@ -76,3 +77,29 @@ class QuienSomos(models.Model):
 
     def __str__(self):
         return self.titulo
+
+class Traza(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    funcion_llamada = models.CharField(max_length=255, blank=True)
+    datos_in = JSONField()
+    datos_out = JSONField()
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    fecha_creacion = models.DateField(auto_now=True)
+    error = models.BooleanField(default=False)
+
+class Bono(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    peticiones = models.PositiveIntegerField()
+    descripcion = models.TextField(max_length=255)
+    precio = models.PositiveIntegerField()
+    activado = models.BooleanField(default=False)
+    fecha_creacion = models.DateField(auto_now=True)
+
+
+class BonoUsuario(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    bono = models.ForeignKey(Bono, on_delete=models.CASCADE, null=True)
+    activado = models.BooleanField(default=True)
+    fecha_creacion = models.DateField(auto_now=True)
+

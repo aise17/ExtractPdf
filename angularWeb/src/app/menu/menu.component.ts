@@ -42,15 +42,15 @@ export class MenuComponent implements OnInit {
         if (res['ok'] === true ) {
         this.user = res['user'];
         console.log(res);
-        console.log('user:' + this.user.username);
+        console.log('user:' + this.username);
         sessionStorage.setItem('id', this.user.id);
-        sessionStorage.setItem('username', this.user.username);
+        sessionStorage.setItem('username', this.user['username']);
         sessionStorage.setItem('password', this.user.password);
         sessionStorage.setItem('email', this.user.email);
         sessionStorage.setItem('first_name', this.user.first_name);
         sessionStorage.setItem('last_name', this.user.last_name);
         console.log('enviando peticion de token')
-        this.peticionToken(this.user.username, this.password);
+        this.peticionToken(this.username, this.password);
       }
       });
     });
@@ -85,8 +85,8 @@ export class MenuComponent implements OnInit {
     console.log(sessionStorage.getItem('username'));
     if (sessionStorage.getItem('username') !== null && sessionStorage.getItem('password') !== null) {
       console.log('sesion storage username:' + sessionStorage.getItem('username'));
-      this.user = new Usuario();
-      this.user.username = sessionStorage.getItem('username');
+      this.user = new Usuario()
+      this.user.usuario = sessionStorage.getItem('username');
       this.user.password = sessionStorage.getItem('password');
     }
   }

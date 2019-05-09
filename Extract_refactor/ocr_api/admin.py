@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from .models import File, Explicacion, IpsFiles, Incidencia, \
-    QuienSomos
+    QuienSomos, Bono, BonoUsuario, Traza
 
 
 class FileAdmin(admin.ModelAdmin):
@@ -38,6 +38,25 @@ class QuienSomosAdmin(admin.ModelAdmin):
     search_fields = ['titulo']
 
 
+class BonoAdmin(admin.ModelAdmin):
+    list_display = ['id', 'peticiones', 'descripcion', 'precio', 'activado', 'fecha_creacion' ]
+    list_filter =['activado', 'fecha_creacion']
+    list_editable = ['activado']
+    search_fields = ['id']
+
+class BonoUsuarioAdmin(admin.ModelAdmin):
+    list_display = ['id', 'usuario', 'bono', 'activado', 'fecha_creacion' ]
+    list_filter =['usuario', 'bono', 'fecha_creacion']
+    list_editable = ['activado']
+    search_fields = ['usuario', 'bono', 'fecha_creacion']
+
+class TrazaAdmin(admin.ModelAdmin):
+    list_display = ['id', 'funcion_llamada', 'datos_in', 'datos_out', 'usuario', 'fecha_creacion', 'error' ]
+    list_filter =['funcion_llamada', 'fecha_creacion']
+    list_editable = ['error']
+    search_fields = ['usuario', 'fecha_creacion']
+
+
 admin.site.site_header = 'Extract Pdf'
 admin.site.index_title = 'Administración'
 admin.site.site_title = 'HTML title from adminsitration'
@@ -48,6 +67,10 @@ admin.site.register(Explicacion, ExplicacionAdmin)
 admin.site.register(IpsFiles, IpsFilesAdmin)
 admin.site.register(Incidencia, IncidenciasAdmin)
 admin.site.register(QuienSomos, QuienSomosAdmin)
+
+admin.site.register(Bono, BonoAdmin)
+admin.site.register(BonoUsuario, BonoUsuarioAdmin)
+admin.site.register(Traza, TrazaAdmin)
 
 admin.site.site_url = 'http://localhost:4200'
 

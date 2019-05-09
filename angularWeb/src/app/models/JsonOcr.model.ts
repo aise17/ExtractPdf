@@ -2,7 +2,7 @@ export class JsonOcr {
     descripcion: string;
     documento: string;
     proceso: string;
-    id: Int32Array;
+    id: string;
     dateTimeUp: Date;
     prcesar: boolean;
     usuario: number;

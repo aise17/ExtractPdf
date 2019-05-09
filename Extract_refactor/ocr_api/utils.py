@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.gis.geoip2 import GeoIP2
 from ipware import get_client_ip
 
-from .models import IpsFiles
+from .models import IpsFiles, Traza
 
 
 def fileIpCreate(request, file):
@@ -36,3 +36,24 @@ def fileIpCreate(request, file):
             ip_file.lon = 0
 
     ip_file.save()
+
+
+def servicioTraza(request,salida, clase):
+    traza = Traza()
+    traza.datos_in = request.data.__repr__()
+    traza.datos_out = salida
+
+    if request.data.get('id') :
+        traza.usuario = User(id=request.data.get('id'))
+
+    else:
+        traza.usuario = None
+
+    traza.funcion_llamada = "" + clase + ' ' + request.method
+    traza.error = False
+
+    traza.clean()
+
+    traza.save()
+
+    print('[-][-] Traza generada')
