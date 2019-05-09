@@ -5,7 +5,19 @@ from django.contrib.postgres.fields import JSONField
 
 from ckeditor.fields import RichTextField, CKEditorWidget
 
-# Create your models here.
+import sys
+sys.path.append('..')
+
+from anuncios.models import Bono
+
+
+class Salida():
+    ok = False
+    errores = []
+    resut_text_ocr = ''
+
+
+
 class File(models.Model):
     PROCESOS = (
         ('B', 'B'),
@@ -24,21 +36,6 @@ class File(models.Model):
         return self.descripcion
 
 
-class Explicacion(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    titulo = models.CharField(max_length=255, blank=True)
-    fecha_creacion = models.DateField(auto_now=True)
-    fecha_publicacion = models.DateField(null=True, blank=True)
-    publicado = models.BooleanField(default=False)
-    contenido = RichTextField(config_name='default')
-    titulo_imagen = models.CharField(max_length=255, blank=True)
-    imagen = models.URLField()
-
-    def __str__(self):
-        return self.titulo
-
-
-
 class IpsFiles(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     file = models.ForeignKey(File, on_delete=models.CASCADE)
@@ -53,31 +50,6 @@ class IpsFiles(models.Model):
         return self.ip
 
 
-class Incidencia(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    asunto = models.CharField(max_length=100)
-    contenido = models.TextField()
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    fecha_creacion = models.DateField(auto_now=True)
-    resuelta = models.BooleanField(default= False)
-
-    def __str__(self):
-        return self.asunto
-
-
-class QuienSomos(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    titulo = models.CharField(max_length=255, blank=True)
-    fecha_creacion = models.DateField(auto_now=True)
-    fecha_publicacion = models.DateField(null=True, blank=True)
-    publicado = models.BooleanField(default=False)
-    contenido = RichTextField(config_name='default')
-    titulo_imagen = models.CharField(max_length=255, blank=True)
-    imagen = models.URLField(null=True, blank=True)
-
-    def __str__(self):
-        return self.titulo
-
 class Traza(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     funcion_llamada = models.CharField(max_length=255, blank=True)
@@ -86,14 +58,6 @@ class Traza(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     fecha_creacion = models.DateField(auto_now=True)
     error = models.BooleanField(default=False)
-
-class Bono(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    peticiones = models.PositiveIntegerField()
-    descripcion = models.TextField(max_length=255)
-    precio = models.PositiveIntegerField()
-    activado = models.BooleanField(default=False)
-    fecha_creacion = models.DateField(auto_now=True)
 
 
 class BonoUsuario(models.Model):

@@ -5,5 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class BonosService {
 
+
+  private BonosUrl = 'http://localhost:8001/contenido/bonos';
+
+
   constructor() { }
 }

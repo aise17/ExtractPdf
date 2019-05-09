@@ -34,9 +34,10 @@ export class OcrService {
     fd.append('descripcion', orc.descripcion);
     fd.append('documento', orc.documento);
     fd.append('proceso', orc.proceso);
-    if (orc.usuario) {
-      fd.append('usuario', orc.usuario.toString());
+    if (orc.usuarioId) {
+      fd.append('usuarioId', orc.usuarioId);
     }
+
 
     console.log(orc);
     return this.http.post<Response>(this.fileUrl, fd, {headers: headers}  ).pipe(

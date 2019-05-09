@@ -2,25 +2,13 @@ from django.contrib.auth.models import User
 from django.contrib.gis.geoip2 import GeoIP2
 from ipware import get_client_ip
 
-from .models import IpsFiles, Traza, File
+from .models import IpsFiles, Traza
 
-def fileCreate(data):
-    user = User.objects.get(id=data.get('usuarioId'))
-    obj = File(usuario = user)
-    obj.proceso = data.get('proceso')
-    obj.documento = data.get('documento')
-    obj.descripcion = data.get('descripcion')
-
-    obj.save()
-
-    return obj
 
 def fileIpCreate(request, file):
     client_ip, is_routable = get_client_ip(request)
-    data = request.data
-    if request.data.get('usuarioId'):
-        user = User.objects.get(id=data.get('usuarioId'))
-        ip_file = IpsFiles(usuario=user)
+    if request.data.get('usuario'):
+        ip_file = IpsFiles(usuario=User(id=request.data.get('usuario')))
     else:
         ip_file = IpsFiles()
     if client_ip is None:
@@ -51,20 +39,20 @@ def fileIpCreate(request, file):
 
 
 def servicioTraza(request,salida, clase):
-    data = request.data
     traza = Traza()
-    traza.datos_in = data.__repr__()
-    traza.datos_out = salida.__repr__()
+    traza.datos_in = request.data.__repr__()
+    traza.datos_out = salida
 
-    if request.data.get('usuarioId') :
-        usuario = User.objects.get(id=request.data.get('usuarioId'))
-        traza.usuario = usuario
+    if request.data.get('id') :
+        traza.usuario = User.objects.filter(id=request.data.get('id'))
 
     else:
         traza.usuario = None
 
     traza.funcion_llamada = "" + clase + ' ' + request.method
     traza.error = False
+
+    traza.clean()
 
     traza.save()
 

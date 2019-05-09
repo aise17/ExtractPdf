@@ -43,8 +43,8 @@ export class GestionDocumentosComponent implements OnInit {
     // ocr.documento = this.ruta.split('/')[-1];
     console.log(ocr);
     ocr.documento = ocr.documento.split('/', 3)[2];
-    ocr.usuario = parseInt(sessionStorage.getItem('id'), 0);
-    console.log(ocr.usuario);
+    ocr.usuarioId = sessionStorage.getItem('id');
+    console.log(ocr.usuarioId);
     this.send(ocr);
     this.getFiles();
 
@@ -69,7 +69,7 @@ export class GestionDocumentosComponent implements OnInit {
 
       console.log('keys: ' + this.files.keys());
       console.log('files: ' + this.files.toString());
-      console.log('res: ' + res);
+      console.log('res: ' + res.fecha_conexion);
 
       this.dataSource = new MatTableDataSource(this.files);
       this.dataSource.paginator = this.paginator;
@@ -93,8 +93,7 @@ export class GestionDocumentosComponent implements OnInit {
       return;
     }
     this.is_progres = true;
-    orc.id = sessionStorage.getItem('id');
-    
+        
     this.ser.addFileJson( orc, sessionStorage.getItem('api_token') )
       .subscribe(res => {
         if (res !== undefined) {

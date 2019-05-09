@@ -1,10 +1,14 @@
 
 import sys
+
+
+
 sys.path.append("..")
 
 from rest_framework import serializers
 from ocr_api.models import File, IpsFiles
 from django.contrib.auth.models import User
+from .models import Incidencia
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -51,5 +55,9 @@ class IpsFileSerializers(serializers.ModelSerializer):
 
 
 
+class IncidenciaSerializers(serializers.ModelSerializer):
+    class Meta:
+        model= Incidencia
+        fields = "__all__"
 
 

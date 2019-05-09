@@ -10,8 +10,8 @@ sys.path.append("../..")
 #from Extract_refactor.ocr_api.serializers import ExplicaionSerializer
 
 
-from  ocr_api.models import Explicacion
-from  ocr_api.serializers import ExplicaionSerializer
+from  anuncios.models import Explicacion
+from  anuncios.serializers import ExplicaionSerializer
 
 
 data = {

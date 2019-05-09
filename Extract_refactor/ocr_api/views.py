@@ -6,7 +6,9 @@ from django.core.mail import EmailMessage
 
 from rest_framework import generics
 from rest_framework.decorators import permission_classes
+from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny
+from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework import status
 import sys
@@ -14,11 +16,9 @@ import sys
 sys.path.append("..")
 
 from seguridad.views import IsAuthenticatedOrPost
-from .serializers import ArchivoSerializer, ExplicaionSerializer, IncidenciaSerializers, IpsFileSerializers, \
-    QuienSomosSerializer, TrazaSerializer
-from .models import File, Explicacion, Incidencia, IpsFiles, QuienSomos, Traza
-from django.http import HttpResponse
+from .serializers import ArchivoSerializer, IpsFileSerializers
 
+from .models import File, IpsFiles
 
 from .tasks import orc
 
@@ -26,7 +26,7 @@ from ipware import get_client_ip
 
 from django.contrib.gis.geoip2 import GeoIP2
 
-from .utils import fileIpCreate, servicioTraza
+from .utils import fileIpCreate, servicioTraza, fileCreate
 
 
 @permission_classes([IsAuthenticatedOrPost])
@@ -36,6 +36,7 @@ class FileView(generics.ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         if not request.data.get('id'):
+            print('[-][-][-] No lleva id ')
             file_serializer = ArchivoSerializer(data=request.data)
             if file_serializer.is_valid():
 
@@ -52,6 +53,8 @@ class FileView(generics.ListCreateAPIView):
                 # TODO leer proceso de los datos de entrada y configurar orc
                 text = orc.delay(nombre, proceso)
         else:
+            print('[+][+][+] Lleva id ')
+
             proceso = self.request.data.get('proceso')
             nombre: str = self.request.data.get('documento')
             text = orc.delay(nombre, proceso)
@@ -67,39 +70,6 @@ class FileView(generics.ListCreateAPIView):
 
         return Response(salida, status=status.HTTP_201_CREATED)
 
-
-@permission_classes([AllowAny])
-class ExplicacionContent(generics.ListCreateAPIView):
-    queryset = Explicacion.objects.filter(publicado=True).order_by('fecha_publicacion')[:3]
-    serializer_class = ExplicaionSerializer
-
-
-
-@permission_classes([AllowAny])
-class ContactoView(generics.ListCreateAPIView):
-    queryset = Incidencia.objects.all()
-    serializer_class = IncidenciaSerializers
-
-    def post(self, request, *args, **kwargs):
-        incidencia = IncidenciaSerializers(data=request.data)
-        if (incidencia.is_valid()):
-            incidencia.save()
-
-            email = EmailMessage(incidencia.data.get('asunto'), incidencia.data.get('contenido'),
-                                 to=['sergio.martinez-g@hotmail.com'])
-            email.send()
-
-            salida = {
-                'ok': 'true'
-            }
-        else:
-            salida = {
-                'ok': 'false'
-            }
-
-        servicioTraza(request, salida, ContactoView.__name__)
-
-        return Response(salida, status=status.HTTP_200_OK)
 
 
 class RequestForMonth(generics.ListAPIView):
@@ -133,8 +103,4 @@ class CoordenadasWithRequest(generics.ListAPIView):
 
 
 
-@permission_classes([AllowAny])
-class QuienesSomos(generics.ListAPIView):
-    queryset = QuienSomos.objects.filter(publicado=True).order_by('fecha_publicacion')[:1]
-    serializer_class = QuienSomosSerializer
 

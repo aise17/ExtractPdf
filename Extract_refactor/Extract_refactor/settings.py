@@ -152,7 +152,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #STATICFILES_DIRS = (os.path.join(STATIC_ROOT, 'static'),)
 
 MEDIA_URL = '/media/'
-IMAGENES_PATH = os.path.join(BASE_DIR, './media/')
+IMAGENES_PATH = os.path.join(BASE_DIR, 'media/')
 JPG_PATH = os.path.join(BASE_DIR, './Ocr/output/')
 MEDIA_ROOT = os.path.join(BASE_DIR, './media/')
 

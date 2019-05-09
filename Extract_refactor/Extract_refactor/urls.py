@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('file/', include('ocr_api.urls')),
-    path('anuncios/', include('anuncios.urls')),
+    path('contenido/', include('anuncios.urls')),
     path('usuarios/', include('usuarios.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),

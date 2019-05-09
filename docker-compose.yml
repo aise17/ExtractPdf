@@ -35,7 +35,7 @@ services:
 
   api_web:
     build: .
-    command: bash -c "cd Extract_refactor && python manage.py InitialData && python manage.py makemigrations && python manage.py migrate && gunicorn Extract_refactor.wsgi -b 0.0.0.0:8000"     #production mode
+    command: bash -c "cd Extract_refactor  && python manage.py makemigrations && python manage.py migrate && python manage.py InitialData && gunicorn Extract_refactor.wsgi -b 0.0.0.0:8000"     #production mode
     #command: bash -c "cd Extract_refactor && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"  # develop mode
     volumes:
       - .:/code

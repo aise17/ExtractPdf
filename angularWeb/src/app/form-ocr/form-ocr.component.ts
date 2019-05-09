@@ -33,7 +33,7 @@ export class FormOcrComponent implements OnInit {
       orc.documento = fileBrowser.files[0];
       orc.proceso = this.formulario.proceso;
       if (sessionStorage.getItem('id')) {
-        orc.id =  sessionStorage.getItem('id');
+        orc.usuarioId =  sessionStorage.getItem('id');
       }
     console.log(orc);
     await this.add(orc);
@@ -54,7 +54,7 @@ export class FormOcrComponent implements OnInit {
       .subscribe(res => {
         if (res !== undefined) {
           this.archivo = res['salida'];
-          console.log(res['salida']);
+          console.log(res);
           this.saveFile();
           } else {
             console.log('respuesta vacia');

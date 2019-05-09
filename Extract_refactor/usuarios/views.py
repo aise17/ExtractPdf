@@ -1,6 +1,8 @@
 
 import sys
 
+
+
 sys.path.append("..")
 
 from django.contrib.auth import authenticate, login, logout
@@ -11,9 +13,13 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import ArchivoSerializer, UserSerializer, IpsFileSerializers
+from .serializers import ArchivoSerializer, UserSerializer, IpsFileSerializers, IncidenciaSerializers
+from .models import Incidencia
 from ocr_api.models import File, IpsFiles, Traza
 from ocr_api.utils import servicioTraza
+
+
+from django.core.mail import EmailMessage
 
 
 
@@ -159,5 +165,32 @@ class FilesForUser(generics.ListCreateAPIView):
             salida['ok'] = False
 
         servicioTraza(request, salida, FilesForUser.__name__)
+
+        return Response(salida, status=status.HTTP_200_OK)
+
+
+@permission_classes([AllowAny])
+class ContactoView(generics.ListCreateAPIView):
+    queryset = Incidencia.objects.all()
+    serializer_class = IncidenciaSerializers
+
+    def post(self, request, *args, **kwargs):
+        incidencia = IncidenciaSerializers(data=request.data)
+        if (incidencia.is_valid()):
+            incidencia.save()
+
+            email = EmailMessage(incidencia.data.get('asunto'), incidencia.data.get('contenido'),
+                                 to=['sergio.martinez-g@hotmail.com'])
+            email.send()
+
+            salida = {
+                'ok': 'true'
+            }
+        else:
+            salida = {
+                'ok': 'false'
+            }
+
+        servicioTraza(request, salida, ContactoView.__name__)
 
         return Response(salida, status=status.HTTP_200_OK)

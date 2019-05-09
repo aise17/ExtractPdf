@@ -5,9 +5,9 @@ from rest_framework import generics
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 
-from .models import AnuncioLateral, AnuncioInferior, AnuncioSuperior
+from .models import AnuncioLateral, AnuncioInferior, AnuncioSuperior, Bono, Explicacion, QuienSomos
 from .serializers import AnuncioLateralSerializer, AnuncioInferiroSerializer, \
-    AnuncioSuperiorSerializer
+    AnuncioSuperiorSerializer, BonoSerializer, ExplicaionSerializer, QuienSomosSerializer
 
 
 @permission_classes([AllowAny])
@@ -24,3 +24,28 @@ class AnuncioInferiorView(generics.ListCreateAPIView):
 class AnuncioLateralView(generics.ListCreateAPIView):
     queryset = AnuncioLateral.objects.filter(publicado=True).order_by('fecha_publicacion')[:1]
     serializer_class = AnuncioLateralSerializer
+
+# Todo
+
+
+@permission_classes([AllowAny])
+class BonosView(generics.ListAPIView):
+
+    queryset = Bono.objects.filter(activado=True).order_by('precio')
+    serializer_class = BonoSerializer
+
+
+    def get(self, request, *args, **kwargs):
+
+        salida = list()
+        salida.append(self.queryset)
+
+@permission_classes([AllowAny])
+class ExplicacionInicio(generics.ListCreateAPIView):
+    queryset = Explicacion.objects.filter(publicado=True).order_by('fecha_publicacion')[:3]
+    serializer_class = ExplicaionSerializer
+
+@permission_classes([AllowAny])
+class QuienesSomosView(generics.ListAPIView):
+    queryset = QuienSomos.objects.filter(publicado=True).order_by('fecha_publicacion')[:1]
+    serializer_class = QuienSomosSerializer

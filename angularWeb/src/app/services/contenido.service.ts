@@ -9,7 +9,7 @@ import { tap, catchError } from 'rxjs/operators';
 })
 export class ContenidoService {
 
-  private explicacionUrl = 'http://localhost:8001/file/explicacion/';
+  private explicacionUrl = 'http://localhost:8001/contenido/explicacion-inicio/';
 
 
   constructor(private http: HttpClient) { }

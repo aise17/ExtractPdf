@@ -1,9 +1,10 @@
 export class Ocr {
+    
+    id: string;
     descripcion: string;
     documento: File;
     proceso: string;
-    id: string;
     dateTimeUp: Date;
-    usuario: string;
+    usuarioId: string;
 
 }

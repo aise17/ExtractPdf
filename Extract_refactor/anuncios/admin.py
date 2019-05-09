@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import AnuncioInferior, AnuncioLateral, AnuncioSuperior
+from .models import AnuncioInferior, AnuncioLateral, AnuncioSuperior, Explicacion, QuienSomos, Bono
+
 
 # Register your models here.
 
@@ -22,7 +23,32 @@ class AnuncioInferiorAdmin(admin.ModelAdmin):
     list_editable = ['publicado']
     search_fields = ['titulo']
 
+class ExplicacionAdmin(admin.ModelAdmin):
+    list_display = ['titulo', 'fecha_creacion', 'fecha_publicacion', 'publicado' ]
+    list_filter =['publicado', 'fecha_creacion', 'fecha_publicacion']
+    list_editable = ['publicado']
+    search_fields = ['titulo']
+
+
+class QuienSomosAdmin(admin.ModelAdmin):
+    list_display = ['titulo', 'fecha_creacion', 'fecha_publicacion', 'publicado' ]
+    list_filter =['publicado', 'fecha_creacion', 'fecha_publicacion']
+    list_editable = ['publicado']
+    search_fields = ['titulo']
+
+class BonoAdmin(admin.ModelAdmin):
+    list_display = ['id', 'peticiones', 'descripcion', 'precio', 'activado', 'fecha_creacion' ]
+    list_filter =['activado', 'fecha_creacion']
+    list_editable = ['activado']
+    search_fields = ['id']
 
 admin.site.register(AnuncioLateral, AnuncioLateralAdmin)
 admin.site.register(AnuncioSuperior, AnuncioSuperiorAdmin)
 admin.site.register(AnuncioInferior, AnuncioInferiorAdmin)
+
+admin.site.register(Explicacion, ExplicacionAdmin)
+admin.site.register(QuienSomos, QuienSomosAdmin)
+admin.site.register(Bono, BonoAdmin)
+
+
+

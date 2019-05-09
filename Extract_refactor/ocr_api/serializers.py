@@ -1,7 +1,6 @@
 
 from rest_framework import serializers
-from .models import File, Explicacion, IpsFiles, Incidencia, \
-    QuienSomos, Bono, BonoUsuario, Traza
+from .models import File, IpsFiles, BonoUsuario, Traza, Salida
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
@@ -41,12 +40,6 @@ class ArchivoSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ExplicaionSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model= Explicacion
-        fields = "__all__"
-
 
 class IpsFileSerializers(serializers.ModelSerializer):
     class Meta:
@@ -54,21 +47,11 @@ class IpsFileSerializers(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class IncidenciaSerializers(serializers.ModelSerializer):
+class SalidaSerializers(serializers.ModelSerializer):
     class Meta:
-        model= Incidencia
+        model= Salida
         fields = "__all__"
 
-
-class QuienSomosSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = QuienSomos
-        fields = "__all__"
-
-class BonoSerializer(serializers.Serializer):
-    class Meta:
-        model = Bono
-        fields = "__all__"
 
 class BonoUsuarioSerializer(serializers.Serializer):
     class Meta:
@@ -79,4 +62,7 @@ class TrazaSerializer(serializers.Serializer):
     class Meta:
         model = Traza
         fields = "__all__"
+
+
+
 
