@@ -1,9 +1,15 @@
+import sys
+
+
+sys.path.append('../')
+
 from django.db import models
 import uuid
 from django.contrib.auth.models import User
 
+from anuncios.models import Bono
 
-# Create your models here.
+
 class Incidencia(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     asunto = models.CharField(max_length=100)
@@ -14,3 +20,13 @@ class Incidencia(models.Model):
 
     def __str__(self):
         return self.asunto
+
+
+class BonoUsuario(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    bono = models.ForeignKey(Bono, on_delete=models.CASCADE, null=True)
+    activado = models.BooleanField(default=True)
+    fecha_creacion = models.DateField(auto_now=True)
+
+

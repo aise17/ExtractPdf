@@ -60,10 +60,5 @@ class Traza(models.Model):
     error = models.BooleanField(default=False)
 
 
-class BonoUsuario(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    bono = models.ForeignKey(Bono, on_delete=models.CASCADE, null=True)
-    activado = models.BooleanField(default=True)
-    fecha_creacion = models.DateField(auto_now=True)
+
 

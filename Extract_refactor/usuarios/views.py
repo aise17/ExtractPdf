@@ -13,8 +13,9 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import ArchivoSerializer, UserSerializer, IpsFileSerializers, IncidenciaSerializers
-from .models import Incidencia
+from .serializers import ArchivoSerializer, UserSerializer, IpsFileSerializers, IncidenciaSerializers, \
+    BonoUsuarioSerializer
+from .models import Incidencia, BonoUsuario
 from ocr_api.models import File, IpsFiles, Traza
 from ocr_api.utils import servicioTraza
 
@@ -67,18 +68,23 @@ class LogoutUser(generics.ListCreateAPIView):
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserSerializer()
 
-    def put(self, request, *args, **kwargs):
+
+    def update(self, request, *args, **kwargs):
         salida = dict()
-        user = self.get_object()
-        serializer = UserSerializer(user, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            salida['ok'] = True
-            salida['user'] = serializer.data
-        else:
-            salida['ok'] = False
+        instance = self.get_object()
+        instance.username = request.data.get('usuario')
+        instance.first_name = request.data.get('first_name')
+        instance.last_name = request.data.get('last_name')
+        instance.set_password(request.data.get('password'))
+        instance.email = request.data.get('email')
+
+        self.perform_update(instance)
+
+        salida['ok'] = True
+        data = UserSerializer(instance=instance)
+        salida['user'] = data.data
 
         servicioTraza(request, salida, UserDetail.__name__)
 
@@ -92,7 +98,7 @@ class AuthentificacionUsuario(generics.ListCreateAPIView):
     def post(self, request, *args, **kwargs):
         salida = dict()
 
-        s = authenticate(username=request.data.get('usuario'), password=request.data.get('password'))
+        s = authenticate(username=request.data.get('username'), password=request.data.get('password'))
         if s is not None:
             login(request, s)
             salida['ok'] = True
@@ -107,12 +113,9 @@ class AuthentificacionUsuario(generics.ListCreateAPIView):
         return Response(salida, status=status.HTTP_200_OK)
 
 
-class RequestProcessOcrForUser(generics.ListCreateAPIView):
-
+class RequestProcessOcrByUser(generics.ListCreateAPIView):
+    queryset = IpsFiles.objects.all()
     serializer_class = IpsFileSerializers
-
-    def get_object(self):
-        return IpsFiles.objects.filter(usuario__username=self.request.data.get('username'))
 
     def post(self, request, *args, **kwargs):
         salida = dict()
@@ -121,25 +124,24 @@ class RequestProcessOcrForUser(generics.ListCreateAPIView):
 
             salida['ok'] = True
 
-            #TODO reemplazar las 12 consultas por una que contenga un array con todos los meses para luego iterar por el.
-            salida['enero'] = len(IpsFiles.objects.filter(fecha_conexion__month='01', usuario=request.data.get('id')))
-            salida['febrero'] = len(IpsFiles.objects.filter(fecha_conexion__month='02', usuario=request.data.get('id')))
-            salida['marzo'] = len(IpsFiles.objects.filter(fecha_conexion__month='03', usuario=request.data.get('id')))
-            salida['abril'] = len(IpsFiles.objects.filter(fecha_conexion__month='04', usuario=request.data.get('id')))
-            salida['mayo'] = len(IpsFiles.objects.filter(fecha_conexion__month='05', usuario=request.data.get('id')))
-            salida['junio'] = len(IpsFiles.objects.filter(fecha_conexion__month='06', usuario=request.data.get('id')))
-            salida['julio'] = len(IpsFiles.objects.filter(fecha_conexion__month='07', usuario=request.data.get('id')))
-            salida['agosto'] = len(IpsFiles.objects.filter(fecha_conexion__month='08', usuario=request.data.get('id')))
-            salida['septiembre'] = len(IpsFiles.objects.filter(fecha_conexion__month='09', usuario=request.data.get('id')))
-            salida['octubre'] = len(IpsFiles.objects.filter(fecha_conexion__month='10', usuario=request.data.get('id')))
-            salida['noviembre'] = len(IpsFiles.objects.filter(fecha_conexion__month='11', usuario=request.data.get('id')))
-            salida['diciembre'] = len(IpsFiles.objects.filter(fecha_conexion__month='12', usuario=request.data.get('id')))
+            salida['enero'] = len(self.queryset.filter(fecha_conexion__month='01', usuario=request.data.get('id')))
+            salida['febrero'] = len(self.queryset.filter(fecha_conexion__month='02', usuario=request.data.get('id')))
+            salida['marzo'] = len(self.queryset.filter(fecha_conexion__month='03', usuario=request.data.get('id')))
+            salida['abril'] = len(self.queryset.filter(fecha_conexion__month='04', usuario=request.data.get('id')))
+            salida['mayo'] = len(self.queryset.filter(fecha_conexion__month='05', usuario=request.data.get('id')))
+            salida['junio'] = len(self.queryset.filter(fecha_conexion__month='06', usuario=request.data.get('id')))
+            salida['julio'] = len(self.queryset.filter(fecha_conexion__month='07', usuario=request.data.get('id')))
+            salida['agosto'] = len(self.queryset.filter(fecha_conexion__month='08', usuario=request.data.get('id')))
+            salida['septiembre'] = len(self.queryset.filter(fecha_conexion__month='09', usuario=request.data.get('id')))
+            salida['octubre'] = len(self.queryset.filter(fecha_conexion__month='10', usuario=request.data.get('id')))
+            salida['noviembre'] = len(self.queryset.filter(fecha_conexion__month='11', usuario=request.data.get('id')))
+            salida['diciembre'] = len(self.queryset.filter(fecha_conexion__month='12', usuario=request.data.get('id')))
 
 
         else:
             salida['ok'] = False
 
-        servicioTraza(request, salida, RequestProcessOcrForUser.__name__)
+        servicioTraza(request, salida, RequestProcessOcrByUser.__name__)
 
         return Response(salida, status=status.HTTP_200_OK)
 
@@ -181,7 +183,6 @@ class ContactoView(generics.ListCreateAPIView):
 
             i = incidencia.save()
 
-
             email = EmailMessage(incidencia.data.get('asunto'), incidencia.data.get('contenido'),
                                  to=['sergio.martinez-g@hotmail.com'])
             email.send()
@@ -197,3 +198,20 @@ class ContactoView(generics.ListCreateAPIView):
         servicioTraza(request, salida, ContactoView.__name__)
 
         return Response(salida, status=status.HTTP_200_OK)
+
+
+class BonosByUserCreateView(generics.ListCreateAPIView):
+    queryset = BonoUsuario.objects.all()
+    serializer_class = BonoUsuarioSerializer
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+
+class BonosByUserListView(generics.ListCreateAPIView):
+    queryset = BonoUsuario.objects.all()
+    serializer_class = BonoUsuarioSerializer
+
+    def post(self, request, *args, **kwargs):
+        bonos = self.queryset.filter(usuario=request.data.get('usuarioId'))
+

@@ -4,6 +4,7 @@ import { Validators, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DialogData } from '../menu/menu.component';
 import { UsuarioService } from '../services/usuario.service';
+import { Oauth2Service } from '../services/oauth2.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class DialogLoginComponent implements OnInit {
   ]);
 
   constructor(public dialogRef: MatDialogRef<DialogLoginComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, public userService: UsuarioService) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, public userService: UsuarioService, private oauthService: Oauth2Service) { }
 
   ngOnInit() {
   }
@@ -36,34 +37,39 @@ export class DialogLoginComponent implements OnInit {
   enviarRegistro() {
     if (!this.emailFormControl.hasError('email') && !this.emailFormControl.hasError('required')) {
 
-
+      var newuser = new Usuario();
 
       this.userService.register(this.user)
       .subscribe(res => {
         console.log(res);
         if (res['ok'] === true ) {
-        this.user = res['user'];
+        newuser = res['user'];
         console.log(res);
-        console.log('user:' + this.user.usuario);
-        sessionStorage.setItem('id', this.user.id);
-        sessionStorage.setItem('username', this.user.usuario);
-        sessionStorage.setItem('password', this.user.password);
-        sessionStorage.setItem('email', this.user.email);
-        sessionStorage.setItem('first_name', this.user.first_name);
-        sessionStorage.setItem('last_name', this.user.last_name);
+        console.log('user:' + newuser.username);
+        sessionStorage.setItem('id', newuser.id);
+        sessionStorage.setItem('username', newuser.username);
+        sessionStorage.setItem('password', newuser.password);
+        sessionStorage.setItem('email', newuser.email);
+        sessionStorage.setItem('first_name', newuser.first_name);
+        sessionStorage.setItem('last_name', newuser.last_name);
 
-
-
-        this.user = new Usuario();
-        window.location.href = '/index';
+        this.peticionToken(this.user.username, this.user.password);
         }
-      });
-
-
+      }); 
     }
-  
-  
-  
+  }
+
+  peticionToken(username: string, password: string) {
+    this.oauthService.getToken(username, password)
+    .subscribe(res => {
+
+      console.log('peticion de token realizada');
+      console.log(res);
+
+      sessionStorage.setItem('api_token', res['access_token']);
+      // TODO conseguir que cierre dialogo al cargar api token
+      //window.location.href = '/index';
+    });
   }
 
 }

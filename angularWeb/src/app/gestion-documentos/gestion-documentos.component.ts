@@ -54,7 +54,7 @@ export class GestionDocumentosComponent implements OnInit {
   ngOnInit() {
     this.usuario = new Usuario;
     this.usuario.id = sessionStorage.getItem('id');
-    this.usuario.usuario = sessionStorage.getItem('username');
+    this.usuario.username = sessionStorage.getItem('username');
     this.usuario.password = sessionStorage.getItem('password');
     this.usuario.first_name = sessionStorage.getItem('first_name');
     this.usuario.last_name = sessionStorage.getItem('last_name');

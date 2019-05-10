@@ -75,7 +75,7 @@ export class UsuarioDetalleComponent implements OnInit {
   ngOnInit() {
       this.usuario = new Usuario;
       this.usuario.id = sessionStorage.getItem('id');
-      this.usuario.usuario = sessionStorage.getItem('username');
+      this.usuario.username = sessionStorage.getItem('username');
       this.usuario.password = sessionStorage.getItem('password');
       this.usuario.first_name = sessionStorage.getItem('first_name');
       this.usuario.last_name = sessionStorage.getItem('last_name');
@@ -93,16 +93,17 @@ export class UsuarioDetalleComponent implements OnInit {
       console.log('salida de cahnge()= ' + res['ok']);
       if (res['ok'] === true ) {
         this.usuario = res['user'];
+
         console.log('respsuesta' + res);
-        console.log('user:' + this.usuario.usuario);
         sessionStorage.setItem('id', this.usuario.id);
-        sessionStorage.setItem('username', this.usuario.usuario);
+        sessionStorage.setItem('username', this.usuario.username);
         sessionStorage.setItem('password', this.usuario.password);
         sessionStorage.setItem('email', this.usuario.email);
         sessionStorage.setItem('first_name', this.usuario.first_name);
         sessionStorage.setItem('last_name', this.usuario.last_name);
       }
     });
+    window.location.href = '/usuario'
   }
 
   getRequest() {

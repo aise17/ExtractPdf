@@ -7,7 +7,7 @@
       </button>
     <span>OCR</span>
     <span class="spacer"></span>
-    <span *ngIf='user'>{{user.usuario }}</span>
+    <span *ngIf='user'>{{user.username }}</span>
     <button mat-button [matMenuTriggerFor]="menu" *ngIf='user; else notUser'>
           <mat-icon class="icon" >face</mat-icon>
 

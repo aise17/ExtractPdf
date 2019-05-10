@@ -8,7 +8,7 @@ sys.path.append("..")
 from rest_framework import serializers
 from ocr_api.models import File, IpsFiles
 from django.contrib.auth.models import User
-from .models import Incidencia
+from .models import Incidencia, BonoUsuario
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -19,11 +19,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
 
-        instance.username = validated_data.get('username', instance.username)
+        instance.username = validated_data.get('usuario', instance.username)
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.set_password(validated_data.get('password', instance.password))
         instance.email = validated_data.get('email', instance.email)
+
         instance.save()
         return instance
 
@@ -61,3 +62,7 @@ class IncidenciaSerializers(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class BonoUsuarioSerializer(serializers.Serializer):
+    class Meta:
+        model = BonoUsuario
+        fields = "__all__"

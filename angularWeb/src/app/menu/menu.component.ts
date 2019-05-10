@@ -41,6 +41,7 @@ export class MenuComponent implements OnInit {
       .subscribe(res => {
         if (res['ok'] === true ) {
         this.user = res['user'];
+        this.user.username = res['user'].username;
         console.log(res);
         console.log('user:' + this.username);
         sessionStorage.setItem('id', this.user.id);
@@ -53,7 +54,9 @@ export class MenuComponent implements OnInit {
         this.peticionToken(this.username, this.password);
       }
       });
+      //window.location.href = '/index';
     });
+  
   }
 
   peticionToken(username: string, password: string) {
@@ -64,9 +67,6 @@ export class MenuComponent implements OnInit {
       console.log(res);
 
       sessionStorage.setItem('api_token', res['access_token']);
-
-      
-      //window.location.href = '/ocr';
     });
   }
 
@@ -86,7 +86,7 @@ export class MenuComponent implements OnInit {
     if (sessionStorage.getItem('username') !== null && sessionStorage.getItem('password') !== null) {
       console.log('sesion storage username:' + sessionStorage.getItem('username'));
       this.user = new Usuario()
-      this.user.usuario = sessionStorage.getItem('username');
+      this.user.username = sessionStorage.getItem('username');
       this.user.password = sessionStorage.getItem('password');
     }
   }

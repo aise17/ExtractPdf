@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import File, IpsFiles, BonoUsuario, Traza
+from .models import File, IpsFiles, Traza
 
 
 
@@ -21,11 +21,6 @@ class IpsFilesAdmin(admin.ModelAdmin):
     search_fields = ['ip', 'id']
 
 
-class BonoUsuarioAdmin(admin.ModelAdmin):
-    list_display = ['id', 'usuario', 'bono', 'activado', 'fecha_creacion' ]
-    list_filter =['usuario', 'bono', 'fecha_creacion']
-    list_editable = ['activado']
-    search_fields = ['usuario', 'bono', 'fecha_creacion']
 
 class TrazaAdmin(admin.ModelAdmin):
     list_display = ['id', 'funcion_llamada', 'datos_in', 'datos_out', 'usuario', 'fecha_creacion', 'error' ]
@@ -39,7 +34,6 @@ admin.site.register(File, FileAdmin)
 
 admin.site.register(IpsFiles, IpsFilesAdmin)
 
-admin.site.register(BonoUsuario, BonoUsuarioAdmin)
 admin.site.register(Traza, TrazaAdmin)
 
 admin.site.site_url = 'http://localhost:4200'

@@ -16,12 +16,7 @@ export class Oauth2Service {
 
   getToken (usuario: string, pass: string): Observable<Response> {
 
-
-
-   
-
     var token = new ApiToken(usuario, pass.toString());
-
 
     console.log(token)
 
