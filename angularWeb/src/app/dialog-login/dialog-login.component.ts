@@ -67,7 +67,7 @@ export class DialogLoginComponent implements OnInit {
       console.log(res);
 
       sessionStorage.setItem('api_token', res['access_token']);
-      // TODO conseguir que cierre dialogo al cargar api token
+      // TODO conseguir que cierre dialogo al cargar api tokenng 
       //window.location.href = '/index';
     });
   }

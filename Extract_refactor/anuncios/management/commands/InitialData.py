@@ -5,26 +5,16 @@ from django.utils import timezone
 from oauth2_provider.models import Application
 
 import  sys
+
+
 sys.path.append("../..")
 #from Extract_refactor.ocr_api.models import Explicacion
 #from Extract_refactor.ocr_api.serializers import ExplicaionSerializer
 
 
-from  anuncios.models import Explicacion
+from  seguridad.models import MinSizeDocumento
+from  anuncios.models import Explicacion, Bono
 from  anuncios.serializers import ExplicaionSerializer
-
-
-data = {
-    'titulo': 'Utilice el software OCR',
-    'contenido': 'sin instalación en su computadora. Reconocer texto y caracteres de documentos escaneados en PDF (incluidos archivos de varias páginas), fotografías e imágenes captadas por cámaras digitales.',
-    'fecha_publicacion': '2019-08-08',
-    'publicado': 'True',
-    'titulo_imagen': 'imagen1',
-    'imagen': 'https://www.google.es/imgres?imgurl=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1*kMUgsKRq0rhkN4JD9HrmSw.png&imgrefurl=https%3A%2F%2Fcodeburst.io%2Foptical-character-recognition-recognizing-text-to-labels-on-an-android-platform-4c20bddc9175&docid=P4SRErQIoTG6rM&tbnid=L1XM5RgQ930N3M%3A&vet=10ahUKEwiY3vCuwYviAhWM8eAKHac_Df4QMwhMKA4wDg..i&w=600&h=411&client=ubuntu&bih=912&biw=1866&q=ocr&ved=0ahUKEwiY3vCuwYviAhWM8eAKHac_Df4QMwhMKA4wDg&iact=mrc&uact=8'
-}
-
-
-# explicacion.imagen = 'https://www.google.es/imgres?imgurl=https%3A%2F%2Fstore-images.s-microsoft.com%2Fimage%2Fapps.4294.13510798886736958.a650f2a3-9e4d-4aeb-8aff-d1ce5d232c80.cf7f9fcd-4d78-4d3f-8a03-98ed771f89c1&imgrefurl=https%3A%2F%2Fwww.microsoft.com%2Fes-mx%2Fp%2Fphoto-to-text-ocr%2F9nblggh6hrzh&docid=GqWOzJRBLYwspM&tbnid=nOcRfHBULMXQCM%3A&vet=10ahUKEwjS9YGqvIviAhV77OAKHbkgBUAQMwhAKAIwAg..i&w=620&h=620&client=ubuntu&bih=863&biw=1866&q=ocr&ved=0ahUKEwjS9YGqvIviAhV77OAKHbkgBUAQMwhAKAIwAg&iact=mrc&uact=8'
 
 
 class Command(BaseCommand):
@@ -36,6 +26,10 @@ class Command(BaseCommand):
         self.crearExplicacion2Inicial()
         self.crearExplicacion3Inicial()
         self.registerApilicationOauth()
+        self.registerBonoSmallCard()
+        self.registerBonoMediumCard()
+        self.registerBonoGrantCard()
+        self.registerMinSizeDocumentoDefault()
 
     def crearSuperuser(self):
         if (User.objects.filter(username='admin')):
@@ -165,3 +159,78 @@ class Command(BaseCommand):
             except:
                 print('[+][+] Registro de Aplicacion no es valida')
                 print('[+][+] Error en registro de Aplicacion -> ' + aplication.__repr__())
+
+    def registerBonoGrantCard(self):
+        if Bono.objects.filter(titulo='Great Card'):
+            print('[+] Bono Great Card ya existe')
+        else:
+            bono = Bono()
+            bono.titulo = 'Great Card'
+            bono.peticiones = '200'
+            bono.descripcion = 'consige el este pak de 200 peticiones a nuestro servicios a un coste reducido'
+            bono.precio = '10'
+            bono.activado = True
+
+            try:
+                bono.save()
+                print('[+] Registro de Bono Great Card creado')
+            except:
+
+                print('[+][+] Registro de Bono no es valida')
+                print('[+][+] Error en registro de Aplicacion -> ' + bono.__repr__())
+
+    def registerBonoMediumCard(self):
+        if Bono.objects.filter(titulo='Medium Card'):
+            print('[+] Bono Medium Card ya existe')
+        else:
+            bono = Bono()
+            bono.titulo = 'Medium Card'
+            bono.peticiones = '80'
+            bono.descripcion = 'amplia tus peticiones con este pak de 80 peticiones por solo 8 euros'
+            bono.precio = '8'
+            bono.activado = True
+
+            try:
+                bono.save()
+                print('[+] Registro de Bono Great Card creado')
+            except:
+
+                print('[+][+] Registro de Bono no es valida')
+                print('[+][+] Error en registro de Aplicacion -> ' + bono.__repr__())
+
+    def registerBonoSmallCard(self):
+        if Bono.objects.filter(titulo='Small Card'):
+            print('[+] Bono Small Card ya existe')
+        else:
+            bono = Bono()
+            bono.titulo = 'Small Card'
+            bono.peticiones = '20'
+            bono.descripcion = 'este bono te permitirá adquirir 20 peticiones a nuestros servicios'
+            bono.precio = '5'
+            bono.activado = True
+
+            try:
+                bono.save()
+                print('[+] Registro de Bono Great Card creado')
+            except:
+
+                print('[+][+] Registro de Bono no es valida')
+                print('[+][+] Error en registro de Aplicacion -> ' + bono.__repr__())
+
+    def registerMinSizeDocumentoDefault(self):
+        if MinSizeDocumento.objects.filter(titulo='defecto'):
+            print('[+] MinSizeDocumento defecto ya existe')
+        else:
+            min_size_documento = MinSizeDocumento()
+            min_size_documento.titulo = 'defecto'
+            min_size_documento.tam_min = 40000
+            min_size_documento.activo = True
+
+            try:
+                min_size_documento.save()
+                print('[+] Registro de MinSizeDocumento defecto creado')
+            except:
+
+                print('[+][+] Registro de MinSizeDocumento no es valida')
+                print(
+                    '[+][+] Error en registro de MinSizeDocumento defecto -> ' + min_size_documento.__repr__())

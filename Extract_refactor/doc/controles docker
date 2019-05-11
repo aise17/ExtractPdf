@@ -1,0 +1,11 @@
+
+
+controles para docker
+
+-> Eliminar todos los contenedores
+
+    docker rm $(docker ps -a -q)
+
+->
+
+    docker rmi $(docker images -a)

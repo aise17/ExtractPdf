@@ -11303,3 +11303,79 @@ Descripcién producw/sen/icio IVA%
 Observaciones Base imponible: 31 ,00
 mm»
 TOTAL: 3751
+
+
+-------------------------------------
+FECHA: Sat May 11 17:34:27 2019  ESCALA DE GRISES: T
+-------------------------------------
+
+
+Factura: 231 Fecha: 10/06/2018
+
+marlano raloy
+3423M Datos del cliente
+moncloa Pedro sanchez
+53454566 654655as
+c/ Nuevo presidents
+54646458
+Descripcién producw/sen/icio IVA%
+—l-mum
+—m-mmm
+
+Observaciones Base imponible: 31 ,00
+mm»
+TOTAL: 3751
+
+
+-------------------------------------
+FECHA: Sat May 11 17:39:51 2019  ESCALA DE GRISES: T
+-------------------------------------
+
+
+LOGO FACTURA
+ 
+Direccién Foch: 12/23/11
+Ciudad, Provincia 00000 Fawn w 1111
+Teléfono: 100) 11 11 11 11 Ha: N9 pedido
+Fax:1DD) 11 11 11 12
+Factura para:
+Contacto en la empresa
+Nombre de la empresa
+Direccién
+Ciudad, Provincia 00000
+(00) 22 22 22 22
+Cantldad Descrlpdan Pretln unharln lmpnrte
+1 Elemenm numem 1 2,00: 2,00:
+1 Elemento nL’Imero 2 2,00 € 2,00 €
+1 Elemenm numem 3 2,00: 2,00:
+ 
+ 
+ 
+ 
+
+Observaclonas
+
+WA 1,26
+Total 7,26 €
+
+
+-------------------------------------
+FECHA: Sat May 11 17:40:12 2019  ESCALA DE GRISES: T
+-------------------------------------
+
+
+Factura: 231 Fecha: 10/06/2018
+
+marlano raloy
+3423M Datos del cliente
+moncloa Pedro sanchez
+53454566 654655as
+c/ Nuevo presidents
+54646458
+Descripcién producw/sen/icio IVA%
+—l-mum
+—m-mmm
+
+Observaciones Base imponible: 31 ,00
+mm»
+TOTAL: 3751

@@ -1,0 +1,29 @@
+.card {
+    max-width: 350px;
+    margin: 20px;
+
+  }
+  
+
+.contenedor{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+  
+ 
+}
+
+.titilo{
+  text-align: center;
+  width: 100%;
+}
+
+.cont-prin{
+  height: 100%;
+}
+
+
+
+  
+

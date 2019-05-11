@@ -16,7 +16,7 @@ from rest_framework import status
 from .serializers import ArchivoSerializer, UserSerializer, IpsFileSerializers, IncidenciaSerializers, \
     BonoUsuarioSerializer
 from .models import Incidencia, BonoUsuario
-from ocr_api.models import File, IpsFiles, Traza
+from ocr_api.models import File, IpsFiles
 from ocr_api.utils import servicioTraza
 
 

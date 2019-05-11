@@ -42,6 +42,10 @@ class BonoAdmin(admin.ModelAdmin):
     list_editable = ['activado']
     search_fields = ['id']
 
+
+
+
+
 admin.site.register(AnuncioLateral, AnuncioLateralAdmin)
 admin.site.register(AnuncioSuperior, AnuncioSuperiorAdmin)
 admin.site.register(AnuncioInferior, AnuncioInferiorAdmin)

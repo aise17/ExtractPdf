@@ -1,6 +1,25 @@
 
 <app-menu>
-<p>
-  bonos works!
-</p>
+  <div>
+    <div align="center" text-aling="center" class="contenedor">
+  
+      <mat-card class="card" *ngFor="let contenido of result">
+        <mat-card-header class="contenedor">
+          <mat-card-title class="contenedor">{{ contenido.titulo | uppercase }}</mat-card-title>
+        </mat-card-header>
+          <p  mat-card-subtitle>{{ contenido.descripcion }} </p>
+          <mat-card-content>
+            <p [innerHtml]='contenido.peticiones'></p>
+          </mat-card-content>
+          <button mat-raised-button color="primary" (click)='comprarBono(contenido.titulo)' >Comprar</button> 
+
+        </mat-card>
+
+
+  
+    </div>
+      
+      <app-ir-ocr></app-ir-ocr>
+    
+    </div>
 </app-menu>

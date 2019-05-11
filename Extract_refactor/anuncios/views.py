@@ -1,14 +1,23 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import generics
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
+from rest_framework.renderers import JSONRenderer
 
 from .models import AnuncioLateral, AnuncioInferior, AnuncioSuperior, Bono, Explicacion, QuienSomos
 from .serializers import AnuncioLateralSerializer, AnuncioInferiroSerializer, \
     AnuncioSuperiorSerializer, BonoSerializer, ExplicaionSerializer, QuienSomosSerializer
 
+from rest_framework.response import Response
+from rest_framework import status
+
+import sys
+sys.path.append('../')
+
+from ocr_api.utils import servicioTraza
 
 @permission_classes([AllowAny])
 class AnuncioSuperiroView(generics.ListCreateAPIView):
@@ -30,15 +39,26 @@ class AnuncioLateralView(generics.ListCreateAPIView):
 
 @permission_classes([AllowAny])
 class BonosView(generics.ListAPIView):
-
     queryset = Bono.objects.filter(activado=True).order_by('precio')
     serializer_class = BonoSerializer
 
-
     def get(self, request, *args, **kwargs):
 
-        salida = list()
-        salida.append(self.queryset)
+        salida = dict()
+
+        ser = BonoSerializer(self.queryset.all(), many=True)
+
+        salida['salida'] = ser.data
+
+        if salida['salida']:
+            salida['ok'] = True
+        else:
+            salida['ok'] = False
+
+        servicioTraza(request, salida, BonosView.__name__)
+
+        return Response(salida, status=status.HTTP_200_OK)
+
 
 @permission_classes([AllowAny])
 class ExplicacionInicio(generics.ListCreateAPIView):

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ocr_api.apps.OcrApiConfig',
     'usuarios.apps.UsuariosConfig',
     'anuncios.apps.AnunciosConfig',
+    'seguridad.apps.SeguridadConfig',
     'rest_framework',
     'ckeditor',
     'oauth2_provider',

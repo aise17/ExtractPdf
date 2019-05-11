@@ -13,10 +13,10 @@ export class ContenidoComponent implements OnInit {
   public result: Contenido[];
 
   ngOnInit() {
-    this.boton();
+    this.getContenido();
   }
 
-  boton(): void {
+  getContenido(): void {
     console.log('pulsado');
 
     this.service.getContenido()

@@ -24,7 +24,7 @@ class AnuncioInferiroSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class BonoSerializer(serializers.Serializer):
+class BonoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bono
         fields = "__all__"
