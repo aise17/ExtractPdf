@@ -12,6 +12,7 @@ sys.path.append("../..")
 #from Extract_refactor.ocr_api.serializers import ExplicaionSerializer
 
 
+from anuncios.models import QuienSomos
 from  seguridad.models import MinSizeDocumento
 from  anuncios.models import Explicacion, Bono
 from  anuncios.serializers import ExplicaionSerializer
@@ -47,26 +48,6 @@ class Command(BaseCommand):
 
             print('[+] superadministrador creado')
 
-    '''
-        def crearExplicacion1Inicial(self):
-            if (Explicacion.objects.filter(titulo='Utilice el software OCR')):
-                print('[+] Primera explicacion ya existe')
-
-            else:
-                #explicacion.imagen = 'https://www.google.es/imgres?imgurl=https%3A%2F%2Fstore-images.s-microsoft.com%2Fimage%2Fapps.4294.13510798886736958.a650f2a3-9e4d-4aeb-8aff-d1ce5d232c80.cf7f9fcd-4d78-4d3f-8a03-98ed771f89c1&imgrefurl=https%3A%2F%2Fwww.microsoft.com%2Fes-mx%2Fp%2Fphoto-to-text-ocr%2F9nblggh6hrzh&docid=GqWOzJRBLYwspM&tbnid=nOcRfHBULMXQCM%3A&vet=10ahUKEwjS9YGqvIviAhV77OAKHbkgBUAQMwhAKAIwAg..i&w=620&h=620&client=ubuntu&bih=863&biw=1866&q=ocr&ved=0ahUKEwjS9YGqvIviAhV77OAKHbkgBUAQMwhAKAIwAg&iact=mrc&uact=8'
-
-
-                ser = ExplicaionSerializer(data=data)
-
-
-
-                if ser.is_valid():
-                    ser.save();
-                    print('[+] Primera explicacion creada')
-                else:
-                    print('[+][+] Primera Explicacion no es valida')
-                    print('[+][+] Error producido -> ' + ser.errors.__repr__())
-    '''
 
     def crearExplicacion1Inicial(self):
         if (Explicacion.objects.filter(titulo='Convertir PDF a Word')):
@@ -235,14 +216,14 @@ class Command(BaseCommand):
                 print(
                     '[+][+] Error en registro de MinSizeDocumento defecto -> ' + min_size_documento.__repr__())
 
-'''
+
     def crearQuienSomos(self):
         if QuienSomos.objects.filter(titulo='defecto'):
             print('[+] QuienSomos defecto ya existe')
         else:
             quien_somos = QuienSomos()
             quien_somos.titulo = 'defecto'
-            quien_somos.tam_min = 40000
+            quien_somos.contenido = '<p>Joven estudiante de programador interesado en tecnologias bakend y frontend con buen manejo en leguajes python, javascript y c# utilizando&nbsp; frameworks como django, .net, angular 5 y sql</p><p>Especializado en tecnologias python y Django utilizando el stak django, celery redis, nginx sonbre docker</p>  <p>aficionado a la escalada, los viajes las buenas conversaciones</p><p>&nbsp;</p>'
             quien_somos.activo = True
 
             try:
@@ -252,6 +233,5 @@ class Command(BaseCommand):
 
                 print('[+][+] Registro de QuienSomos no es valida')
                 print(
-                    '[+][+] Error en registro de QuienSomos defecto -> ' + min_size_documento.__repr__())
+                    '[+][+] Error en registro de QuienSomos defecto -> ' + quien_somos.__repr__())
 
-'''
