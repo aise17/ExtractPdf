@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class QuienSomosService {
 
   
-  private explicacionUrl = 'http://localhost:8001/contenido/quienSomos/';
+  private explicacionUrl = 'http://localhost:8001/contenido/quien-somos/';
 
 
   constructor(private http: HttpClient) { }

@@ -12,7 +12,6 @@ from rest_framework.permissions import IsAuthenticated
 class IsAuthenticatedOrPost(IsAuthenticated):
     def has_permission(self, request, view):
 
-        print('[+][+][+] el docuemto pesa -> {} '.format(request.data.get('documento').size))
 
         regla =  MinSizeDocumento.objects.get(activo=True)
 
@@ -20,6 +19,9 @@ class IsAuthenticatedOrPost(IsAuthenticated):
             return True
 
         if request.data.get('documento').size < regla.tam_min:
+            print('[+][+][+] el docuemto pesa -> {} '.format(request.data.get('documento').size))
             return True
+
+        return False
         #return super().has_permission(request, view)
 

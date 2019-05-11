@@ -25,11 +25,11 @@ class Command(BaseCommand):
         self.crearExplicacion1Inicial()
         self.crearExplicacion2Inicial()
         self.crearExplicacion3Inicial()
-        self.registerApilicationOauth()
-        self.registerBonoSmallCard()
-        self.registerBonoMediumCard()
-        self.registerBonoGrantCard()
-        self.registerMinSizeDocumentoDefault()
+        self.crearApilicationOauth()
+        self.crearBonoSmallCard()
+        self.crearBonoMediumCard()
+        self.crearBonoGrantCard()
+        self.crearMinSizeDocumentoDefault()
 
     def crearSuperuser(self):
         if (User.objects.filter(username='admin')):
@@ -80,7 +80,7 @@ class Command(BaseCommand):
             explicacion.fecha_creacion = timezone.now()
             explicacion.publicado = True
             explicacion.titulo_imagen = 'imagen1'
-            # explicacion.imagen = 'https://www.google.es/imgres?imgurl=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1*kMUgsKRq0rhkN4JD9HrmSw.png&imgrefurl=https%3A%2F%2Fcodeburst.io%2Foptical-character-recognition-recognizing-text-to-labels-on-an-android-platform-4c20bddc9175&docid=P4SRErQIoTG6rM&tbnid=L1XM5RgQ930N3M%3A&vet=10ahUKEwiY3vCuwYviAhWM8eAKHac_Df4QMwhMKA4wDg..i&w=600&h=411&client=ubuntu&bih=912&biw=1866&q=ocr&ved=0ahUKEwiY3vCuwYviAhWM8eAKHac_Df4QMwhMKA4wDg&iact=mrc&uact=8'
+            explicacion.imagen = 'http://innovagroupbcn.com/wp-content/uploads/2017/02/ocr.jpg'
 
             try:
 
@@ -103,7 +103,7 @@ class Command(BaseCommand):
             explicacion.fecha_creacion = timezone.now()
             explicacion.publicado = True
             explicacion.titulo_imagen = 'imagen2'
-            #explicacion.imagen = 'https://www.google.es/imgres?imgurl=https%3A%2F%2Fcdn-images-1.medium.com%2Fmax%2F1200%2F1*kMUgsKRq0rhkN4JD9HrmSw.png&imgrefurl=https%3A%2F%2Fcodeburst.io%2Foptical-character-recognition-recognizing-text-to-labels-on-an-android-platform-4c20bddc9175&docid=P4SRErQIoTG6rM&tbnid=L1XM5RgQ930N3M%3A&vet=10ahUKEwiY3vCuwYviAhWM8eAKHac_Df4QMwhMKA4wDg..i&w=600&h=411&client=ubuntu&bih=912&biw=1866&q=ocr&ved=0ahUKEwiY3vCuwYviAhWM8eAKHac_Df4QMwhMKA4wDg&iact=mrc&uact=8'
+            explicacion.imagen = 'https://sitejerk.com/images/convertir-png-en-pdf-11.png'
 
             try:
 
@@ -127,7 +127,7 @@ class Command(BaseCommand):
             explicacion.fecha_publicacion = timezone.now()
             explicacion.publicado = True
             explicacion.titulo_imagen = 'imagen3'
-            #explicacion.imagen = 'https://www.google.es/imgres?imgurl=https%3A%2F%2Fwww.nerdwallet.com%2Fassets%2Fblog%2Fwp-content%2Fuploads%2F2014%2F11%2FiStock_000079110987_Small-570x225.jpg&imgrefurl=https%3A%2F%2Fwww.nerdwallet.com%2Fblog%2Fcredit-cards%2Fcredit-cards-give-free-fico-scores%2F&docid=bpjK7F9a2KAijM&tbnid=7hEcTu8Qo8y_gM%3A&vet=10ahUKEwjhqtnovIviAhWPHRQKHWMqBgoQMwg9KAUwBQ..i&w=570&h=225&client=ubuntu&bih=863&biw=1866&q=free&ved=0ahUKEwjhqtnovIviAhWPHRQKHWMqBgoQMwg9KAUwBQ&iact=mrc&uact=8'
+            explicacion.imagen = 'https://st.depositphotos.com/1031343/3971/v/950/depositphotos_39717745-stock-illustration-gratis-stamp.jpg'
 
             try:
 
@@ -140,7 +140,7 @@ class Command(BaseCommand):
 
 
 
-    def registerApilicationOauth(self):
+    def crearApilicationOauth(self):
         if (Application.objects.filter(client_id='xIlTUtu3pv3YCN0NZxioinzAIvnqhaUPB3j6C9m1')):
             print('[+] Tercera explicacion ya existe')
         else:
@@ -160,7 +160,7 @@ class Command(BaseCommand):
                 print('[+][+] Registro de Aplicacion no es valida')
                 print('[+][+] Error en registro de Aplicacion -> ' + aplication.__repr__())
 
-    def registerBonoGrantCard(self):
+    def crearBonoGrantCard(self):
         if Bono.objects.filter(titulo='Great Card'):
             print('[+] Bono Great Card ya existe')
         else:
@@ -176,10 +176,10 @@ class Command(BaseCommand):
                 print('[+] Registro de Bono Great Card creado')
             except:
 
-                print('[+][+] Registro de Bono no es valida')
+                print('[+][+] Registro de Bono no es valido')
                 print('[+][+] Error en registro de Aplicacion -> ' + bono.__repr__())
 
-    def registerBonoMediumCard(self):
+    def crearBonoMediumCard(self):
         if Bono.objects.filter(titulo='Medium Card'):
             print('[+] Bono Medium Card ya existe')
         else:
@@ -198,7 +198,7 @@ class Command(BaseCommand):
                 print('[+][+] Registro de Bono no es valida')
                 print('[+][+] Error en registro de Aplicacion -> ' + bono.__repr__())
 
-    def registerBonoSmallCard(self):
+    def crearBonoSmallCard(self):
         if Bono.objects.filter(titulo='Small Card'):
             print('[+] Bono Small Card ya existe')
         else:
@@ -217,7 +217,7 @@ class Command(BaseCommand):
                 print('[+][+] Registro de Bono no es valida')
                 print('[+][+] Error en registro de Aplicacion -> ' + bono.__repr__())
 
-    def registerMinSizeDocumentoDefault(self):
+    def crearMinSizeDocumentoDefault(self):
         if MinSizeDocumento.objects.filter(titulo='defecto'):
             print('[+] MinSizeDocumento defecto ya existe')
         else:
@@ -234,3 +234,24 @@ class Command(BaseCommand):
                 print('[+][+] Registro de MinSizeDocumento no es valida')
                 print(
                     '[+][+] Error en registro de MinSizeDocumento defecto -> ' + min_size_documento.__repr__())
+
+'''
+    def crearQuienSomos(self):
+        if QuienSomos.objects.filter(titulo='defecto'):
+            print('[+] QuienSomos defecto ya existe')
+        else:
+            quien_somos = QuienSomos()
+            quien_somos.titulo = 'defecto'
+            quien_somos.tam_min = 40000
+            quien_somos.activo = True
+
+            try:
+                quien_somos.save()
+                print('[+] Registro de QuienSomos defecto creado')
+            except:
+
+                print('[+][+] Registro de QuienSomos no es valida')
+                print(
+                    '[+][+] Error en registro de QuienSomos defecto -> ' + min_size_documento.__repr__())
+
+'''

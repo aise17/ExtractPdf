@@ -16,11 +16,11 @@ class AnuncioSuperior(models.Model):
         return self.titulo
 
     def save(self, *args, **kwargs):
-        if self.active:
-            otros = AnuncioSuperior.objects.filter(active=True)
+        if self.publicado:
+            otros = AnuncioSuperior.objects.filter(publicado=True)
             if self.id:
                 otros = otros.exclude(pk=self.id)
-            otros.update(active=False)
+            otros.update(publicado=False)
 
         super(AnuncioSuperior, self).save(*args, **kwargs)
 
@@ -36,6 +36,15 @@ class AnuncioLateral(models.Model):
     def __str__(self):
         return self.titulo
 
+    def save(self, *args, **kwargs):
+        if self.publicado:
+            otros = AnuncioLateral.objects.filter(publicado=True)
+            if self.id:
+                otros = otros.exclude(pk=self.id)
+            otros.update(publicado=False)
+
+        super(AnuncioLateral, self).save(*args, **kwargs)
+
 
 class AnuncioInferior(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -47,6 +56,15 @@ class AnuncioInferior(models.Model):
 
     def __str__(self):
         return self.titulo
+
+    def save(self, *args, **kwargs):
+        if self.publicado:
+            otros = AnuncioInferior.objects.filter(publicado=True)
+            if self.id:
+                otros = otros.exclude(pk=self.id)
+            otros.update(publicado=False)
+
+        super(AnuncioInferior, self).save(*args, **kwargs)
 
 class Bono(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -86,4 +104,13 @@ class QuienSomos(models.Model):
 
     def __str__(self):
         return self.titulo
+
+    def save(self, *args, **kwargs):
+        if self.publicado:
+            otros = QuienSomos.objects.filter(publicado=True)
+            if self.id:
+                otros = otros.exclude(pk=self.id)
+            otros.update(publicado=False)
+
+        super(QuienSomos, self).save(*args, **kwargs)
 

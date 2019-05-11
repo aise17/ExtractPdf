@@ -17,13 +17,7 @@ export class ContactoService {
 
 
   sendEmail(contacto: Contacto): Observable<Contacto> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token',
-        'Access-Control-Allow-Origin': '*'
-      })
-    };
+
 
     const headers = new HttpHeaders();
     headers.append('Access-Control-Allow-Methods', 'POST');

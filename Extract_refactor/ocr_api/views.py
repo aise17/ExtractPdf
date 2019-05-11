@@ -35,38 +35,49 @@ class FileView(generics.ListCreateAPIView):
     serializer_class = ArchivoSerializer
 
     def post(self, request, *args, **kwargs):
-        if not request.data.get('id'):
-            print('[-][-][-] No lleva id ')
-            file_serializer = ArchivoSerializer(data=request.data)
-            if file_serializer.is_valid():
 
-                f = file_serializer.save()
+        # TODO implementar el sistema de bonos
 
-                fileIpCreate(request, f)
+        salida = dict()
+        nombre: str = None
+        proceso: str = None
 
-                proceso = file_serializer.data.get('proceso')
-                nombre: str = file_serializer.data.get('documento').__str__()
+        try:
+            if not request.data.get('id'):
+                print('[-][-][-] No lleva id ')
+
+                request.data['usuario'] = request.data.get('usuarioId')
+                file_serializer = ArchivoSerializer(data=request.data)
+                if file_serializer.is_valid():
+                    f = file_serializer.save()
+
+                    fileIpCreate(request, f)
+
+                    proceso = file_serializer.data.get('proceso')
+                    nombre = file_serializer.data.get('documento').__str__()
 
 
-                nombre = nombre.split('/')[-1]
+                    nombre = nombre.split('/')[-1]
 
-                # TODO leer proceso de los datos de entrada y configurar orc
-                text = orc.delay(nombre, proceso)
-        else:
-            print('[+][+][+] Lleva id ')
+                    # TODO leer proceso de los datos de entrada y configurar orc
 
-            proceso = self.request.data.get('proceso')
-            nombre: str = self.request.data.get('documento')
+            else:
+                print('[+][+][+] Lleva id ')
+
+                proceso = self.request.data.get('proceso')
+                nombre = self.request.data.get('documento')
+
             text = orc.delay(nombre, proceso)
 
-        text = text.get()
+            text = text.get()
 
+            salida['ok'] = True
+            salida['salida'] = text
 
-        salida = {
-            "salida": text,
-        }
-
-        servicioTraza(request, salida, FileView.__name__)
+            servicioTraza(request, salida, FileView.__name__)
+        except Exception as e:
+            salida['ok'] = False
+            salida['error'] = e
 
         return Response(salida, status=status.HTTP_201_CREATED)
 

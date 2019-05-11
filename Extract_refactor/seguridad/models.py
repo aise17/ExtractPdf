@@ -10,3 +10,12 @@ class MinSizeDocumento(models.Model):
 
     def __str__(self):
         return self.nombre
+
+    def save(self, *args, **kwargs):
+        if self.publicado:
+            otros = MinSizeDocumento.objects.filter(publicado=True)
+            if self.id:
+                otros = otros.exclude(pk=self.id)
+            otros.update(publicado=False)
+
+        super(MinSizeDocumento, self).save(*args, **kwargs)

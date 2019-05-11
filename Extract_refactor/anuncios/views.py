@@ -21,17 +21,17 @@ from ocr_api.utils import servicioTraza
 
 @permission_classes([AllowAny])
 class AnuncioSuperiroView(generics.ListCreateAPIView):
-    queryset = AnuncioSuperior.objects.filter(publicado=True).order_by('fecha_publicacion')[:1]
+    queryset = AnuncioSuperior.objects.get(publicado=True)
     serializer_class = AnuncioSuperiorSerializer
 
 @permission_classes([AllowAny])
 class AnuncioInferiorView(generics.ListCreateAPIView):
-    queryset = AnuncioInferior.objects.filter(publicado=True).order_by('fecha_publicacion')[:1]
+    queryset = AnuncioInferior.objects.filter(publicado=True)
     serializer_class = AnuncioInferiroSerializer
 
 @permission_classes([AllowAny])
 class AnuncioLateralView(generics.ListCreateAPIView):
-    queryset = AnuncioLateral.objects.filter(publicado=True).order_by('fecha_publicacion')[:1]
+    queryset = AnuncioLateral.objects.filter(publicado=True)
     serializer_class = AnuncioLateralSerializer
 
 # Todo
@@ -67,5 +67,5 @@ class ExplicacionInicio(generics.ListCreateAPIView):
 
 @permission_classes([AllowAny])
 class QuienesSomosView(generics.ListAPIView):
-    queryset = QuienSomos.objects.filter(publicado=True).order_by('fecha_publicacion')[:1]
+    queryset = QuienSomos.objects.filter(publicado=True)
     serializer_class = QuienSomosSerializer
