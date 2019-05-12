@@ -54,7 +54,7 @@ class BonosView(generics.ListAPIView):
             salida['ok'] = True
         else:
             salida['ok'] = False
-            salida['error'] = 'fallo en la serializacion de archivos'
+            salida['error'] = 'Fallo en la serializacion de archivos'
 
         servicioTraza(request, salida, BonosView.__name__)
 

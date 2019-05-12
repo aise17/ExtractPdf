@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { FormOcrComponent } from './form-ocr/form-ocr.component';
+import { DialogErrorComponent } from './dialog-error/dialog-error.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FormOcrComponent } from './form-ocr/form-ocr.component';
     QuienSomosComponent,
     UsuarioDetalleComponent,
     BonosComponent,
-    FormOcrComponent
+    FormOcrComponent,
+    DialogErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,7 @@ import { FormOcrComponent } from './form-ocr/form-ocr.component';
     FormsModule,
     HttpClientModule
   ],
-  entryComponents: [ DialogLoginComponent ],
+  entryComponents: [ DialogLoginComponent, DialogErrorComponent ],
   providers: [    
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
   ],

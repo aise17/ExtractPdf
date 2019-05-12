@@ -1,0 +1,14 @@
+.titulo{
+background-color: red;
+color: white;
+text-align: center;
+}
+
+
+.contenido{
+    text-align: center;
+}
+
+.boton{
+    width: 100%;
+}

@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { JsonOcr } from '../models/JsonOcr.model';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
 import { Usuario } from '../models/usuario.model';
 import { UsuarioService } from '../services/usuario.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Ocr } from '../models/ocr.model';
 import { saveAs } from 'file-saver/src/FileSaver';
 import { OcrService } from '../services/ocr.service';
+import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class GestionDocumentosComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(public userService: UsuarioService, private ser: OcrService) { }
+  constructor(public userService: UsuarioService, private ser: OcrService, public dialog: MatDialog) { }
 
   selected(ocr: JsonOcr) {
     console.log(ocr);
@@ -65,6 +66,7 @@ export class GestionDocumentosComponent implements OnInit {
   getFiles() {
     this.userService.getFiles(this.usuario, sessionStorage.getItem('api_token'))
     .subscribe(res => {
+      if(res['ok'] === true){
       this.files = res['request'];
 
       console.log('keys: ' + this.files.keys());
@@ -73,6 +75,10 @@ export class GestionDocumentosComponent implements OnInit {
 
       this.dataSource = new MatTableDataSource(this.files);
       this.dataSource.paginator = this.paginator;
+      }
+      else if(res['ok'] === false){
+        this.openDialogError(res['error'])
+      }
 
     });
   }
@@ -113,6 +119,20 @@ export class GestionDocumentosComponent implements OnInit {
     this.is_progres = false;
 
 
+  }
+
+  openDialogError(request): void {
+    const dialogRef = this.dialog.open(DialogErrorComponent, {
+      width: '250px',
+      data: {error: request}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     
+        console.log('dialogo error cerrado')
+      
+    });
+  
   }
   
 }

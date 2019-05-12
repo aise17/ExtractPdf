@@ -4,12 +4,15 @@ import { Usuario } from '../models/usuario.model';
 import { DialogLoginComponent } from '../dialog-login/dialog-login.component';
 import { UsuarioService } from '../services/usuario.service';
 import { Oauth2Service } from '../services/oauth2.service';
+import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
 
 export interface DialogData {
   username: string;
   password: string;
   u: Usuario;
 }
+
+
 
 
 @Component({
@@ -55,6 +58,9 @@ export class MenuComponent implements OnInit {
           console.log('enviando peticion de token')
           this.peticionToken(this.username, this.password);
         }
+        else if(res['ok'] === false){
+          this.openDialogError(res['error'])
+        }
       });
       //window.location.href = '/index';
     });
@@ -93,5 +99,18 @@ export class MenuComponent implements OnInit {
     }
   }
 
+  openDialogError(request): void {
+    const dialogRef = this.dialog.open(DialogErrorComponent, {
+      width: '250px',
+      data: {error: request}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     
+        console.log('dialogo error cerrado')
+      
+    });
+  
+  }
 
 }

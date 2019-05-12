@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { saveAs } from 'file-saver/src/FileSaver';
 import { Ocr } from '../models/ocr.model';
 import { OcrService } from '../services/ocr.service';
+import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
+import { MatDialog } from '@angular/material';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class FormOcrComponent implements OnInit {
   is_progres: boolean;
   ver_form = true;
 
-  constructor(private ser: OcrService) { }
+  constructor(private ser: OcrService, public dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -52,14 +54,19 @@ export class FormOcrComponent implements OnInit {
 
     this.ser.addFile( orc, sessionStorage.getItem('api_token') )
       .subscribe(res => {
-        if (res !== undefined) {
-          this.archivo = res['salida'];
-          console.log(res);
-          this.saveFile();
-          } else {
-            console.log('respuesta vacia');
+        if (res != undefined){
+          if (res['ok'] === true) {
+            this.archivo = res['salida'];
             console.log(res);
+            this.saveFile();
+          } else if(res['ok'] === false) {
+            this.openDialogError(res['error'])
           }
+        }else{
+          this.openDialogError(' [+] error de autentificacion')
+          this.is_progres = false;
+          this.ver_form = true;
+        }
       });
     }
 
@@ -69,6 +76,21 @@ export class FormOcrComponent implements OnInit {
     this.is_progres = false;
     this.ver_form = true;
 
+  }
+
+
+  openDialogError(request): void {
+    const dialogRef = this.dialog.open(DialogErrorComponent, {
+      width: '250px',
+      data: {error: request}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     
+        console.log('dialogo error cerrado')
+      
+    });
+  
   }
 
 

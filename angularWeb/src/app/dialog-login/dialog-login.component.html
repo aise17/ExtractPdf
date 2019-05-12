@@ -3,7 +3,7 @@
     <h1 mat-dialog-title>Sing In</h1>
     <div mat-dialog-content>
       <mat-form-field>
-        <input matInput [(ngModel)]="data.username" placeholder="Username">
+        <input matInput cdkFocusInitial [(ngModel)]="data.username" placeholder="Username">
       </mat-form-field>
       <mat-form-field>
           <input type="password" matInput [(ngModel)]="data.password" placeholder="Password">

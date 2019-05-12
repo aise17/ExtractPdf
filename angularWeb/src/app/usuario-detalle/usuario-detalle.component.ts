@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import { Validators, FormControl } from '@angular/forms';
 import { Usuario } from '../models/usuario.model';
+import { MatDialog } from '@angular/material';
+import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
 
 @Component({
   selector: 'app-usuario-detalle',
@@ -56,7 +58,7 @@ export class UsuarioDetalleComponent implements OnInit {
   passFormControl = new FormControl('', [
     Validators.required,
   ]);
-  constructor(private userService: UsuarioService) {
+  constructor(private userService: UsuarioService, public dialog: MatDialog) {
     this.newusuario = new Usuario();
 
   }
@@ -110,18 +112,38 @@ export class UsuarioDetalleComponent implements OnInit {
     console.log('get request' + this.usuario.id);
     this.userService.getRequest(this.usuario, sessionStorage.getItem('api_token'))
     .subscribe(res => {
-       console.log(res);
-      this.dict = res;
 
-      for (const key in this.dict) {
-        if (this.dict.hasOwnProperty(key)) {
-          if (key === 'ok') {
-            continue;
+      if(res['ok'] === true){
+        console.log(res);
+        this.dict = res;
+
+        for (const key in this.dict) {
+          if (this.dict.hasOwnProperty(key)) {
+            if (key === 'ok') {
+              continue;
+            }
+            this.lineChartData[0].data.push(this.dict[key]);
           }
-          this.lineChartData[0].data.push(this.dict[key]);
         }
+      }else if(res['ok'] == false){
+
       }
     });
+  }
+
+
+  openDialogError(request): void {
+    const dialogRef = this.dialog.open(DialogErrorComponent, {
+      width: '250px',
+      data: {error: request}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     
+        console.log('dialogo error cerrado')
+      
+    });
+  
   }
 
 

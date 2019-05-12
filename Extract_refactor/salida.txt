@@ -11969,3 +11969,67 @@ Sac. lmdm. voL A247, pp. 52951, April 1955.
 
 [2] I. Clerk Maxwell, A Treatise an Electricity Millagnetixm. 3'“ ed., Vol.
 2. Oxford: Clarendon, 1892Y ”WE-73.
+
+
+-------------------------------------
+FECHA: Sun May 12 23:01:34 2019  ESCALA DE GRISES: T
+-------------------------------------
+
+
+LOGO FACTURA
+ 
+Direccién Foch: 12/23/11
+Ciudad, Provincia 00000 Fawn w 1111
+Teléfono: 100) 11 11 11 11 Ha: N9 pedido
+Fax:1DD) 11 11 11 12
+Factura para:
+Contacto en la empresa
+Nombre de la empresa
+Direccién
+Ciudad, Provincia 00000
+(00) 22 22 22 22
+Cantldad Descrlpdan Pretln unharln lmpnrte
+1 Elemenm numem 1 2,00: 2,00:
+1 Elemento nL’Imero 2 2,00 € 2,00 €
+1 Elemenm numem 3 2,00: 2,00:
+ 
+ 
+ 
+ 
+
+Observaclonas
+
+WA 1,26
+Total 7,26 €
+
+
+-------------------------------------
+FECHA: Sun May 12 23:19:23 2019  ESCALA DE GRISES: T
+-------------------------------------
+
+
+LOGO FACTURA
+ 
+Direccién Foch: 12/23/11
+Ciudad, Provincia 00000 Fawn w 1111
+Teléfono: 100) 11 11 11 11 Ha: N9 pedido
+Fax:1DD) 11 11 11 12
+Factura para:
+Contacto en la empresa
+Nombre de la empresa
+Direccién
+Ciudad, Provincia 00000
+(00) 22 22 22 22
+Cantldad Descrlpdan Pretln unharln lmpnrte
+1 Elemenm numem 1 2,00: 2,00:
+1 Elemento nL’Imero 2 2,00 € 2,00 €
+1 Elemenm numem 3 2,00: 2,00:
+ 
+ 
+ 
+ 
+
+Observaclonas
+
+WA 1,26
+Total 7,26 €
