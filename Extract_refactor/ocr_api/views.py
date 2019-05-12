@@ -7,7 +7,7 @@ from django.core.mail import EmailMessage
 from rest_framework import generics
 from rest_framework.decorators import permission_classes
 from rest_framework.parsers import JSONParser
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework import status
@@ -82,22 +82,25 @@ class FileView(generics.ListCreateAPIView):
         return Response(salida, status=status.HTTP_201_CREATED)
 
 
-
+@permission_classes([IsAuthenticated])
 class RequestForMonth(generics.ListAPIView):
     serializer_class = IpsFileSerializers
     queryset = IpsFiles.objects.filter(fecha_conexion__year=date.today().year, fecha_conexion__month=date.today().month)
 
 
+@permission_classes([IsAuthenticated])
 class RequestForDay(generics.ListAPIView):
     serializer_class = IpsFileSerializers
     queryset = IpsFiles.objects.filter(fecha_conexion=date.today())
 
 
+@permission_classes([IsAuthenticated])
 class RequestForYear(generics.ListAPIView):
     serializer_class = IpsFileSerializers
     queryset = IpsFiles.objects.filter(fecha_conexion__year=date.today().year)
 
 
+@permission_classes([IsAuthenticated])
 class CoordenadasWithRequest(generics.ListAPIView):
     serializer_class = IpsFileSerializers
     queryset = IpsFiles.objects.all()

@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 from rest_framework import generics
 from rest_framework.decorators import permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny , IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.serializers import serialize
@@ -73,6 +73,7 @@ class LogoutUser(generics.ListCreateAPIView):
         return Response(salida, status=status.HTTP_200_OK)
 
 
+@permission_classes([IsAuthenticated])
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer()
@@ -121,6 +122,7 @@ class AuthentificacionUsuario(generics.ListCreateAPIView):
         return Response(salida, status=status.HTTP_200_OK)
 
 
+@permission_classes([IsAuthenticated])
 class RequestProcessOcrByUser(generics.ListCreateAPIView):
     queryset = IpsFiles.objects.all()
     serializer_class = IpsFileSerializers
@@ -155,6 +157,7 @@ class RequestProcessOcrByUser(generics.ListCreateAPIView):
         return Response(salida, status=status.HTTP_200_OK)
 
 
+@permission_classes([IsAuthenticated])
 class FilesForUser(generics.ListCreateAPIView):
     serializer_class = ArchivoSerializer
 
@@ -210,6 +213,7 @@ class ContactoView(generics.ListCreateAPIView):
         return Response(salida, status=status.HTTP_200_OK)
 
 
+@permission_classes([IsAuthenticated])
 class BonosByUserListView(generics.ListCreateAPIView):
     queryset = BonoUsuario.objects.all()
     serializer_class = BonoUsuarioSerializer
