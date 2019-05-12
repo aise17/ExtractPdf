@@ -15,7 +15,7 @@ export class UsuarioDetalleComponent implements OnInit {
 
   usuario: Usuario;
   newusuario: Usuario;
-  usernameString: string;
+ 
 
   public lineChartLegend = true;
   public lineChartType = 'line';
@@ -103,7 +103,7 @@ export class UsuarioDetalleComponent implements OnInit {
         sessionStorage.setItem('last_name', this.usuario.last_name);
       }
     });
-    window.location.href = '/usuario'
+    //window.location.href = '/usuario'
   }
 
   getRequest() {

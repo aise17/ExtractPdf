@@ -13,9 +13,8 @@ sys.path.append("../..")
 
 
 from anuncios.models import QuienSomos
-from  seguridad.models import MinSizeDocumento
-from  anuncios.models import Explicacion, Bono
-from  anuncios.serializers import ExplicaionSerializer
+from seguridad.models import MinSizeDocumento
+from anuncios.models import Explicacion, Bono
 
 
 class Command(BaseCommand):
@@ -31,6 +30,7 @@ class Command(BaseCommand):
         self.crearBonoMediumCard()
         self.crearBonoGrantCard()
         self.crearMinSizeDocumentoDefault()
+        self.crearQuienSomos()
 
     def crearSuperuser(self):
         if (User.objects.filter(username='admin')):
@@ -224,7 +224,7 @@ class Command(BaseCommand):
             quien_somos = QuienSomos()
             quien_somos.titulo = 'defecto'
             quien_somos.contenido = '<p>Joven estudiante de programador interesado en tecnologias bakend y frontend con buen manejo en leguajes python, javascript y c# utilizando&nbsp; frameworks como django, .net, angular 5 y sql</p><p>Especializado en tecnologias python y Django utilizando el stak django, celery redis, nginx sonbre docker</p>  <p>aficionado a la escalada, los viajes las buenas conversaciones</p><p>&nbsp;</p>'
-            quien_somos.activo = True
+            quien_somos.publicado = True
 
             try:
                 quien_somos.save()

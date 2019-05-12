@@ -103,9 +103,10 @@ class CoordenadasWithRequest(generics.ListAPIView):
     queryset = IpsFiles.objects.all()
 
     def get(self, request, *args, **kwargs):
-        salida = []
+        salida = {}
+        salida['salida'] = list()
         for ip in IpsFiles.objects.all():
-            salida.append({'usuario': ip.usuario, 'lat': ip.lat, 'lon': ip.lon})
+            salida['salida'].append({'usuario': ip.usuario, 'lat': ip.lat, 'lon': ip.lon})
 
         servicioTraza(request, salida, CoordenadasWithRequest.__name__)
 

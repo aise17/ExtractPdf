@@ -88,7 +88,7 @@ export class UsuarioService {
     headers.append('responseType', 'blob');
 
     return this.http.post<Usuario>(this.loginUrl, user, {headers: headers}  ).pipe(
-      tap((res: Usuario) => this.log(`usuario recivido=${res}`)),
+      tap((res: Usuario) => this.log(`reusltad0 =${res['ok']}  usuario recivido=${res['salida']} `)),
       catchError(this.handleError<Usuario>('error de envio de usuario'))
     );
   }

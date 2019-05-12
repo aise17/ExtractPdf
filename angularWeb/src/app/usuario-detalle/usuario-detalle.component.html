@@ -16,8 +16,8 @@
               </mat-error>
       <label>Usuario:</label>
         <mat-form-field>
-          <input matInput #input_user [(ngModel)]="newusuario.usuario" maxlength="100" 
-          [formControl]="passFormControl" placeholder="{{usuario.usuario}}">
+          <input matInput #input_user [(ngModel)]="newusuario.username" maxlength="100" 
+          [formControl]="passFormControl" placeholder="{{usuario.username}}">
           <mat-hint align="end">{{input_user.value?.length || 0}}/100</mat-hint>
         </mat-form-field>
 

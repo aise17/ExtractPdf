@@ -40,19 +40,21 @@ export class MenuComponent implements OnInit {
       this.userService.login(this.usuario)
       .subscribe(res => {
         if (res['ok'] === true ) {
-        this.user = res['user'];
-        this.user.username = res['user'].username;
-        console.log(res);
-        console.log('user:' + this.username);
-        sessionStorage.setItem('id', this.user.id);
-        sessionStorage.setItem('username', this.user['username']);
-        sessionStorage.setItem('password', this.user.password);
-        sessionStorage.setItem('email', this.user.email);
-        sessionStorage.setItem('first_name', this.user.first_name);
-        sessionStorage.setItem('last_name', this.user.last_name);
-        console.log('enviando peticion de token')
-        this.peticionToken(this.username, this.password);
-      }
+          console.log(res['ok']);
+          console.log(res['salida']);
+          this.user = res['salida'];
+          this.user.username = res['salida'].username;
+
+          console.log('user:' + this.username);
+          sessionStorage.setItem('id', this.user.id);
+          sessionStorage.setItem('username', this.user['username']);
+          sessionStorage.setItem('password', this.user.password);
+          sessionStorage.setItem('email', this.user.email);
+          sessionStorage.setItem('first_name', this.user.first_name);
+          sessionStorage.setItem('last_name', this.user.last_name);
+          console.log('enviando peticion de token')
+          this.peticionToken(this.username, this.password);
+        }
       });
       //window.location.href = '/index';
     });

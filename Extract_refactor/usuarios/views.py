@@ -13,6 +13,8 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
+from django.core.serializers import serialize
+
 from .serializers import ArchivoSerializer, UserSerializer, IpsFileSerializers, IncidenciaSerializers, \
     BonoUsuarioSerializer
 from .models import Incidencia, BonoUsuario
@@ -46,7 +48,7 @@ class RegisterUser(generics.ListCreateAPIView):
         else:
             salida['ok'] = False
 
-            salida['user'] = user.errors
+            salida['error'] = user.error_messages
 
         servicioTraza(request, salida, RegisterUser.__name__)
 
@@ -60,9 +62,14 @@ class LogoutUser(generics.ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         salida = dict()
-        logout(request)
-        salida['ok'] = True
+        if logout(request):
+            salida['ok'] = True
+        else:
+            salida['ok'] = False
+            salida['error'] = 'fallo en la desconexion'
+
         servicioTraza(request, salida, LogoutUser.__name__)
+
         return Response(salida, status=status.HTTP_200_OK)
 
 
@@ -73,18 +80,16 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def update(self, request, *args, **kwargs):
         salida = dict()
-        instance = self.get_object()
-        instance.username = request.data.get('usuario')
-        instance.first_name = request.data.get('first_name')
-        instance.last_name = request.data.get('last_name')
-        instance.set_password(request.data.get('password'))
-        instance.email = request.data.get('email')
 
-        self.perform_update(instance)
+        user = User.objects.get(id=request.data.get('id'))
+        user = self.serializer_class.update(user, request.data)
 
-        salida['ok'] = True
-        data = UserSerializer(instance=instance)
-        salida['user'] = data.data
+        if user is not None:
+            salida['ok'] = True
+            salida['user'] = user
+        else :
+            salida['ok'] = False
+            salida['error'] = self.serializer_class.error_messages
 
         servicioTraza(request, salida, UserDetail.__name__)
 
@@ -101,14 +106,17 @@ class AuthentificacionUsuario(generics.ListCreateAPIView):
         s = authenticate(username=request.data.get('username'), password=request.data.get('password'))
         if s is not None:
             login(request, s)
-            salida['ok'] = True
             ser = UserSerializer(instance=s)
-            salida['user'] = ser.data
+
+
+
+            salida['ok'] = True
+            salida['salida'] = ser.data
         else:
             salida['ok'] = False
+            salida['error'] = 'fallo en la autentificacion'
 
-        #servicioTraza(request, salida, AuthentificacionUsuario)
-
+        servicioTraza(request, salida, AuthentificacionUsuario.__name__)
 
         return Response(salida, status=status.HTTP_200_OK)
 
@@ -140,16 +148,18 @@ class RequestProcessOcrByUser(generics.ListCreateAPIView):
 
         else:
             salida['ok'] = False
+            salida['error'] = 'fallo en la optencion del usuario'
 
         servicioTraza(request, salida, RequestProcessOcrByUser.__name__)
 
         return Response(salida, status=status.HTTP_200_OK)
 
+
 class FilesForUser(generics.ListCreateAPIView):
     serializer_class = ArchivoSerializer
 
     def get_object(self):
-        if (self.request.data.get('username')):
+        if self.request.data.get('username'):
             return File.objects.filter(usuario__username=self.request.data.get('username'))
         else:
             return File.objects.filter(usuario=None)
@@ -165,6 +175,7 @@ class FilesForUser(generics.ListCreateAPIView):
             salida['request'] = ser.data
         else:
             salida['ok'] = False
+            salida['error'] = 'fallo en la identificacion'
 
         servicioTraza(request, salida, FilesForUser.__name__)
 
@@ -177,6 +188,7 @@ class ContactoView(generics.ListCreateAPIView):
     serializer_class = IncidenciaSerializers
 
     def post(self, request, *args, **kwargs):
+        salida = dict()
         usuario = User.objects.get()
         incidencia = IncidenciaSerializers(data=request.data)
         if (incidencia.is_valid()):
@@ -187,31 +199,24 @@ class ContactoView(generics.ListCreateAPIView):
                                  to=['sergio.martinez-g@hotmail.com'])
             email.send()
 
-            salida = {
-                'ok': 'true'
-            }
+            salida['ok'] = True
+            salida['salida'] = i
         else:
-            salida = {
-                'ok': 'false'
-            }
+            salida['ok'] = False
+            salida['error'] = incidencia.error_messages
 
         servicioTraza(request, salida, ContactoView.__name__)
 
         return Response(salida, status=status.HTTP_200_OK)
 
 
-class BonosByUserCreateView(generics.ListCreateAPIView):
-    queryset = BonoUsuario.objects.all()
-    serializer_class = BonoUsuarioSerializer
-
-    def post(self, request, *args, **kwargs):
-        pass
-
-
 class BonosByUserListView(generics.ListCreateAPIView):
     queryset = BonoUsuario.objects.all()
     serializer_class = BonoUsuarioSerializer
 
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         bonos = self.queryset.filter(usuario=request.data.get('usuarioId'))
 
+
+    def post(self, request, *args, **kwargs):
+        pass

@@ -26,7 +26,7 @@ class UserSerializer(serializers.ModelSerializer):
         instance.email = validated_data.get('email', instance.email)
 
         instance.save()
-        return instance
+        return validated_data
 
     def create(self, validated_data):
 

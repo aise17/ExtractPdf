@@ -50,10 +50,11 @@ class BonosView(generics.ListAPIView):
 
         salida['salida'] = ser.data
 
-        if salida['salida']:
+        if salida['salida'].__len__() is self.queryset.all().__len__():
             salida['ok'] = True
         else:
             salida['ok'] = False
+            salida['error'] = 'fallo en la serializacion de archivos'
 
         servicioTraza(request, salida, BonosView.__name__)
 
