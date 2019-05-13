@@ -219,8 +219,21 @@ class BonosByUserListView(generics.ListCreateAPIView):
     serializer_class = BonoUsuarioSerializer
 
     def get(self, request, *args, **kwargs):
-        bonos = self.queryset.filter(usuario=request.data.get('usuarioId'))
+        salida = dict()
 
+        if request.data.get('usuarioId'):
+            bonos = self.queryset.filter(usuario=request.data.get('usuarioId'))
+
+            ser = BonoUsuarioSerializer(bonos, many=True)
+
+            salida['ok'] = True
+            salida['salida'] = ser.data
+        else:
+            salida['ok'] = False
+            salida['error'] = 'fallo al obtener usuario'
+
+        return Response(salida, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
+
         pass

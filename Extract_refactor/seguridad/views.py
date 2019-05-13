@@ -13,7 +13,7 @@ class IsAuthenticatedOrPost(IsAuthenticated):
     def has_permission(self, request, view):
 
 
-        regla =  MinSizeDocumento.objects.get(activo=True)
+        regla =  MinSizeDocumento.objects.filter(activo=True)
 
         if super().has_permission(request, view):
             return True

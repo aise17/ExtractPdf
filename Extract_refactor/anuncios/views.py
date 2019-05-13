@@ -21,7 +21,7 @@ from ocr_api.utils import servicioTraza
 
 @permission_classes([AllowAny])
 class AnuncioSuperiroView(generics.ListCreateAPIView):
-    queryset = AnuncioSuperior.objects.get(publicado=True)
+    queryset = AnuncioSuperior.objects.filter(publicado=True)
     serializer_class = AnuncioSuperiorSerializer
 
 @permission_classes([AllowAny])

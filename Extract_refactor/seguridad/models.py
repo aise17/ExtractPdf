@@ -9,13 +9,13 @@ class MinSizeDocumento(models.Model):
     activo = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.nombre
+        return self.titulo
 
     def save(self, *args, **kwargs):
-        if self.publicado:
-            otros = MinSizeDocumento.objects.filter(publicado=True)
+        if self.activo:
+            otros = MinSizeDocumento.objects.filter(activo=True)
             if self.id:
                 otros = otros.exclude(pk=self.id)
-            otros.update(publicado=False)
+            otros.update(activo=False)
 
         super(MinSizeDocumento, self).save(*args, **kwargs)
