@@ -203,7 +203,7 @@ class ContactoView(generics.ListCreateAPIView):
             email.send()
 
             salida['ok'] = True
-            salida['salida'] = i
+            salida['salida'] = incidencia.data
         else:
             salida['ok'] = False
             salida['error'] = incidencia.error_messages

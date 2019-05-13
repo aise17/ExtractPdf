@@ -20,3 +20,4 @@ django-ipware
 geoip2
 django-oauth-toolkit
 django-cors-headers
+coreapi

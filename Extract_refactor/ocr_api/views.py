@@ -22,10 +22,6 @@ from .models import File, IpsFiles
 
 from .tasks import orc
 
-from ipware import get_client_ip
-
-from django.contrib.gis.geoip2 import GeoIP2
-
 from .utils import fileIpCreate, servicioTraza, fileCreate
 
 

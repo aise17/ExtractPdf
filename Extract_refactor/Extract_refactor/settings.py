@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'ckeditor',
     'oauth2_provider',
-    'corsheaders'
+    'corsheaders',
+    'coreapi'
 
 ]
 
