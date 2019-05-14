@@ -120,7 +120,7 @@ export class UsuarioService {
     headers.append('responseType', 'blob');
     
 
-    return this.http.put<Usuario>(this.userChangeUrl + user.id, user, {headers: headers}  ).pipe(
+    return this.http.post<Usuario>(this.userChangeUrl + user.id, user, {headers: headers}  ).pipe(
       tap((res: Usuario) => this.log(`usuario recivido= ${res['username']}`)),
       catchError(this.handleError<Usuario>('error de envio de usuario'))
     );

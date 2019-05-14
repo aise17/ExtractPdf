@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.documentation import include_docs_urls
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.schemas import SchemaGenerator
 from rest_framework.schemas.views import SchemaView
 from rest_framework.settings import api_settings
@@ -37,6 +37,6 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     path('docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION,  authentication_classes = [],
-                                    permission_classes = [], public=False))
+                                    permission_classes = [], public=True))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

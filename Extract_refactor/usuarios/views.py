@@ -28,7 +28,7 @@ from django.core.mail import EmailMessage
 
 # Create your views here.
 @permission_classes([AllowAny])
-class RegisterUser(generics.ListCreateAPIView):
+class RegisterUser(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -56,7 +56,7 @@ class RegisterUser(generics.ListCreateAPIView):
 
 
 @permission_classes([AllowAny])
-class LogoutUser(generics.ListCreateAPIView):
+class LogoutUser(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -74,12 +74,12 @@ class LogoutUser(generics.ListCreateAPIView):
 
 
 @permission_classes([IsAuthenticated])
-class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+class UserDetail(generics.CreateAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer()
+    serializer_class = UserSerializer
 
 
-    def update(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         salida = dict()
 
         user = User.objects.get(id=request.data.get('id'))
@@ -97,7 +97,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
         return Response(salida, status=status.HTTP_200_OK)
 
 @permission_classes([AllowAny])
-class AuthentificacionUsuario(generics.ListCreateAPIView):
+class AuthentificacionUsuario(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -123,7 +123,7 @@ class AuthentificacionUsuario(generics.ListCreateAPIView):
 
 
 @permission_classes([IsAuthenticated])
-class RequestProcessOcrByUser(generics.ListCreateAPIView):
+class RequestProcessOcrByUser(generics.CreateAPIView):
     queryset = IpsFiles.objects.all()
     serializer_class = IpsFileSerializers
 
@@ -158,7 +158,7 @@ class RequestProcessOcrByUser(generics.ListCreateAPIView):
 
 
 @permission_classes([IsAuthenticated])
-class FilesForUser(generics.ListCreateAPIView):
+class FilesForUser(generics.CreateAPIView):
     serializer_class = ArchivoSerializer
 
     def get_object(self):
@@ -186,7 +186,7 @@ class FilesForUser(generics.ListCreateAPIView):
 
 
 @permission_classes([AllowAny])
-class ContactoView(generics.ListCreateAPIView):
+class ContactoView(generics.CreateAPIView):
     queryset = Incidencia.objects.all()
     serializer_class = IncidenciaSerializers
 
@@ -214,7 +214,7 @@ class ContactoView(generics.ListCreateAPIView):
 
 
 @permission_classes([IsAuthenticated])
-class BonosByUserListView(generics.ListCreateAPIView):
+class BonosByUserListView(generics.ListAPIView):
     queryset = BonoUsuario.objects.all()
     serializer_class = BonoUsuarioSerializer
 
@@ -234,6 +234,4 @@ class BonosByUserListView(generics.ListCreateAPIView):
 
         return Response(salida, status=status.HTTP_200_OK)
 
-    def post(self, request, *args, **kwargs):
 
-        pass

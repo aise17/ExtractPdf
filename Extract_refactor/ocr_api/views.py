@@ -26,7 +26,7 @@ from .utils import fileIpCreate, servicioTraza, fileCreate
 
 
 @permission_classes([IsAuthenticatedOrPost])
-class FileView(generics.ListCreateAPIView):
+class FileView(generics.CreateAPIView):
     queryset = File.objects.all()
     serializer_class = ArchivoSerializer
 

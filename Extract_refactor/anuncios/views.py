@@ -20,17 +20,17 @@ sys.path.append('../')
 from ocr_api.utils import servicioTraza
 
 @permission_classes([AllowAny])
-class AnuncioSuperiroView(generics.ListCreateAPIView):
+class AnuncioSuperiroView(generics.ListAPIView):
     queryset = AnuncioSuperior.objects.filter(publicado=True)
     serializer_class = AnuncioSuperiorSerializer
 
 @permission_classes([AllowAny])
-class AnuncioInferiorView(generics.ListCreateAPIView):
+class AnuncioInferiorView(generics.ListAPIView):
     queryset = AnuncioInferior.objects.filter(publicado=True)
     serializer_class = AnuncioInferiroSerializer
 
 @permission_classes([AllowAny])
-class AnuncioLateralView(generics.ListCreateAPIView):
+class AnuncioLateralView(generics.ListAPIView):
     queryset = AnuncioLateral.objects.filter(publicado=True)
     serializer_class = AnuncioLateralSerializer
 
@@ -62,7 +62,7 @@ class BonosView(generics.ListAPIView):
 
 
 @permission_classes([AllowAny])
-class ExplicacionInicio(generics.ListCreateAPIView):
+class ExplicacionInicio(generics.ListAPIView):
     queryset = Explicacion.objects.filter(publicado=True).order_by('fecha_publicacion')[:3]
     serializer_class = ExplicaionSerializer
 
