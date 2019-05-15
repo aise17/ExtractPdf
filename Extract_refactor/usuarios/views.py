@@ -192,7 +192,6 @@ class ContactoView(generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         salida = dict()
-        usuario = User.objects.get()
         incidencia = IncidenciaSerializers(data=request.data)
         if (incidencia.is_valid()):
 
@@ -210,11 +209,11 @@ class ContactoView(generics.CreateAPIView):
 
         servicioTraza(request, salida, ContactoView.__name__)
 
-        return Response(salida, status=status.HTTP_200_OK)
+        return Response(salida, status=status.HTTP_201_CREATED)
 
 
-@permission_classes([IsAuthenticated])
-class BonosByUserListView(generics.ListAPIView):
+@permission_classes([AllowAny])
+class BonosByUserListView(generics.ListCreateAPIView):
     queryset = BonoUsuario.objects.all()
     serializer_class = BonoUsuarioSerializer
 
@@ -232,6 +231,26 @@ class BonosByUserListView(generics.ListAPIView):
             salida['ok'] = False
             salida['error'] = 'fallo al obtener usuario'
 
+        servicioTraza(request, salida, BonosByUserListView.__name__)
+
         return Response(salida, status=status.HTTP_200_OK)
 
+    def post(self, request, *args, **kwargs):
+        salida = dict()
+
+
+        bono_usuario = BonoUsuarioSerializer(data=request.data)
+
+        if bono_usuario.is_valid():
+            bono_usuario.save()
+            salida['ok'] = True
+
+        else:
+            salida['ok'] = False
+            salida['error'] = bono_usuario.error_messages
+
+        servicioTraza(request, salida, BonosByUserListView.__name__)
+
+
+        return Response(salida, status=status.HTTP_201_CREATED)
 

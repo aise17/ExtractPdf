@@ -3,6 +3,8 @@ import { ContenidoService } from '../services/contenido.service';
 import { Bonos } from '../models/bonos.model.';
 import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
 import { MatDialog } from '@angular/material';
+import { BonoUsuario } from '../models/Bonousuario.model';
+import { BonoUsuarioService } from '../services/bono-usuario.service';
 
 @Component({
   selector: 'app-bonos',
@@ -11,15 +13,22 @@ import { MatDialog } from '@angular/material';
 })
 export class BonosComponent implements OnInit {
 
-  constructor(private service: ContenidoService, public dialog: MatDialog) { }
+  constructor(private service: ContenidoService, public dialog: MatDialog, private serviceBonoUsuario: BonoUsuarioService) { }
   public result: Bonos[];
 
   ngOnInit() {
     this.getBono();
   }
 
-  comprarBono(nombre){
-      console.log('bono comprado -> ' + nombre)
+  comprarBono(bono: Bonos){
+      console.log('bono comprado -> ' + bono.id);
+      let bono_usuario = new BonoUsuario();
+      bono_usuario.bono = bono.id
+      bono_usuario.usuario = sessionStorage.getItem('id');
+      this.serviceBonoUsuario.comprarBono(bono_usuario).subscribe(res => {
+            console.log(res);
+      });
+
   }
 
 
@@ -38,6 +47,8 @@ export class BonosComponent implements OnInit {
       }
     }); 
   }
+
+
 
 
   openDialogError(request): void {

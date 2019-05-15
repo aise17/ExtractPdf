@@ -2,7 +2,7 @@
 from django.urls import path
 
 from .views import FilesForUser, UserDetail, AuthentificacionUsuario, LogoutUser, RequestProcessOcrByUser, \
-    RegisterUser, ContactoView
+    RegisterUser, ContactoView, BonosByUserListView
 
 urlpatterns = [
     path('list_files/', FilesForUser.as_view(), name='files_list'),
@@ -12,5 +12,6 @@ urlpatterns = [
     path('logout/', LogoutUser.as_view(), name='logout'),
     path('register/', RegisterUser.as_view(), name='register'),
     path('contacto/', ContactoView.as_view(), name='contacto'),
+    path('bono_usuario/', BonosByUserListView.as_view(), name='bono_usuario'),
 
 ]

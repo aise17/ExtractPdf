@@ -62,7 +62,7 @@ class IncidenciaSerializers(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class BonoUsuarioSerializer(serializers.Serializer):
+class BonoUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = BonoUsuario
         fields = "__all__"

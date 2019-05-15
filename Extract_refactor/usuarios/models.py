@@ -30,3 +30,11 @@ class BonoUsuario(models.Model):
     fecha_creacion = models.DateField(auto_now=True)
 
 
+    def save(self, *args, **kwargs):
+        if self.activado:
+            otros = BonoUsuario.objects.filter(activado=True)
+            if self.usuario:
+                otros = otros.filter(usuario=self.usuario)
+            otros.update(activado=False)
+
+        super(BonoUsuario, self).save(*args, **kwargs)
