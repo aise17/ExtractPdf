@@ -76,7 +76,7 @@ class LogoutUser(generics.CreateAPIView):
 @permission_classes([IsAuthenticated])
 class UserDetail(generics.CreateAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer()
+    serializer_class = UserSerializer
 
 
     def post(self, request, *args, **kwargs):
@@ -85,7 +85,7 @@ class UserDetail(generics.CreateAPIView):
         user = User.objects.get(id=request.data.get('id'))
 
 
-        user = self.serializer_class.update(instance=user, validated_data=request.data)
+        user = self.serializer_class().update(instance=user, validated_data=request.data)
 
 
 
