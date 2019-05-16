@@ -75,16 +75,17 @@ def servicioTraza(request,salida, clase):
 
     print('[-][-] Traza generada')
 
-def restarPeticion(request, salida):
-    ser = BonoUsuarioSerializer()
+def restarPeticion(request):
 
-    bono_usuario = BonoUsuario.objects.filter(usuario=request.data.get('usuario'), activado=True)
-    bono_usuario.peticiones_consumidas = bono_usuario.peticiones_consumidas -1
-    bono_usuario = ser.update(instance=bono_usuario,validated_data=request.data)
+    bono_usuario = BonoUsuario.objects.filter(usuario__id=request.data.get('usuario'), activado=True)
+    bono = bono_usuario.get()
+    peticiones_consumidas = int(bono.peticiones_consumidas)
+    print('[+][+] ---------- {} '.format(peticiones_consumidas))
+    peticiones_consumidas = peticiones_consumidas - 1
+    print('[+][+] ---------- {} '.format(peticiones_consumidas))
 
-    if bono_usuario is not None:
-        return True
-    else:
-        return False
+    bono_usuario.update(peticiones_consumidas=peticiones_consumidas)
+
+
 
 

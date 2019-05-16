@@ -224,8 +224,8 @@ class BonosByUserListView(generics.ListCreateAPIView):
     def get(self, request, *args, **kwargs):
         salida = dict()
 
-        if request.data.get('usuarioId'):
-            bonos = self.queryset.filter(usuario=request.data.get('usuarioId'))
+        if request.data.get('usuario'):
+            bonos = self.queryset.filter(usuario=request.data.get('usuario'))
 
             ser = BonoUsuarioSerializer(bonos, many=True)
 

@@ -22,7 +22,7 @@ from .models import File, IpsFiles
 
 from .tasks import orc
 
-from .utils import fileIpCreate, servicioTraza, fileCreate
+from .utils import fileIpCreate, servicioTraza, fileCreate, restarPeticion
 
 
 @permission_classes([IsAuthenticatedOrPost])
@@ -68,11 +68,12 @@ class FileView(generics.CreateAPIView):
 
             salida['ok'] = True
             salida['salida'] = text
+            restarPeticion(request)
 
             servicioTraza(request, salida, FileView.__name__)
         except Exception as e:
             salida['ok'] = False
-            salida['error'] = e
+            salida['error'] = e.__repr__()
 
         return Response(salida, status=status.HTTP_201_CREATED)
 
