@@ -28,6 +28,7 @@ class BonoUsuario(models.Model):
     bono = models.ForeignKey(Bono, on_delete=models.CASCADE, null=True)
     activado = models.BooleanField(default=True)
     fecha_creacion = models.DateField(auto_now=True)
+    peticiones_consumidas = models.PositiveIntegerField(default=0)
 
 
     def save(self, *args, **kwargs):
@@ -38,3 +39,4 @@ class BonoUsuario(models.Model):
             otros.update(activado=False)
 
         super(BonoUsuario, self).save(*args, **kwargs)
+

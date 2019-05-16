@@ -34,8 +34,8 @@ export class OcrService {
     fd.append('descripcion', orc.descripcion);
     fd.append('documento', orc.documento);
     fd.append('proceso', orc.proceso);
-    if (orc.usuarioId) {
-      fd.append('usuarioId', orc.usuarioId);
+    if (orc.usuario) {
+      fd.append('usuario', orc.usuario);
     }
 
 

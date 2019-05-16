@@ -42,7 +42,6 @@ class FileView(generics.CreateAPIView):
             if not request.data.get('id'):
                 print('[-][-][-] No lleva id ')
 
-                request.data['usuario'] = request.data.get('usuarioId')
                 file_serializer = ArchivoSerializer(data=request.data)
                 if file_serializer.is_valid():
                     f = file_serializer.save()

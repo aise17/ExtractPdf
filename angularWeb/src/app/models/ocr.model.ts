@@ -5,6 +5,6 @@ export class Ocr {
     documento: File;
     proceso: string;
     dateTimeUp: Date;
-    usuarioId: string;
+    usuario: string;
 
 }

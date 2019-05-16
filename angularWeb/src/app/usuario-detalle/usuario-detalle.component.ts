@@ -82,6 +82,7 @@ export class UsuarioDetalleComponent implements OnInit {
       this.usuario.first_name = sessionStorage.getItem('first_name');
       this.usuario.last_name = sessionStorage.getItem('last_name');
       this.usuario.email = sessionStorage.getItem('email');
+      this.usuario.usuario= this.usuario.id
       this.getRequest();
 
   }
@@ -109,7 +110,7 @@ export class UsuarioDetalleComponent implements OnInit {
   }
 
   getRequest() {
-    console.log('get request' + this.usuario.id);
+    console.log('get request' + this.usuario.usuario);
     this.userService.getRequest(this.usuario, sessionStorage.getItem('api_token'))
     .subscribe(res => {
 

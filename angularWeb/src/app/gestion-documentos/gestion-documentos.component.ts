@@ -44,8 +44,8 @@ export class GestionDocumentosComponent implements OnInit {
     // ocr.documento = this.ruta.split('/')[-1];
     console.log(ocr);
     ocr.documento = ocr.documento.split('/', 3)[2];
-    ocr.usuarioId = sessionStorage.getItem('id');
-    console.log(ocr.usuarioId);
+    ocr.usuario = sessionStorage.getItem('id');
+    console.log(ocr.usuario);
     this.send(ocr);
     this.getFiles();
 
@@ -60,6 +60,7 @@ export class GestionDocumentosComponent implements OnInit {
     this.usuario.first_name = sessionStorage.getItem('first_name');
     this.usuario.last_name = sessionStorage.getItem('last_name');
     this.usuario.email = sessionStorage.getItem('email');
+    this.usuario.usuario = this.usuario.id;
     this.getFiles();
   }
 

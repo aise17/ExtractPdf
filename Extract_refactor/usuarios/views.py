@@ -76,14 +76,18 @@ class LogoutUser(generics.CreateAPIView):
 @permission_classes([IsAuthenticated])
 class UserDetail(generics.CreateAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserSerializer()
 
 
     def post(self, request, *args, **kwargs):
         salida = dict()
 
         user = User.objects.get(id=request.data.get('id'))
-        user = self.serializer_class.update(user, request.data)
+
+
+        user = self.serializer_class.update(instance=user, validated_data=request.data)
+
+
 
         if user is not None:
             salida['ok'] = True
@@ -237,7 +241,6 @@ class BonosByUserListView(generics.ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         salida = dict()
-
 
         bono_usuario = BonoUsuarioSerializer(data=request.data)
 

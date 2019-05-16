@@ -2,9 +2,9 @@
 import sys
 
 
-
 sys.path.append("..")
 
+from anuncios.models import Bono
 from rest_framework import serializers
 from ocr_api.models import File, IpsFiles
 from django.contrib.auth.models import User
@@ -19,7 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
 
-        instance.username = validated_data.get('usuario', instance.username)
+        instance.username = validated_data.get('username', instance.username)
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.set_password(validated_data.get('password', instance.password))
@@ -27,6 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
 
         instance.save()
         return validated_data
+
 
     def create(self, validated_data):
 
@@ -58,7 +59,7 @@ class IpsFileSerializers(serializers.ModelSerializer):
 
 class IncidenciaSerializers(serializers.ModelSerializer):
     class Meta:
-        model= Incidencia
+        model = Incidencia
         fields = "__all__"
 
 
@@ -66,3 +67,42 @@ class BonoUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = BonoUsuario
         fields = "__all__"
+
+    def update(self, instance, validated_data):
+
+        instance.id = validated_data.get('id', instance.id)
+        instance.usuario = validated_data.get('usuario', instance.usuario)
+        instance.bono = validated_data.get('bono', instance.bono)
+        instance.activado = validated_data.get('activado', instance.activado)
+        instance.peticiones_consumidas = validated_data.get('peticiones_consumidas', instance.peticiones_consumidas)
+
+        instance.save()
+
+        return instance, validated_data
+
+    def create(self, validated_data):
+        instance = BonoUsuario()
+        instance.usuario = validated_data.get('usuario', instance.usuario)
+        instance.bono = validated_data.get('bono', instance.bono)
+        instance.activado = validated_data.get('activado', instance.activado)
+        instance.peticiones_consumidas = self.peticomesByBono(validated_data.get('bono').id)
+
+        instance.save()
+
+        return instance
+
+
+    def peticomesByBono(self, id):
+
+        queryset = Bono.objects.all()
+        obj =queryset.get(id=id)
+        num = obj.peticiones
+
+        return int(num)
+
+
+
+
+
+
+

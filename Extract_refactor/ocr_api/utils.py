@@ -2,6 +2,11 @@ from django.contrib.auth.models import User
 from django.contrib.gis.geoip2 import GeoIP2
 from ipware import get_client_ip
 
+import sys
+sys.path.append('../')
+
+from usuarios.models import BonoUsuario
+from usuarios.serializers import BonoUsuarioSerializer
 from .models import IpsFiles, Traza, File
 
 def fileCreate(data):
@@ -56,8 +61,8 @@ def servicioTraza(request,salida, clase):
     traza.datos_in = data.__repr__()
     traza.datos_out = salida.__repr__()
 
-    if request.data.get('usuarioId') :
-        usuario = User.objects.get(id=request.data.get('usuarioId'))
+    if request.data.get('usuario') :
+        usuario = User.objects.get(id=request.data.get('usuario'))
         traza.usuario = usuario
 
     else:
@@ -69,3 +74,17 @@ def servicioTraza(request,salida, clase):
     traza.save()
 
     print('[-][-] Traza generada')
+
+def restarPeticion(request, salida):
+    ser = BonoUsuarioSerializer()
+
+    bono_usuario = BonoUsuario.objects.filter(usuario=request.data.get('usuario'), activado=True)
+    bono_usuario.peticiones_consumidas = bono_usuario.peticiones_consumidas -1
+    bono_usuario = ser.update(instance=bono_usuario,validated_data=request.data)
+
+    if bono_usuario is not None:
+        return True
+    else:
+        return False
+
+

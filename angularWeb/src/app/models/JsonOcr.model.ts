@@ -5,5 +5,5 @@ export class JsonOcr {
     id: string;
     dateTimeUp: Date;
     prcesar: boolean;
-    usuarioId: string;
+    usuario: string;
 }
