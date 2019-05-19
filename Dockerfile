@@ -9,17 +9,13 @@ WORKDIR /code
 ADD Extract_refactor/config/requirements.txt /code/
 
 
-RUN pip install --upgrade pip
+RUN pip install --upgrade pip \
+    && pip install -r requirements.txt
 
-RUN pip install -r requirements.txt
-
-RUN apt-get update
-
-RUN apt-get install -y tesseract-ocr
-
-RUN apt-get install -y imagemagick
-
-RUN apt-get install -y ghostscript
+RUN apt-get update \
+    && apt-get install -y tesseract-ocr \
+    && apt-get install -y imagemagick \
+    && apt-get install -y ghostscript
 
 ADD . /code/
 

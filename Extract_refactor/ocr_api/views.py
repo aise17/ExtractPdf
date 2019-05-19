@@ -1,38 +1,25 @@
 from datetime import date
 
-from django.contrib.auth.models import User
-from django.core.mail import EmailMessage
-
-
-from rest_framework import generics
-from rest_framework.decorators import permission_classes
-from rest_framework.parsers import JSONParser
+from rest_framework import generics, viewsets
+from rest_framework.decorators import permission_classes, detail_route
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework import status
-import sys
 
-sys.path.append("..")
-
-from seguridad.views import IsAuthenticatedOrPost
+from .permissions import IsAuthenticatedOrPost
 from .serializers import ArchivoSerializer, IpsFileSerializers
-
 from .models import File, IpsFiles
-
 from .tasks import orc
-
 from .utils import fileIpCreate, servicioTraza, fileCreate, restarPeticion
 
 
 @permission_classes([IsAuthenticatedOrPost])
-class FileView(generics.CreateAPIView):
+#@detail_route(methods=['post'])
+class FileView(viewsets.ModelViewSet):
     queryset = File.objects.all()
     serializer_class = ArchivoSerializer
 
-    def post(self, request, *args, **kwargs):
-
-        # TODO implementar el sistema de bonos
+    def upload(self, request, *args, **kwargs):
 
         salida = dict()
         nombre: str = None
@@ -68,7 +55,8 @@ class FileView(generics.CreateAPIView):
 
             salida['ok'] = True
             salida['salida'] = text
-            restarPeticion(request)
+            if request.data.get('usuario'):
+                restarPeticion(request)
 
             servicioTraza(request, salida, FileView.__name__)
         except Exception as e:

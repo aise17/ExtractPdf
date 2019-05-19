@@ -23,8 +23,8 @@ def fileCreate(data):
 def fileIpCreate(request, file):
     client_ip, is_routable = get_client_ip(request)
     data = request.data
-    if request.data.get('usuarioId'):
-        user = User.objects.get(id=data.get('usuarioId'))
+    if request.data.get('usuario'):
+        user = User.objects.get(id=data.get('usuario'))
         ip_file = IpsFiles(usuario=user)
     else:
         ip_file = IpsFiles()

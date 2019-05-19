@@ -13,7 +13,7 @@ sys.path.append("../..")
 
 
 from anuncios.models import QuienSomos
-from seguridad.models import MinSizeDocumento
+from ocr_api.models import MinSizeDocumento
 from anuncios.models import Explicacion, Bono
 
 

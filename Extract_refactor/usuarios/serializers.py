@@ -1,13 +1,11 @@
+from rest_framework import serializers
+from django.contrib.auth.models import User
 
 import sys
-
-
 sys.path.append("..")
 
 from anuncios.models import Bono
-from rest_framework import serializers
 from ocr_api.models import File, IpsFiles
-from django.contrib.auth.models import User
 from .models import Incidencia, BonoUsuario
 
 
@@ -15,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = "__all__"
+        fields = ('id', 'username', 'first_name', 'last_name', 'password', 'email')
 
     def update(self, instance, validated_data):
 

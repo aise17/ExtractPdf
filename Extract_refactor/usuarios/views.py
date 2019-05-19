@@ -1,14 +1,9 @@
 
-import sys
-
-
-
-sys.path.append("..")
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny , IsAuthenticated
 from rest_framework.response import Response
@@ -18,6 +13,10 @@ from django.core.serializers import serialize
 from .serializers import ArchivoSerializer, UserSerializer, IpsFileSerializers, IncidenciaSerializers, \
     BonoUsuarioSerializer
 from .models import Incidencia, BonoUsuario
+
+import sys
+sys.path.append("..")
+
 from ocr_api.models import File, IpsFiles
 from ocr_api.utils import servicioTraza
 
@@ -28,11 +27,11 @@ from django.core.mail import EmailMessage
 
 # Create your views here.
 @permission_classes([AllowAny])
-class RegisterUser(generics.CreateAPIView):
+class RegisterUser(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    def post(self, request, *args, **kwargs):
+    def crear(self, request, *args, **kwargs):
         salida = dict()
 
         user = UserSerializer(data=request.data)
@@ -56,11 +55,11 @@ class RegisterUser(generics.CreateAPIView):
 
 
 @permission_classes([AllowAny])
-class LogoutUser(generics.CreateAPIView):
+class LogoutUser(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    def post(self, request, *args, **kwargs):
+    def logout(self, request, *args, **kwargs):
         salida = dict()
         if logout(request):
             salida['ok'] = True
@@ -74,12 +73,12 @@ class LogoutUser(generics.CreateAPIView):
 
 
 @permission_classes([IsAuthenticated])
-class UserDetail(generics.CreateAPIView):
+class UserDetail(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
-    def post(self, request, *args, **kwargs):
+    def userDetail(self, request, *args, **kwargs):
         salida = dict()
 
         user = User.objects.get(id=request.data.get('id'))
@@ -101,11 +100,11 @@ class UserDetail(generics.CreateAPIView):
         return Response(salida, status=status.HTTP_200_OK)
 
 @permission_classes([AllowAny])
-class AuthentificacionUsuario(generics.CreateAPIView):
+class AuthentificacionUsuario(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    def post(self, request, *args, **kwargs):
+    def login(self, request, *args, **kwargs):
         salida = dict()
 
         s = authenticate(username=request.data.get('username'), password=request.data.get('password'))
@@ -127,11 +126,11 @@ class AuthentificacionUsuario(generics.CreateAPIView):
 
 
 @permission_classes([IsAuthenticated])
-class RequestProcessOcrByUser(generics.CreateAPIView):
+class RequestProcessOcrByUser(viewsets.ModelViewSet):
     queryset = IpsFiles.objects.all()
     serializer_class = IpsFileSerializers
 
-    def post(self, request, *args, **kwargs):
+    def userStadisticRequest(self, request, *args, **kwargs):
         salida = dict()
 
         if request.data.get('id') is not None:
@@ -162,7 +161,7 @@ class RequestProcessOcrByUser(generics.CreateAPIView):
 
 
 @permission_classes([IsAuthenticated])
-class FilesForUser(generics.CreateAPIView):
+class FilesForUser(viewsets.ModelViewSet):
     serializer_class = ArchivoSerializer
 
     def get_object(self):
@@ -171,7 +170,7 @@ class FilesForUser(generics.CreateAPIView):
         else:
             return File.objects.filter(usuario=None)
 
-    def post(self, request, *args, **kwargs):
+    def getFilesForUser(self, request, *args, **kwargs):
         salida = dict()
 
         if request.data.get('id') is not None:
@@ -190,11 +189,11 @@ class FilesForUser(generics.CreateAPIView):
 
 
 @permission_classes([AllowAny])
-class ContactoView(generics.CreateAPIView):
+class ContactoView(viewsets.ModelViewSet):
     queryset = Incidencia.objects.all()
     serializer_class = IncidenciaSerializers
 
-    def post(self, request, *args, **kwargs):
+    def sendCommunication(self, request, *args, **kwargs):
         salida = dict()
         incidencia = IncidenciaSerializers(data=request.data)
         if (incidencia.is_valid()):
@@ -217,11 +216,11 @@ class ContactoView(generics.CreateAPIView):
 
 
 @permission_classes([AllowAny])
-class BonosByUserListView(generics.ListCreateAPIView):
+class BonosByUserListView(viewsets.ModelViewSet):
     queryset = BonoUsuario.objects.all()
     serializer_class = BonoUsuarioSerializer
 
-    def get(self, request, *args, **kwargs):
+    def getUserBonus(self, request, *args, **kwargs):
         salida = dict()
 
         if request.data.get('usuario'):
@@ -239,7 +238,7 @@ class BonosByUserListView(generics.ListCreateAPIView):
 
         return Response(salida, status=status.HTTP_200_OK)
 
-    def post(self, request, *args, **kwargs):
+    def shopUserBonus(self, request, *args, **kwargs):
         salida = dict()
 
         bono_usuario = BonoUsuarioSerializer(data=request.data)

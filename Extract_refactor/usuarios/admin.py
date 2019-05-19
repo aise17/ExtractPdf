@@ -13,7 +13,7 @@ class BonoUsuarioAdmin(admin.ModelAdmin):
     list_display = ['id', 'usuario', 'bono', 'activado', 'fecha_creacion' ]
     list_filter =['usuario', 'bono', 'fecha_creacion']
     list_editable = ['activado']
-    search_fields = ['usuario', 'bono', 'fecha_creacion']
+    search_fields = ['usuario', 'bono', 'fecha_creacion', 'peticiones_consumidas']
 
 
 admin.site.register(BonoUsuario, BonoUsuarioAdmin)

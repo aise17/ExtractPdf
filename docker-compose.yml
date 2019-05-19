@@ -33,7 +33,7 @@ services:
      - '6379:6379'
 
 
-  api_web:
+  api_web: &api_web
     build: .
     command: bash -c "cd Extract_refactor  && python manage.py makemigrations && python manage.py migrate && python manage.py InitialData && gunicorn Extract_refactor.wsgi -b 0.0.0.0:8000"     #production mode
     #command: bash -c "cd Extract_refactor && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"  # develop mode
@@ -63,6 +63,25 @@ services:
       - redis
     depends_on:
       - redis
+
+  flower:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /code/Extract_refactor
+    ports:
+      - "5555:5555"
+    command: celery flower \
+      --app= Extract_refactor.celery
+      --broker="redis://redis:6379/0"
+      --loglevel=info
+    links:
+      - redis
+
+    depends_on:
+
+      - worker
+
 
 volumes:
   postgres_data:

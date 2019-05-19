@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from coreapi.auth import BasicAuthentication, AuthBase
+
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -24,8 +24,8 @@ from rest_framework.schemas import SchemaGenerator
 from rest_framework.schemas.views import SchemaView
 from rest_framework.settings import api_settings
 
-API_TITLE = 'API Extract Pdf'
-API_DESCRIPTION = 'documentacion basada en el api Extract Pdf para apoyo a desarrolladores'
+API_TITLE = 'API Extract Pdf Documentation'
+API_DESCRIPTION = 'documentacion basada en el api Extract Pdf para apoyo a desarrolladores que deseen implemetar nuestros servicios en sus sistemas'
 
 
 urlpatterns = [
