@@ -43,7 +43,7 @@ Thumbs.db
 
 venv
 
-.pyc
-.pdf
+*.pyc
+*.pdf
 
 __pycache__
