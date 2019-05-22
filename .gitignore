@@ -45,3 +45,5 @@ venv
 
 .pyc
 .pdf
+
+__pycache__
