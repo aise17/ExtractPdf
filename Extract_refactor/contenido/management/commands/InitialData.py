@@ -239,7 +239,11 @@ class Command(BaseCommand):
         else:
             quien_somos = QuienSomos()
             quien_somos.titulo = 'defecto'
-            quien_somos.contenido = '<p>Joven estudiante de programador interesado en tecnologias bakend y frontend con buen manejo en leguajes python, javascript y c# utilizando&nbsp; frameworks como django, .net, angular 5 y sql</p><p>Especializado en tecnologias python y Django utilizando el stak django, celery redis, nginx sonbre docker</p>  <p>aficionado a la escalada, los viajes las buenas conversaciones</p><p>&nbsp;</p>'
+            quien_somos.contenido = '<p>Jovenes estudiantes de programador interesados en tecnologias bakend y frontend con buen manejo en leguajes python, javascript y c# utilizando&nbsp; frameworks como django, .net, angular 5,&nbsp;sql, android y&nbsp;&nbsp;java</p>' \
+                                    '<p>Especializado en tecnologias python y Django utilizando el stak django, celery redis, nginx sonbre docker(AISE)</p' \
+                                    '><p>Especializado en tecnologias java, android, sapui5, abap, kotlin(MELEBA)</p><p>aficionado a la escalada, los viajes las buenas conversaciones(AISE)</p><p>aficionado a los videojuegos, los airsoft, los viajes en pareja,' \
+                                    '&nbsp;las buenas conversaciones(AISE)</p><p>&nbsp;</p>'
+
             quien_somos.publicado = True
 
             try:
@@ -261,7 +265,7 @@ class Command(BaseCommand):
             user_bonus.usuario = user
             user_bonus.bono = bono
             user_bonus.activado = True
-            user_bonus.peticiones_consumidas = 2000000
+            user_bonus.peticiones_restantes = 2000000
 
             try:
                 user_bonus.save()
