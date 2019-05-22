@@ -12,9 +12,9 @@ sys.path.append("../..")
 #from Extract_refactor.ocr_api.serializers import ExplicaionSerializer
 
 
-from anuncios.models import QuienSomos
 from ocr_api.models import MinSizeDocumento
-from anuncios.models import Explicacion, Bono
+from contenido.models import Explicacion, Bono, QuienSomos
+from usuarios.models import BonoUsuario
 
 
 class Command(BaseCommand):
@@ -25,12 +25,14 @@ class Command(BaseCommand):
         self.crearExplicacion1Inicial()
         self.crearExplicacion2Inicial()
         self.crearExplicacion3Inicial()
-        self.crearApilicationOauth()
+        self.crearApilicationOauthAngular()
+        self.crearApilicationOauthAndroid()
         self.crearBonoSmallCard()
         self.crearBonoMediumCard()
         self.crearBonoGrantCard()
         self.crearMinSizeDocumentoDefault()
         self.crearQuienSomos()
+        self.createUserBonus()
 
     def crearSuperuser(self):
         if (User.objects.filter(username='admin')):
@@ -48,17 +50,14 @@ class Command(BaseCommand):
 
             print('[+] superadministrador creado')
 
-
     def crearExplicacion1Inicial(self):
-        if (Explicacion.objects.filter(titulo='Convertir PDF a Word')):
+        if (Explicacion.objects.filter(titulo='Utilice el software OCR')):
             print('[+] Primera explicacion ya existe')
 
         else:
             explicacion = Explicacion()
             explicacion.titulo = 'Utilice el software OCR'
             explicacion.contenido = 'sin instalación en su computadora. Reconocer texto y caracteres de documentos escaneados en PDF (incluidos archivos de varias páginas), fotografías e imágenes captadas por cámaras digitales.'
-            explicacion.fecha_publicacion = timezone.now()
-            explicacion.fecha_creacion = timezone.now()
             explicacion.publicado = True
             explicacion.titulo_imagen = 'imagen1'
             explicacion.imagen = 'http://innovagroupbcn.com/wp-content/uploads/2017/02/ocr.jpg'
@@ -95,8 +94,6 @@ class Command(BaseCommand):
                 print('[+][+] Segunda Explicacion no es valida')
                 print('[+][+] Error producido -> ' + explicacion.contenido.__repr__())
 
-
-
     def crearExplicacion3Inicial(self):
         if (Explicacion.objects.filter(titulo='Servicio gratuito')):
             print('[+] Tercera explicacion ya existe')
@@ -119,13 +116,33 @@ class Command(BaseCommand):
                 print('[+][+] Tercera Explicacion no es valida')
                 print('[+][+] Error producido -> ' + explicacion.contenido.__repr__())
 
-
-
-    def crearApilicationOauth(self):
+    def crearApilicationOauthAngular(self):
         if (Application.objects.filter(client_id='xIlTUtu3pv3YCN0NZxioinzAIvnqhaUPB3j6C9m1')):
             print('[+] Tercera explicacion ya existe')
         else:
             aplication = Application()
+            aplication.name = 'Angular'
+            aplication.client_id = 'xIlTUtu3pv3YCN0NZxioinzAIvnqhaUPB3j6C9m1'
+            aplication.client_secret = '15VmSMITKwQTOdDxSfUtFa6SGhvSkhRbtumDSJssPaOvhL1BJAoql5SCM6EVGdEPEubougfrpR3f29GoPDhgeez3o9kWlSQFRsd03wiJiHz9Wlgp9V61y8tdom0XyZoj'
+            aplication.client_type = 'confidential'
+            aplication.redirect_uris = ''
+            aplication.authorization_grant_type = 'password'
+
+            try:
+
+                aplication.save()
+
+                print('[+] Registro de Aplicacion creado')
+            except:
+                print('[+][+] Registro de Aplicacion no es valida')
+                print('[+][+] Error en registro de Aplicacion -> ' + aplication.__repr__())
+
+    def crearApilicationOauthAndroid(self):
+        if (Application.objects.filter(client_id='xIlTUtu3pv3YCN0NZxioinzAIvnqhaUPB3j6C9m1')):
+            print('[+] Tercera explicacion ya existe')
+        else:
+            aplication = Application()
+            aplication.name = 'Android'
             aplication.client_id = 'xIlTUtu3pv3YCN0NZxioinzAIvnqhaUPB3j6C9m1'
             aplication.client_secret = '15VmSMITKwQTOdDxSfUtFa6SGhvSkhRbtumDSJssPaOvhL1BJAoql5SCM6EVGdEPEubougfrpR3f29GoPDhgeez3o9kWlSQFRsd03wiJiHz9Wlgp9V61y8tdom0XyZoj'
             aplication.client_type = 'confidential'
@@ -216,7 +233,6 @@ class Command(BaseCommand):
                 print(
                     '[+][+] Error en registro de MinSizeDocumento defecto -> ' + min_size_documento.__repr__())
 
-
     def crearQuienSomos(self):
         if QuienSomos.objects.filter(titulo='defecto'):
             print('[+] QuienSomos defecto ya existe')
@@ -235,3 +251,23 @@ class Command(BaseCommand):
                 print(
                     '[+][+] Error en registro de QuienSomos defecto -> ' + quien_somos.__repr__())
 
+    def createUserBonus(self):
+        if BonoUsuario.objects.filter(id='03049354-6b93-47f4-a38c-34c39c4e62b8'):
+            print('[+] createUserBonus defecto ya existe')
+        else:
+            user_bonus = BonoUsuario()
+            user = User.objects.filter(username='admin').get()
+            bono = Bono.objects.filter(titulo='Great Card').get()
+            user_bonus.usuario = user
+            user_bonus.bono = bono
+            user_bonus.activado = True
+            user_bonus.peticiones_consumidas = 2000000
+
+            try:
+                user_bonus.save()
+                print('[+] Registro de UsuarioBono para admin creado')
+            except:
+
+                print('[+][+] Registro de UsuarioBono no es valida')
+                print(
+                    '[+][+] Error en registro de UsuarioBono defecto -> ' + user_bonus.__repr__())

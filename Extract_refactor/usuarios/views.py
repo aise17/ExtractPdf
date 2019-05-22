@@ -17,6 +17,7 @@ from .models import Incidencia, BonoUsuario
 import sys
 sys.path.append("..")
 
+from usuarios.utils import eliminarToken
 from ocr_api.models import File, IpsFiles
 from ocr_api.utils import servicioTraza
 
@@ -61,7 +62,8 @@ class LogoutUser(viewsets.ModelViewSet):
 
     def logout(self, request, *args, **kwargs):
         salida = dict()
-        if logout(request):
+
+        if eliminarToken(request):
             salida['ok'] = True
         else:
             salida['ok'] = False

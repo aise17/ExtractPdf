@@ -33,10 +33,14 @@ services:
      - '6379:6379'
 
 
-  api_web: &api_web
+  api_web:
     build: .
-    command: bash -c "cd Extract_refactor  && python manage.py makemigrations && python manage.py migrate && python manage.py InitialData && gunicorn Extract_refactor.wsgi -b 0.0.0.0:8000"     #production mode
-    #command: bash -c "cd Extract_refactor && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"  # develop mode
+    working_dir: /code/Extract_refactor
+
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py InitialData && gunicorn Extract_refactor.wsgi -b 0.0.0.0:8000"     #production mode
+
+    #command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn Extract_refactor.wsgi -b 0.0.0.0:8000"     #production mode
+
     volumes:
       - .:/code
       - ./Extract_refactor/static:/static

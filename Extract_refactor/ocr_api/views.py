@@ -60,6 +60,7 @@ class FileView(viewsets.ModelViewSet):
 
             servicioTraza(request, salida, FileView.__name__)
         except Exception as e:
+            print(e.__repr__())
             salida['ok'] = False
             salida['error'] = e.__repr__()
 

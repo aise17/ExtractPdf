@@ -2,7 +2,15 @@ from django.contrib.auth.models import User
 from django.contrib.gis.geoip2 import GeoIP2
 from ipware import get_client_ip
 
-from .models import IpsFiles, Traza
+import sys
+
+
+sys.path.append('../')
+
+from ocr_api.serializers import UserSerializer
+from ocr_api.models import IpsFiles, Traza
+
+from oauth2_provider.models import AccessToken
 
 
 def fileIpCreate(request, file):
@@ -58,3 +66,15 @@ def servicioTraza(request,salida, clase):
     traza.save()
 
     print('[-][-] Traza generada')
+
+
+def eliminarToken(request):
+
+    usuario = request.data.get('id')
+    print('[+][+][+] usuario sacodo de request {}'.format(usuario))
+    token = AccessToken.objects.filter(user_id=usuario)
+    print('[+][+][+] token sacodo de request {}'.format(token))
+
+    token.delete()
+    return True
+

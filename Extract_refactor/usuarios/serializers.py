@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 import sys
 sys.path.append("..")
 
-from anuncios.models import Bono
+from contenido.models import Bono
 from ocr_api.models import File, IpsFiles
 from .models import Incidencia, BonoUsuario
 

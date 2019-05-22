@@ -79,12 +79,12 @@ def restarPeticion(request):
 
     bono_usuario = BonoUsuario.objects.filter(usuario__id=request.data.get('usuario'), activado=True)
     bono = bono_usuario.get()
-    peticiones_consumidas = int(bono.peticiones_consumidas)
-    print('[+][+] ---------- {} '.format(peticiones_consumidas))
-    peticiones_consumidas = peticiones_consumidas - 1
-    print('[+][+] ---------- {} '.format(peticiones_consumidas))
+    peticiones_restantes = int(bono.peticiones_restantes)
+    print('[+][+] ---------- {} '.format(peticiones_restantes))
+    peticiones_restantes = peticiones_restantes - 1
+    print('[+][+] ---------- {} '.format(peticiones_restantes))
 
-    bono_usuario.update(peticiones_consumidas=peticiones_consumidas)
+    bono_usuario.update(peticiones_consumidas=peticiones_restantes)
 
 
 

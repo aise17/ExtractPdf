@@ -7,7 +7,7 @@ from django.db import models
 import uuid
 from django.contrib.auth.models import User
 
-from anuncios.models import Bono
+from contenido.models import Bono
 
 
 class Incidencia(models.Model):
@@ -28,7 +28,7 @@ class BonoUsuario(models.Model):
     bono = models.ForeignKey(Bono, on_delete=models.CASCADE, null=True)
     activado = models.BooleanField(default=True)
     fecha_creacion = models.DateField(auto_now=True)
-    peticiones_consumidas = models.PositiveIntegerField(default=0)
+    peticiones_restantes = models.PositiveIntegerField(default=0)
 
 
     def save(self, *args, **kwargs):

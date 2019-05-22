@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ocr_api.apps.OcrApiConfig',
     'usuarios.apps.UsuariosConfig',
-    'anuncios.apps.AnunciosConfig',
+    'contenido.apps.ContenidoConfig',
     'rest_framework',
     'ckeditor',
     'oauth2_provider',

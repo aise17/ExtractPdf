@@ -8,7 +8,6 @@ from ckeditor.fields import RichTextField, CKEditorWidget
 import sys
 sys.path.append('..')
 
-from anuncios.models import Bono
 
 
 class Salida():
