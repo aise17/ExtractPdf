@@ -162,6 +162,7 @@ CELERY_RESULT_BACKEND = 'redis://redis:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
+CELERYD_OPTS = "--time-limit=300000 --concurrency=8"
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
