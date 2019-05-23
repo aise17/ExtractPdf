@@ -21,16 +21,28 @@ from ocr_api.utils import servicioTraza
 
 @permission_classes([AllowAny])
 class AnuncioSuperiroView(generics.ListAPIView):
+    '''
+    get:
+    Return a script provided by GoogleAdwords
+    '''
     queryset = AnuncioSuperior.objects.filter(publicado=True)
     serializer_class = AnuncioSuperiorSerializer
 
 @permission_classes([AllowAny])
 class AnuncioInferiorView(generics.ListAPIView):
+    '''
+    get:
+    Return a script provided by GoogleAdwords
+    '''
     queryset = AnuncioInferior.objects.filter(publicado=True)
     serializer_class = AnuncioInferiroSerializer
 
 @permission_classes([AllowAny])
 class AnuncioLateralView(generics.ListAPIView):
+    '''
+    get:
+    Return a script provided by GoogleAdwords
+    '''
     queryset = AnuncioLateral.objects.filter(publicado=True)
     serializer_class = AnuncioLateralSerializer
 
@@ -43,6 +55,10 @@ class BonosView(generics.ListAPIView):
     serializer_class = BonoSerializer
 
     def get(self, request, *args, **kwargs):
+        '''
+        get:
+        Return one list of bono's availables
+        '''
 
         salida = dict()
 
@@ -63,10 +79,18 @@ class BonosView(generics.ListAPIView):
 
 @permission_classes([AllowAny])
 class ExplicacionInicio(generics.ListAPIView):
+    '''
+    get:
+    Return a list of contents for index page. These will try to explain the contents of the services
+    '''
     queryset = Explicacion.objects.filter(publicado=True).order_by('fecha_publicacion')[:3]
     serializer_class = ExplicaionSerializer
 
 @permission_classes([AllowAny])
 class QuienesSomosView(generics.ListAPIView):
+    '''
+    get:
+    Returns content to let us know as developers
+    '''
     queryset = QuienSomos.objects.filter(publicado=True)
     serializer_class = QuienSomosSerializer
