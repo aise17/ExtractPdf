@@ -84,7 +84,7 @@ def restarPeticion(request):
     peticiones_restantes = peticiones_restantes - 1
     print('[+][+] ---------- {} '.format(peticiones_restantes))
 
-    bono_usuario.update(peticiones_consumidas=peticiones_restantes)
+    bono_usuario.update(peticiones_restantes=peticiones_restantes)
 
 
 
