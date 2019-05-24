@@ -23,10 +23,29 @@
   width:70%;
   margin: 5%;
   margin: auto;
+  margin-bottom: 30px;
+
 }
 
 .tabla{
   margin: auto;
+}
+
+.end{
+  margin-bottom: 5% !important;
+}
+
+img{
+  width: 200px;
+  height: 200px;
+  
+}
+
+
+.imagen{
+  display:block;
+  margin:auto;
+  
 }
 
 

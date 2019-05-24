@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { QuienSomos } from '../models/quienSomos.model';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 export class QuienSomosService {
 
   
-  private explicacionUrl = 'http://localhost:8001/contenido/quien-somos/';
+  private explicacionUrl = 'http://' + environment.ip+ ':80/contenido/quien-somos/';
 
 
   constructor(private http: HttpClient) { }

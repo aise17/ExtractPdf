@@ -1,6 +1,32 @@
 
 <app-menu>
   <div class="contenedor">
+
+
+      <mat-card class="card" >
+          <mat-card-header>
+            <mat-card-title> Bienbenido {{ usuario.username | uppercase }}</mat-card-title>
+          </mat-card-header>
+              <img class="imagen" mat-card-image src="https://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png">
+            <mat-card-content>
+              <p> En este apartado encontrara informacion relatival a su usuario </p>
+            </mat-card-content>
+        </mat-card>
+
+
+    </div>
+    <div class="acordeon">
+    <mat-accordion class="acordeon">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Realizar cambios en informacion de usuario
+          </mat-panel-title>
+          <mat-panel-description>
+            ...
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    
     <div class="info-container">
       
       
@@ -55,11 +81,14 @@
         <button mat-raised-button color="primary" *ngIf="!emailFormControl.hasError('email') && !emailFormControl.hasError('required')" (click)='change()' >Actualizar</button> 
            
       </div>
+
+    </mat-expansion-panel> 
+  </mat-accordion>
     
       
     
     </div>
-    <div class="acordeon">
+    <div class="acordeon end">
     <mat-accordion class="acordeon">
       <mat-expansion-panel>
         <mat-expansion-panel-header>

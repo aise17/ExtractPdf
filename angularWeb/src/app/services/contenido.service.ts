@@ -4,17 +4,18 @@ import { HttpClient } from '@angular/common/http';
 import { Contenido } from '../models/contenido.model';
 import { tap, catchError } from 'rxjs/operators';
 import { Bonos } from '../models/bonos.model.';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContenidoService {
 
-  private contenidoUrl = 'http://localhost:80/contenido/explicacion-inicio/';
-  private anuncios_superiorUrl = 'http://localhost:80/contenido/explicacion-inicio/';
-  private anuncios_lateralrUrl = 'http://localhost:80/contenido/explicacion-inicio/';
-  private anuncio_inferiorUrl = 'http://localhost:80/contenido/explicacion-inicio/';
-  private bonosUrl = 'http://localhost:80/contenido/bonos/';
+  private contenidoUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
+  private anuncios_superiorUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
+  private anuncios_lateralrUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
+  private anuncio_inferiorUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
+  private bonosUrl = 'http://' + environment.ip+ ':80/contenido/bonos/';
 
 
   constructor(private http: HttpClient) { }

@@ -3,6 +3,7 @@ import { of, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Contacto } from '../models/contacto.model';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 export class ContactoService {
 
   
-  private contactoUrl = 'http://localhost:80/usuarios/contacto/';
+  private contactoUrl = 'http://' + environment.ip+ ':80/usuarios/contacto/';
 
 
   constructor(private http: HttpClient) { }

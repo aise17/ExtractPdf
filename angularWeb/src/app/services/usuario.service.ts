@@ -5,6 +5,8 @@ import { Usuario } from '../models/usuario.model';
 import { tap, catchError } from 'rxjs/operators';
 import { UserRequest } from '../models/userRequest.model';
 
+import { environment } from 'src/environments/environment';
+
 
 
 @Injectable({
@@ -15,12 +17,12 @@ export class UsuarioService {
   
   constructor(private http: HttpClient) { }
 
-  private loginUrl = 'http://localhost:80/usuarios/login/';
-  private userChangeUrl = 'http://localhost:80/usuarios/user/';
-  private userRequestUrl = 'http://localhost:80/usuarios/request_for_user/';
-  private logoutUrl = 'http://localhost:80/usuarios/logout/'; 
-  private filesUrl = 'http://localhost:80/usuarios/list_files/';
-  private registerUrl = 'http://localhost:80/usuarios/register/';
+  private loginUrl = 'http://' + environment.ip+ ':80/usuarios/login/';
+  private userChangeUrl = 'http://' + environment.ip + ':80/usuarios/user/';
+  private userRequestUrl = 'http://' + environment.ip + ':80/usuarios/request_for_user/';
+  private logoutUrl = 'http://' + environment.ip + ':80/usuarios/logout/'; 
+  private filesUrl = 'http://' + environment.ip + ':80/usuarios/list_files/';
+  private registerUrl = 'http://' + environment.ip + ':80/usuarios/register/';
 
   getRequest(user: Usuario, authorization: string): Observable<UserRequest> {
 

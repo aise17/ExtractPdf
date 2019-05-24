@@ -3,6 +3,7 @@ import { of, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ApiToken } from '../models/token.model';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class Oauth2Service {
 
   constructor(private http: HttpClient) { }
 
-  private createApiTokenUrl = 'http://localhost:80/o/token/';
+  private createApiTokenUrl = 'http://' + environment.ip+ ':80/o/token/';
 
 
   getToken (usuario: string, pass: string): Observable<Response> {

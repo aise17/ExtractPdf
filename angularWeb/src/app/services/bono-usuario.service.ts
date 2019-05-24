@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { Contacto } from '../models/contacto.model';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { BonoUsuario } from '../models/Bonousuario.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { BonoUsuario } from '../models/Bonousuario.model';
 export class BonoUsuarioService {
 
    
-  private bono_usuarioUrl = 'http://localhost:80/usuarios/bono_usuario/';
+  private bono_usuarioUrl = 'http://' + environment.ip+ ':80/usuarios/bono_usuario/';
 
 
   constructor(private http: HttpClient) { }
