@@ -7,9 +7,11 @@
 
 .contenedor{
   max-width: 300px;
-  max-height: 300px;
+  max-height: 100%;
+  padding-top: 5%;
   margin: auto;
-  margin-top: 20px;
+  margin-bottom: 5%;
+
 }
 
 .info-container > * {
@@ -17,6 +19,15 @@
   margin: auto;
 }
 
-.col{
-  margin-top: 260px;
+.acordeon{
+  width:70%;
+  margin: 5%;
+  margin: auto;
 }
+
+.tabla{
+  margin: auto;
+}
+
+
+

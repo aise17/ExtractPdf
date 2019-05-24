@@ -11,8 +11,8 @@ import { JsonOcr } from '../models/JsonOcr.model';
 export class OcrService {
 
   
-  private fileUrl = 'http://localhost:8001/file/upload/';
-  private explicacionUrl = 'http://localhost:8001/file/explicacion/?format=json';
+  private fileUrl = 'http://localhost:80/file/upload/';
+  private explicacionUrl = 'http://localhost:80/file/explicacion/?format=json';
 
 
   constructor(private http: HttpClient) { }

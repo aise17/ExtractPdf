@@ -11,7 +11,7 @@ export class Oauth2Service {
 
   constructor(private http: HttpClient) { }
 
-  private createApiTokenUrl = 'http://localhost:8001/o/token/';
+  private createApiTokenUrl = 'http://localhost:80/o/token/';
 
 
   getToken (usuario: string, pass: string): Observable<Response> {

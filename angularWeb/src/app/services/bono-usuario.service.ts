@@ -11,7 +11,7 @@ import { BonoUsuario } from '../models/Bonousuario.model';
 export class BonoUsuarioService {
 
    
-  private bono_usuarioUrl = 'http://localhost:8001/usuarios/bono_usuario/';
+  private bono_usuarioUrl = 'http://localhost:80/usuarios/bono_usuario/';
 
 
   constructor(private http: HttpClient) { }

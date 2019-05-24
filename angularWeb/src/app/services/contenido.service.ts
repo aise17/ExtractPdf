@@ -10,11 +10,11 @@ import { Bonos } from '../models/bonos.model.';
 })
 export class ContenidoService {
 
-  private contenidoUrl = 'http://localhost:8001/contenido/explicacion-inicio/';
-  private anuncios_superiorUrl = 'http://localhost:8001/contenido/explicacion-inicio/';
-  private anuncios_lateralrUrl = 'http://localhost:8001/contenido/explicacion-inicio/';
-  private anuncio_inferiorUrl = 'http://localhost:8001/contenido/explicacion-inicio/';
-  private bonosUrl = 'http://localhost:8001/contenido/bonos/';
+  private contenidoUrl = 'http://localhost:80/contenido/explicacion-inicio/';
+  private anuncios_superiorUrl = 'http://localhost:80/contenido/explicacion-inicio/';
+  private anuncios_lateralrUrl = 'http://localhost:80/contenido/explicacion-inicio/';
+  private anuncio_inferiorUrl = 'http://localhost:80/contenido/explicacion-inicio/';
+  private bonosUrl = 'http://localhost:80/contenido/bonos/';
 
 
   constructor(private http: HttpClient) { }

@@ -3,13 +3,13 @@
 
 
   <div>
-    <div align="center" text-aling="center" class="contenedor" >
+    <div text-aling="center" class="contenedor" >
   
       <mat-card class="card" *ngFor="let explicacion of result">
         <mat-card-header>
           <mat-card-title>{{ explicacion.titulo | uppercase }}</mat-card-title>
         </mat-card-header>
-          <img  mat-card-image src="{{ explicacion.imagen }}" alt="{{ explicacion.titulo_imagen }}">
+            <img class="imagen" mat-card-image src="{{ explicacion.imagen }}" alt="{{ explicacion.titulo_imagen }}">
           <mat-card-content>
             <p [innerHtml]='explicacion.contenido'></p>
           </mat-card-content>

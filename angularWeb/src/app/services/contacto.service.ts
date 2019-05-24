@@ -10,7 +10,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 export class ContactoService {
 
   
-  private contactoUrl = 'http://localhost:8001/usuarios/contacto/';
+  private contactoUrl = 'http://localhost:80/usuarios/contacto/';
 
 
   constructor(private http: HttpClient) { }

@@ -7,8 +7,10 @@
 
 .contenedor{
   display: flex;
+  flex-direction: row;
   justify-content: center;
   margin: 20px;
+  margin: auto;
  
 }
 
@@ -19,6 +21,12 @@ img{
 }
 .cont-prin{
   height: 100%;
+}
+
+.imagen{
+  display:block;
+  margin:auto;
+  
 }
 
 
