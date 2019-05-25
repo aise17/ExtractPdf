@@ -43,3 +43,10 @@ class ExplicaionSerializer(serializers.ModelSerializer):
     class Meta:
         model= Explicacion
         fields = "__all__"
+
+
+class FaqsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model= Explicacion
+        fields = "__all__"
