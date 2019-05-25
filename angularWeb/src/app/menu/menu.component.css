@@ -1,4 +1,6 @@
-
+.base{
+    height: 100%;
+}
 .icon {
     padding: 0 14px;
 }
@@ -7,35 +9,49 @@
     flex: 1 1 auto;
 }
 
-.container {
-    width: 100%;
-    height: 100%;
-    
-    border: 1px solid rgba(0, 0, 0, 0.5);
-}
-
-.base{
-    height: 100%;;
-}
-
 
 
 .sidenav-content {
-    display: list-item;
+    display: flex;
+    flex-direction: column;
     
-
+    height: 100%;
     justify-content: center ;
     min-height: 80%;
-    height: 80%;
+    margin-bottom: 5%;
+    margin-top: 7%; 
+
     
 }
 
 .sidenav {
-    padding: 20px;  
+    padding: 20px; 
+
+    height: 100%    ;
+ 
+}
+
+.toolbar{
+        
+    position: fixed;
+    z-index: 2;
+    height: 7%;
+    
+    
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    top: 7%;
+    min-height: 100%;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .footer{
-    min-height: 50%;
-    max-height: 100%;
+    top: 7%;
+    height: 20%;
+    margin-top: 4.3%;
+  
 }
-

@@ -18,7 +18,7 @@
   /* reglas CSS */
   .contenedor{
     display: flex;
-    flex-direction: co;
+    flex-direction: column;
     justify-content: center;
     margin: 20px;
     margin: auto;

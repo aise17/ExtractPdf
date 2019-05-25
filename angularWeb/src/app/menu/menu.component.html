@@ -1,31 +1,35 @@
 <div class="base">
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
+
+
+  <!-- Toolbar -->
+  <mat-toolbar color="primary" class="toolbar">
+    <mat-toolbar-row class="toolbar">
       <button mat-button (click)="drawer.toggle()">
           
         <mat-icon  class="icon">menu</mat-icon>
       </button>
-    <span>OCR</span>
-    <span class="spacer"></span>
-    <span *ngIf='user'>{{user.username }}</span>
-    <button mat-button [matMenuTriggerFor]="menu" *ngIf='user; else notUser'>
-          <mat-icon class="icon" >face</mat-icon>
+      <span>OCR</span>
+      <span class="spacer"></span>
+      <span *ngIf='user'>{{user.username }}</span>
+      <button mat-button [matMenuTriggerFor]="menu" *ngIf='user; else notUser'>
+            <mat-icon class="icon" >face</mat-icon>
 
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item [routerLink]="['/usuario']">Informacion Usuario</button>
-            <button mat-menu-item [routerLink]="['/bonos']">Compra Bono</button>
-            <button mat-menu-item [routerLink]="['/gestio-archivos']">Gestion de documentos</button>
-            <button mat-menu-item (click)='logout()' [routerLink]="['/']">Desconectar</button>
-          </mat-menu>
-    </button>
-   
-    <ng-template #notUser>
-       <button mat-button (click)='openDialog()'><mat-icon class="icon" >face</mat-icon></button>
-    </ng-template>
-    
-
-  </mat-toolbar-row>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [routerLink]="['/usuario']">Informacion Usuario</button>
+              <button mat-menu-item [routerLink]="['/bonos']">Compra Bono</button>
+              <button mat-menu-item [routerLink]="['/gestio-archivos']">Gestion de documentos</button>
+              <button mat-menu-item (click)='logout()' [routerLink]="['/']">Desconectar</button>
+            </mat-menu>
+      </button> 
+      <ng-template #notUser>
+        <button mat-button (click)='openDialog()'><mat-icon class="icon" >face</mat-icon></button>
+      </ng-template>
+    </mat-toolbar-row>
   </mat-toolbar>
+  <!-- End Toolbar -->
+
+
+  <!-- Contenedor Central -->
   <mat-drawer-container class="container" autosize>
     <mat-drawer #drawer class="sidenav" mode="side">
       
@@ -52,6 +56,10 @@
     </div>
   
   </mat-drawer-container>
+<!-- End Contenedor Central -->
+
+
+<!--Footer -->
   <mat-toolbar color="primary" class="footer">
       <mat-toolbar-row>
       <div layout="row" layout-align="center center">
@@ -59,6 +67,7 @@
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
+<!--Footer -->
 
 </div>
   
