@@ -194,6 +194,6 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-GEOIP_PATH = '/datasets/GeoIP2/'
+GEOIP_PATH = '/datasets/GeoIP2'
 
 
