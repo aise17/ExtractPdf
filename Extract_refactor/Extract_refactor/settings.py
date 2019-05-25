@@ -194,6 +194,6 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-GEOIP_PATH = '/datasets/GeoIP2/GeoLite2-City.mmdb'
+GEOIP_PATH = 'datasets/GeoIP2'
 
 
