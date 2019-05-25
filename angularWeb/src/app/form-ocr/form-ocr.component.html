@@ -1,6 +1,6 @@
 
 <app-menu>
-  <div *ngIf="ver_form" class=contenedor>
+  <div *ngIf="ver_form">
   <form id="form" class="topBefore">
       <h2>OCR</h2>
       
@@ -12,13 +12,14 @@
 
       <input id="name" type="text" [(ngModel)]="formulario.descripcion" [ngModelOptions]="{standalone: true}" placeholder="TITULO">
 
-      <input id="name" list="procesos" [(ngModel)]="formulario.proceso" [ngModelOptions]="{standalone: true}" name="browser">
-      <datalist id="procesos">
+
+      <select id="name"  [(ngModel)]="formulario.proceso" [ngModelOptions]="{standalone: true}" name="browser">
+ 
           <option value="T">Tresholding </option>
           <option value="B">Blur </option>
           <option value="TB">Tresholding and Blur </option>
 
-      </datalist>
+      </select>
       <input id="name" type="file" #fileInput   placeholder="DOCUMENTO">
                           
       <input (click)="send()" id="submit" type="submit" value="PROCESAR PDF..."  hint="DOCUMENTO">

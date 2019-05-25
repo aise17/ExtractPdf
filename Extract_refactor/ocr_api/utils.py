@@ -36,7 +36,6 @@ def fileIpCreate(request, file):
         ip_file.lon = 0
 
     else:
-        # We got the client's IP address
         if is_routable:
             ip_file.ip = client_ip
             print('-------------------------------------------------------------')

@@ -7,17 +7,19 @@
 
 @media only screen and (max-width: 600px) {
 
-  .contenedor{
-  width: 100%;
+    .contenedor{
+    width: 100%;
+  }
+
+
+  .acordeon {
+    width: 100% !important;
+    margin: 0% !important;
+    margin: auto !important;
+    margin-bottom: 5% !important;
+  }
 }
 
-.acordeon {
-  width: 100% !important;
-  margin: 0% !important;
-  margin: auto !important;
-  margin-bottom: 5% !important;
-}
-}
 
 .contenedor{
   max-width: 300px;
@@ -61,6 +63,7 @@ img{
   margin:auto;
   
 }
+
 
 
 
