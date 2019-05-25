@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  ip: 'localhost',
+  ip: 'analyzer.tk',
   //ip: "192.168.43.217"
 };
 

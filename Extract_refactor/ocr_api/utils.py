@@ -23,6 +23,7 @@ def fileCreate(data):
 def fileIpCreate(request, file):
     client_ip, is_routable = get_client_ip(request)
     data = request.data
+    geo = GeoIP2()
     if request.data.get('usuario'):
         user = User.objects.get(id=data.get('usuario'))
         ip_file = IpsFiles(usuario=user)
@@ -39,9 +40,9 @@ def fileIpCreate(request, file):
         if is_routable:
             ip_file.ip = client_ip
             print('-------------------------------------------------------------')
-            print(GeoIP2.city(client_ip)['latitude'])
-            ip_file.lat = GeoIP2.city(client_ip)['latitude']
-            ip_file.lon = GeoIP2.city(client_ip)['longitude']
+            print(geo.city(query= client_ip)['latitude'])
+            ip_file.lat = geo.city(query= client_ip)['latitude']
+            ip_file.lon = geo.city(query= client_ip)['longitude']
             ip_file.file = file
             ip_file.is_routeable = True
 
