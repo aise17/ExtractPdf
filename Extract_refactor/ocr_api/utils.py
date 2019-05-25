@@ -40,9 +40,10 @@ def fileIpCreate(request, file):
         if is_routable:
             ip_file.ip = client_ip
             print('-------------------------------------------------------------')
-            print(geo.city(query= client_ip)['latitude'])
-            ip_file.lat = geo.city(query= client_ip)['latitude']
-            ip_file.lon = geo.city(query= client_ip)['longitude']
+            geo_req = geo.city(query=client_ip)
+            print(geo_req['latitude'])
+            ip_file.lat = geo_req['latitude']
+            ip_file.lon = geo_req['longitude']
             ip_file.file = file
             ip_file.is_routeable = True
 

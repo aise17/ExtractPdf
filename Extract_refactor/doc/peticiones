@@ -11,4 +11,5 @@ se vasara en el usuario y contraseña + id_user y client_secret de la aplicacion
 
 shh contra ec2 aws
 
--   ssh -vvv -i ec2.pem ec2-user@ec2-3-14-147-255.us-east-2.compute.amazonaws.com
+->
+  ssh -vvv -i ec2.pem ec2-user@ec2-3-14-147-255.us-east-2.compute.amazonaws.com
