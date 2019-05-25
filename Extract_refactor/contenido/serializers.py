@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from .models import AnuncioInferior, AnuncioSuperior, AnuncioLateral, QuienSomos, Bono, Explicacion
+from .models import AnuncioInferior, AnuncioSuperior, AnuncioLateral, QuienSomos, Bono, Explicacion, Faqs
 
 
 class AnuncioLateralSerializer(serializers.ModelSerializer):
@@ -48,5 +48,5 @@ class ExplicaionSerializer(serializers.ModelSerializer):
 class FaqsSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model= Explicacion
+        model= Faqs
         fields = "__all__"

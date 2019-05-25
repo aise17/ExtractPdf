@@ -3,9 +3,7 @@ from django.urls import path
 from rest_framework.documentation import include_docs_urls
 
 from .views import AnuncioInferiorView, AnuncioLateralView, AnuncioSuperiroView, BonosView, ExplicacionInicio, \
-    QuienesSomosView
-
-
+    QuienesSomosView, FaqsView
 
 urlpatterns = [
 
@@ -15,5 +13,6 @@ urlpatterns = [
     path('bonos/', BonosView.as_view(), name='bonos'),
     path('explicacion-inicio/', ExplicacionInicio.as_view(), name='contenido_inicio'),
     path('quien-somos/', QuienesSomosView.as_view(), name='quienSomos'),
+    path('faqs/', FaqsView.as_view(), name='faqs'),
 
 ]

@@ -49,7 +49,7 @@ class AnuncioLateralView(generics.ListAPIView):
 
 @permission_classes([AllowAny])
 class FaqsView(generics.ListAPIView):
-    queryset = Faqs.objects.filter(activado=True).order_by('precio')
+    queryset = Faqs.objects.filter(publicado=True).order_by('fecha_publicacion')
     serializer_class = FaqsSerializer
 
     def get(self, request, *args, **kwargs):
