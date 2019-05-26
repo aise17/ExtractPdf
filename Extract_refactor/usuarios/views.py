@@ -85,10 +85,7 @@ class UserDetail(viewsets.ModelViewSet):
 
         user = User.objects.get(id=request.data.get('id'))
 
-
         user = self.serializer_class().update(instance=user, validated_data=request.data)
-
-
 
         if user is not None:
             salida['ok'] = True
@@ -113,8 +110,6 @@ class AuthentificacionUsuario(viewsets.ModelViewSet):
         if s is not None:
             login(request, s)
             ser = UserSerializer(instance=s)
-
-
 
             salida['ok'] = True
             salida['salida'] = ser.data
@@ -188,7 +183,6 @@ class BonosComprodosbyYear(viewsets.ModelViewSet):
             salida['octubre'] = len(self.queryset.filter(fecha_creacion__month='10'))
             salida['noviembre'] = len(self.queryset.filter(fecha_creacion__month='11'))
             salida['diciembre'] = len(self.queryset.filter(fecha_creacion__month='12'))
-
 
         else:
             salida['ok'] = False

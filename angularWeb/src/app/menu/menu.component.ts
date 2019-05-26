@@ -28,7 +28,10 @@ export class MenuComponent implements OnInit {
   password: string;
   usuario: Usuario;
   constructor(public dialog: MatDialog, private userService: UsuarioService, private oauthService: Oauth2Service) {
-   }
+  if(sessionStorage.getItem('username')== 'admin'){
+    this.is_admin = true;
+  } 
+  }
    openDialog(): void {
     const dialogRef = this.dialog.open(DialogLoginComponent, {
       width: '250px',

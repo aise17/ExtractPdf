@@ -1,3 +1,20 @@
-<p>
-  compra-bonos-estadistica-admin works!
-</p>
+<mat-card>
+
+  <mat-card-title>
+    <h3>Estadistica de los bonos comprados este año</h3>
+  </mat-card-title>
+
+
+  <mat-card-content>
+    <div class="grafico">
+      <canvas baseChart width="400" height="50"
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType">
+      </canvas>
+  </div>
+</mat-card-content>
+</mat-card>

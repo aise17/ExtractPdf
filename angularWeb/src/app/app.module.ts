@@ -28,7 +28,6 @@ import { AgmCoreModule } from '@agm/core';
 import { from } from 'rxjs';
 import { AdminComponent } from './admin/admin.component';
 import { CompraBonosEstadisticaAdminComponent } from './compra-bonos-estadistica-admin/compra-bonos-estadistica-admin.component';
-import { RequestYearEstadisticaAdminComponent } from './request-year-estadistica-admin/request-year-estadistica-admin.component';
 
 
 
@@ -51,7 +50,6 @@ import { RequestYearEstadisticaAdminComponent } from './request-year-estadistica
     HeatmapComponent,
     AdminComponent,
     CompraBonosEstadisticaAdminComponent,
-    RequestYearEstadisticaAdminComponent,
     
 
   ],

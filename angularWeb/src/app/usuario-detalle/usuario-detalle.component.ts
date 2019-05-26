@@ -22,12 +22,12 @@ export class UsuarioDetalleComponent implements OnInit {
   public lineChartLegend = true;
   public lineChartType = 'line';
 
-   // lineChart
-   public lineChartData: Array<any> = [
+  // lineChart
+  public lineChartData: Array<any> = [
     {data: [], label: 'Peticiones'}
   ];
   public lineChartLabels: Array<any> = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
-                                       'Agosto', 'Septiempre', 'Octubre', 'Nobiembre', 'Diciembre'];
+                                      'Agosto', 'Septiempre', 'Octubre', 'Nobiembre', 'Diciembre'];
   public lineChartOptions: any = {
     responsive: true
   };
@@ -127,7 +127,7 @@ export class UsuarioDetalleComponent implements OnInit {
           }
         }
       }else if(res['ok'] == false){
-
+          this.openDialogError(res['error'])
       }
     });
   }

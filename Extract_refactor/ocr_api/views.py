@@ -10,7 +10,7 @@ from .permissions import IsAuthenticatedOrPost
 from .serializers import ArchivoSerializer, IpsFileSerializers
 from .models import File, IpsFiles
 from .tasks import orc
-from .utils import fileIpCreate, servicioTraza, fileCreate, restarPeticion
+from .utils import fileIpCreate, servicioTraza, restarPeticion
 
 
 @permission_classes([IsAuthenticatedOrPost])
@@ -38,10 +38,7 @@ class FileView(viewsets.ModelViewSet):
                     proceso = file_serializer.data.get('proceso')
                     nombre = file_serializer.data.get('documento').__str__()
 
-
                     nombre = nombre.split('/')[-1]
-
-                    # TODO leer proceso de los datos de entrada y configurar orc
 
             else:
                 print('[+][+][+] Lleva id ')

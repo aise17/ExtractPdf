@@ -4,5 +4,6 @@ export class BonoUsuario{
     usuario : string;
     bono : string;
     fecha_creacion: Date;
-
+    activado: boolean;
+    peticiones_restantes: string;
 }
