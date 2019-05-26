@@ -16,9 +16,9 @@ RUN apt-get update \
     && apt-get install -y tesseract-ocr \
     && apt-get install -y imagemagick \
     && apt-get install -y ghostscript \
-    && apt-get install -y git \
-    && git clone https://aise17:Swdzswdz17@github.com/aise17/ExtractPdf.git
-#ADD . /code/
+    && apt-get install -y git
+    #&& git clone https://aise17:Swdzswdz17@github.com/aise17/ExtractPdf.git
+ADD . /code/
 
 
 

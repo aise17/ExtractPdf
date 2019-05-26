@@ -1,8 +1,8 @@
 .imagenP{
   position: relative;
   float: left;
-  top: 105px;
-  left: -80px;
+  top: 35px;
+  left: -32px;
 
   width: 18px;
   height: 18px;
@@ -18,14 +18,14 @@
 h2{
   position: relative;
   float: left;
-  left: 220px;
+  margin: auto;
 }
 
 .imagenA{
   position: relative;
   float: left;
-  top: 155px;
-  left: -98px;
+  top: 85px;
+  left: -50px;
 
   width: 18px;
   height: 18px;
@@ -40,8 +40,8 @@ h2{
 .imagenPR{
   position: relative;
   float: left;
-  top: 250px;
-  left: -116px;
+  top: 180px;
+  left: -69px;
   width: 18px;
   height: 18px;
 
@@ -53,8 +53,11 @@ h2{
 }
 
 .progress{
-  max-width: 50%;
-  margin: 50px auto 100px auto;
+
+  height: 100px;
+  width: 50% !important;
+
+
 }
 
 
@@ -263,8 +266,8 @@ select:hover {
     width: 50%;
   }
   select{
-
-    width: 56.5%; 
+    
+    width: 56.4%; 
   }
   #submit {
     width: 56.5%;    

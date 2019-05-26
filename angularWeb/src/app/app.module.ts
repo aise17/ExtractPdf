@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { FormOcrComponent } from './form-ocr/form-ocr.component';
 import { DialogErrorComponent } from './dialog-error/dialog-error.component';
+import { FaqsComponent } from './faqs/faqs.component';
+import { HeatmapComponent } from './heatmap/heatmap.component';
+
+import { AgmCoreModule } from '@agm/core';
+import { from } from 'rxjs';
+
+
+
 
 @NgModule({
   declarations: [
@@ -35,7 +43,11 @@ import { DialogErrorComponent } from './dialog-error/dialog-error.component';
     UsuarioDetalleComponent,
     BonosComponent,
     FormOcrComponent,
-    DialogErrorComponent
+    DialogErrorComponent,
+    FaqsComponent,
+    HeatmapComponent,
+    
+
   ],
   imports: [
     BrowserModule,
@@ -43,7 +55,11 @@ import { DialogErrorComponent } from './dialog-error/dialog-error.component';
     BrowserAnimationsModule,    
     MaterialModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB2nZL8uAHgxjQ78tU9gBCgi5NxTD2bmjk'
+    })
+    
   ],
   entryComponents: [ DialogLoginComponent, DialogErrorComponent ],
   providers: [    
@@ -52,3 +68,4 @@ import { DialogErrorComponent } from './dialog-error/dialog-error.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

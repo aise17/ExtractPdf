@@ -5,6 +5,7 @@ import { Contenido } from '../models/contenido.model';
 import { tap, catchError } from 'rxjs/operators';
 import { Bonos } from '../models/bonos.model.';
 import { environment } from 'src/environments/environment';
+import { Faqs } from '../models/faqs.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class ContenidoService {
 
   private contenidoUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
+  private faqsUrl = 'http://' + environment.ip+ ':80/contenido/faqs/';
   private anuncios_superiorUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
   private anuncios_lateralrUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
   private anuncio_inferiorUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
@@ -29,6 +31,13 @@ export class ContenidoService {
       );
     }
 
+  getFaqs (): Observable<Faqs[]> {
+    return this.http.get<Faqs[]>(this.faqsUrl)
+      .pipe(
+        tap(faqs => this.log('fetched fqs')),
+        catchError(this.handleError('getfaqs', []))
+      );
+    }
 
   getAnuncioSuperior (): Observable<Contenido[]> {
     return this.http.get<Contenido[]>(this.anuncios_superiorUrl)

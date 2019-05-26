@@ -1,0 +1,56 @@
+.card {
+    max-width: 350px;
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+
+  }
+  
+
+.contenedor{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+  margin: auto;
+ 
+}
+
+.detalle{
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 600px) {
+  /* reglas CSS */
+  .contenedor{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+    margin: auto;
+   
+  }
+  
+
+}
+
+img{
+  width: 100px;
+  height: 100px;
+  
+}
+.cont-prin{
+  height: 100%;
+}
+
+.imagen{
+  display:block;
+  margin:auto;
+  
+}
+
+
+
+  
+

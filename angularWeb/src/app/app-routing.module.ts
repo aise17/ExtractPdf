@@ -7,6 +7,8 @@ import { QuienSomosComponent } from './quien-somos/quien-somos.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { GestionDocumentosComponent } from './gestion-documentos/gestion-documentos.component';
 import { BonosComponent } from './bonos/bonos.component';
+import { FaqsComponent } from './faqs/faqs.component';
+import { HeatmapComponent } from './heatmap/heatmap.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -17,6 +19,8 @@ const routes: Routes = [
   {path: 'contacto', component: ContactoComponent},
   {path: 'quienSomos', component: QuienSomosComponent},
   {path: 'bonos', component: BonosComponent},
+  {path: 'faqs', component: FaqsComponent},
+  {path: 'map', component: HeatmapComponent},
 ];
 
 @NgModule({

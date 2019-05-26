@@ -85,7 +85,9 @@ class RequestForYear(generics.ListAPIView):
     queryset = IpsFiles.objects.filter(fecha_conexion__year=date.today().year)
 
 
-@permission_classes([IsAuthenticated])
+
+
+@permission_classes([AllowAny])
 class CoordenadasWithRequest(generics.ListAPIView):
     serializer_class = IpsFileSerializers
     queryset = IpsFiles.objects.all()
@@ -94,7 +96,13 @@ class CoordenadasWithRequest(generics.ListAPIView):
         salida = {}
         salida['salida'] = list()
         for ip in IpsFiles.objects.all():
-            salida['salida'].append({'usuario': ip.usuario, 'lat': ip.lat, 'lon': ip.lon})
+            salida['salida'].append({'usuario': ip.usuario.__str__(), 'lat': ip.lat, 'lon': ip.lon})
+        if len(salida['salida']) > 0:
+            salida['ok'] = True
+        else:
+            salida['ok'] = False
+
+
 
         servicioTraza(request, salida, CoordenadasWithRequest.__name__)
 

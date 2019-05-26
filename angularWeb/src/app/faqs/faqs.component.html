@@ -1,0 +1,26 @@
+
+<app-menu>
+
+
+  <div>
+    <div align="center" text-aling="center" class="contenedor" >
+  
+      <mat-card class="card" *ngFor="let faqs of result">
+          <img class="imagen" mat-card-image src="{{ faqs.imagen }}" alt="{{ faqs.titulo_imagen }}">
+        <div class="detalle">
+        <mat-card-header>
+          <mat-card-title>{{ faqs.titulo | uppercase }}</mat-card-title>
+        </mat-card-header>
+          <mat-card-content>
+            <p [innerHtml]='faqs.contenido'></p>
+          </mat-card-content>
+          </div>
+      </mat-card>
+  
+    </div>
+      
+      <app-ir-ocr></app-ir-ocr>
+    
+    </div>
+      </app-menu>
+  
