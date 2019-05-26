@@ -11,7 +11,7 @@ import { Observable, of } from 'rxjs';
 export class AdminService {
 
   
-  private contactoUrl = 'http://' + environment.ip+ ':80/files/coor/';
+  private contactoUrl = 'http://' + environment.ip+ ':80/file/coor/';
 
 
   constructor(private http: HttpClient) { }

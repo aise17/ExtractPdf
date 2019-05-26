@@ -20,17 +20,18 @@ export class HeatmapComponent implements OnInit {
 
   ngOnInit() {
     this.getCoordenadas();
+    console.log(this.ipfiles)
   }
 
   constructor(private adminService: AdminService, public dialog: MatDialog){}
   
   
  // google maps zoom level
- zoom: number = 8;
+ zoom: number = 2;
   
  // initial center position for the map
- lat: number = 51.673858;
- lng: number = 7.815982;
+ lat: number = 40;
+ lng: number = 3;
 
  clickedMarker(label: string, index: number) {
    console.log(`clicked the marker: ${label || index}`)
@@ -70,7 +71,7 @@ export class HeatmapComponent implements OnInit {
         console.log(res['salida']);
 
         this.ipfiles = res['salida'];
-
+        
 
       }
       else if(res['ok'] === false){

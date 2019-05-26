@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class BonoUsuarioService {
 
    
-  private bono_usuarioUrl = 'http://' + environment.ip+ ':80/usuarios/bono_usuario/';
+  private bono_usuarioUrl = 'http://' + environment.ip+ ':80/usuarios/comprar_bono/';
 
 
   constructor(private http: HttpClient) { }

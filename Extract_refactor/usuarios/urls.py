@@ -36,11 +36,19 @@ sendCommunication = views.ContactoView.as_view({
     'post': 'sendCommunication'
 })
 
-getUserBonus = views.BonosByUserListView.as_view({
-    'get': 'getUserBonus',
+shopUserBonus = views.BonosShop.as_view({
+
     'post': 'shopUserBonus'
 })
 
+getUserBonus = views.BonosByUserListView.as_view({
+
+    'post': 'getUserBonus'
+})
+
+get_user_bonus_for_year = views.BonosComprodosbyYear.as_view({
+    'get': 'bonosConpardosbyYear'
+})
 
 urlpatterns = [
     path('register/', register_uesr, name='register'),
@@ -49,8 +57,9 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('request_for_user/', userStadisticRequest, name='request_for_user'),
     path('list_files/', getFilesForUser, name='files_list'),
-
     path('contacto/', sendCommunication, name='contacto'),
-    path('bono_usuario/', getUserBonus, name='bono_usuario'),
+    path('comprar_bono/', shopUserBonus, name='bono_usuario'),
+    path('bono_comprados_by_year/', get_user_bonus_for_year, name='bono_comprados'),
+    path('getUserBonus/', getUserBonus, name='bono_comprados'),
 
 ]

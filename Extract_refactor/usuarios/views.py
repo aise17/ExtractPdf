@@ -1,4 +1,4 @@
-
+import datetime
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -129,7 +129,7 @@ class AuthentificacionUsuario(viewsets.ModelViewSet):
 
 @permission_classes([IsAuthenticated])
 class RequestProcessOcrByUser(viewsets.ModelViewSet):
-    queryset = IpsFiles.objects.all()
+    queryset = IpsFiles.objects.filter(fecha_conexion__year=datetime.date.today().year)
     serializer_class = IpsFileSerializers
 
     def userStadisticRequest(self, request, *args, **kwargs):
@@ -151,6 +151,43 @@ class RequestProcessOcrByUser(viewsets.ModelViewSet):
             salida['octubre'] = len(self.queryset.filter(fecha_conexion__month='10', usuario=request.data.get('id')))
             salida['noviembre'] = len(self.queryset.filter(fecha_conexion__month='11', usuario=request.data.get('id')))
             salida['diciembre'] = len(self.queryset.filter(fecha_conexion__month='12', usuario=request.data.get('id')))
+
+
+        else:
+            salida['ok'] = False
+            salida['error'] = 'fallo en la optencion del usuario'
+
+        servicioTraza(request, salida, RequestProcessOcrByUser.__name__)
+
+        return Response(salida, status=status.HTTP_200_OK)
+
+
+
+
+@permission_classes([IsAuthenticated])
+class BonosComprodosbyYear(viewsets.ModelViewSet):
+    queryset = BonoUsuario.objects.filter(fecha_creacion__year=datetime.date.today().year)
+    serializer_class = BonoUsuarioSerializer
+
+    def bonosConpardosbyYear(self, request, *args, **kwargs):
+        salida = dict()
+
+        if len(self.queryset) > 0:
+
+            salida['ok'] = True
+
+            salida['enero'] = len(self.queryset.filter(fecha_creacion__month='01'))
+            salida['febrero'] = len(self.queryset.filter(fecha_creacion__month='02'))
+            salida['marzo'] = len(self.queryset.filter(fecha_creacion__month='03'))
+            salida['abril'] = len(self.queryset.filter(fecha_creacion__month='04'))
+            salida['mayo'] = len(self.queryset.filter(fecha_creacion__month='05'))
+            salida['junio'] = len(self.queryset.filter(fecha_creacion__month='06'))
+            salida['julio'] = len(self.queryset.filter(fecha_creacion__month='07'))
+            salida['agosto'] = len(self.queryset.filter(fecha_creacion__month='08'))
+            salida['septiembre'] = len(self.queryset.filter(fecha_creacion__month='09'))
+            salida['octubre'] = len(self.queryset.filter(fecha_creacion__month='10'))
+            salida['noviembre'] = len(self.queryset.filter(fecha_creacion__month='11'))
+            salida['diciembre'] = len(self.queryset.filter(fecha_creacion__month='12'))
 
 
         else:
@@ -218,27 +255,11 @@ class ContactoView(viewsets.ModelViewSet):
 
 
 @permission_classes([AllowAny])
-class BonosByUserListView(viewsets.ModelViewSet):
+class BonosShop(viewsets.ModelViewSet):
     queryset = BonoUsuario.objects.all()
     serializer_class = BonoUsuarioSerializer
 
-    def getUserBonus(self, request, *args, **kwargs):
-        salida = dict()
 
-        if request.data.get('usuario'):
-            bonos = self.queryset.filter(usuario=request.data.get('usuario'))
-
-            ser = BonoUsuarioSerializer(bonos, many=True)
-
-            salida['ok'] = True
-            salida['salida'] = ser.data
-        else:
-            salida['ok'] = False
-            salida['error'] = 'fallo al obtener usuario'
-
-        servicioTraza(request, salida, BonosByUserListView.__name__)
-
-        return Response(salida, status=status.HTTP_200_OK)
 
     def shopUserBonus(self, request, *args, **kwargs):
         salida = dict()
@@ -258,3 +279,29 @@ class BonosByUserListView(viewsets.ModelViewSet):
 
         return Response(salida, status=status.HTTP_201_CREATED)
 
+@permission_classes([AllowAny])
+class BonosByUserListView(viewsets.ModelViewSet):
+    queryset = BonoUsuario.objects.all()
+    serializer_class = BonoUsuarioSerializer
+
+    def getUserBonus(self, request, *args, **kwargs):
+        salida = dict()
+
+
+        user = User.objects.get(id=request.data.get('usuario'))
+        print('[]þ]þ]þ] usuario {} '.format(request.data.get('usuario')))
+        bonos = self.queryset.filter(usuario=user)
+
+        ser = BonoUsuarioSerializer(bonos, many=True)
+
+
+        if bonos is not None:
+            salida['ok'] = True
+            salida['salida'] = ser.data
+        else:
+            salida['ok'] = False
+            salida['error'] = 'fallo al obtener usuario'
+
+        servicioTraza(request, salida, BonosByUserListView.__name__)
+
+        return Response(salida, status=status.HTTP_200_OK)

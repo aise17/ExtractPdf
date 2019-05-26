@@ -1,40 +1,60 @@
-<h1>Angular Google Maps (AGM) Demo</h1>
-<p><a href="https://angular-maps.com/" target="_blank">Official Website</a></p>
-
+<div>
 <agm-map 
   [latitude]="lat"
   [longitude]="lng"
   [zoom]="zoom"
   [disableDefaultUI]="false"
   [zoomControl]="false"
-  
-  
-  (mapClick)="mapClicked($event)">
+  >
 
   <agm-marker 
-      *ngFor="let m of markers; let i = index"
-      (markerClick)="clickedMarker(m.label, i)"
+      *ngFor="let m of ipfiles; let i = index"
+      (markerClick)="clickedMarker(m.usuario, i)"
       [latitude]="m.lat"
-      [longitude]="m.lng"
-      [label]="m.label"
-      [markerDraggable]="m.draggable"
+      [longitude]="m.lon"
+      [label]="m.usuario"
+      [markerDraggable]="false"
       (dragEnd)="markerDragEnd(m, $event)">
       
         <agm-info-window>
-        <strong>{{m.label}}</strong>
+        <strong>usuario: {{m.usuario}}</strong>
         </agm-info-window>
         
-        <agm-circle [latitude]="m.lat" [longitude]="m.lng" 
-            [radius]="5000"
+        <agm-circle [latitude]="m.lat" [longitude]="m.lon" 
+            [radius]="55555"
             [fillColor]="'red'"
             [circleDraggable]="true"
-            [editable]="true">
+            [editable]="false">
         </agm-circle>
   </agm-marker>
   
 
-
-
-
-
 </agm-map>
+
+<div class="acordeon">
+        <mat-accordion class="acordeon">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+               Peticiones
+              </mat-panel-title>
+              <mat-panel-description>
+                El numero de solicitudes realizadas a nuestor servicios asciende a {{ipfiles.length}} peticiones
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+                <mat-card *ngFor="let m of ipfiles">
+                    <mat-card-content>
+                        <p> Petiocion relaizada desde las corrdenadas -> {{m.lat}}, {{m.lon}}, por el usuario {{m.usuario}}</p>
+                    </mat-card-content>
+                </mat-card>
+
+        </mat-expansion-panel> 
+    </mat-accordion>
+      
+        
+      
+      </div>
+
+
+</div>

@@ -22,7 +22,7 @@ export interface DialogData {
 })
 export class MenuComponent implements OnInit {
 
-
+  is_admin:boolean;
   user: Usuario ;
   username: string;
   password: string;
@@ -47,7 +47,9 @@ export class MenuComponent implements OnInit {
           console.log(res['salida']);
           this.user = res['salida'];
           this.user.username = res['salida'].username;
-
+          if(this.user.username == 'admin'){
+            this.is_admin = true;
+          }
           console.log('user:' + this.username);
           sessionStorage.setItem('id', this.user.id);
           sessionStorage.setItem('username', this.user['username']);
