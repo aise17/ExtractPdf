@@ -6,6 +6,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { UserRequest } from '../models/userRequest.model';
 
 import { environment } from 'src/environments/environment';
+import { BonoUsuario } from '../models/Bonousuario.model';
 
 
 
@@ -23,6 +24,7 @@ export class UsuarioService {
   private logoutUrl = 'http://' + environment.ip + ':80/usuarios/logout/'; 
   private filesUrl = 'http://' + environment.ip + ':80/usuarios/list_files/';
   private registerUrl = 'http://' + environment.ip + ':80/usuarios/register/';
+  private userBonusUrl = 'http://' + environment.ip + ':80/usuarios/getUserBonus/';
 
   getRequest(user: Usuario, authorization: string): Observable<UserRequest> {
 
@@ -34,14 +36,25 @@ export class UsuarioService {
     headers.append('Accept', 'application/json');
     headers.append('responseType', 'application/json');
    
-
-  
-
- 
-
     return this.http.post(this.userRequestUrl, user, {headers: headers}  ).pipe(
       tap((res: UserRequest) => this.log(`usuario recivido= ${res}`)),
       catchError(this.handleError<UserRequest>('error de peticion UserRequest'))
+    );
+  }
+
+  getBonos(bono: BonoUsuario, authorization: string): Observable<BonoUsuario> {
+
+    const headers = new HttpHeaders({"Authorization": "Bearer " + authorization});
+    headers.append('Access-Control-Allow-Methods', 'POST');
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Headers', 'Content-Type');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('responseType', 'application/json');
+   
+    return this.http.post(this.userBonusUrl, bono, {headers: headers}  ).pipe(
+      tap((res: BonoUsuario) => this.log(`bono usuario recivido= ${res}`)),
+      catchError(this.handleError<BonoUsuario>('error de peticion bono usuario'))
     );
   }
 

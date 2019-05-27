@@ -10,6 +10,7 @@ import { BonosComponent } from './bonos/bonos.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { HeatmapComponent } from './heatmap/heatmap.component';
 import { AdminComponent } from './admin/admin.component';
+import { GestionBonosComponent } from './gestion-bonos/gestion-bonos.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -22,6 +23,8 @@ const routes: Routes = [
   {path: 'bonos', component: BonosComponent},
   {path: 'faqs', component: FaqsComponent},
   {path: 'admin', component: AdminComponent},
+  {path: 'map', component: HeatmapComponent},
+  {path: 'gest-bon', component: GestionBonosComponent},
 ];
 
 @NgModule({

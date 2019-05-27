@@ -1,18 +1,15 @@
 agm-map {
     height: 400px;
-
     margin: auto;
   }
   
   
-  * {
-    font-family: Lato;
-  }
-  
-  a {
-    color: darkblue;
-  }
+
 
   .acordeon{
     margin-top: 5px;
+  }
+
+  .tabla{
+    width: 100%;
   }
