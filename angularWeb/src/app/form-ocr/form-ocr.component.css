@@ -17,7 +17,7 @@
   
 h2{
   position: relative;
-  float: left;
+  
   margin: auto;
 }
 
@@ -279,5 +279,12 @@ select:hover {
 
 
 
+}
+
+.titulo{
+  margin: auto;
+  text-align: center;
+  align-self: center;
+  align-items: center;
 }
 

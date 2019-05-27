@@ -32,7 +32,7 @@ class Command(BaseCommand):
         self.crearBonoGrantCard()
         self.crearMinSizeDocumentoDefault()
         self.crearQuienSomos()
-        self.createUserBonus()
+        self.createSuperbono()
 
     def crearSuperuser(self):
         if (User.objects.filter(username='admin')):
@@ -117,8 +117,8 @@ class Command(BaseCommand):
                 print('[+][+] Error producido -> ' + explicacion.contenido.__repr__())
 
     def crearApilicationOauthAngular(self):
-        if (Application.objects.filter(client_id='xIlTUtu3pv3YCN0NZxioinzAIvnqhaUPB3j6C9m1')):
-            print('[+] Tercera explicacion ya existe')
+        if (Application.objects.filter(name='Angular')):
+            print('[+] Aplicacion Angular ya existe')
         else:
             aplication = Application()
             aplication.name = 'Angular'
@@ -138,13 +138,13 @@ class Command(BaseCommand):
                 print('[+][+] Error en registro de Aplicacion -> ' + aplication.__repr__())
 
     def crearApilicationOauthAndroid(self):
-        if (Application.objects.filter(client_id='xIlTUtu3pv3YCN0NZxioinzAIvnqhaUPB3j6C9m1')):
-            print('[+] Tercera explicacion ya existe')
+        if (Application.objects.filter(name='Android')):
+            print('[+] Aplicacion Android ya existe')
         else:
             aplication = Application()
             aplication.name = 'Android'
-            aplication.client_id = 'xIlTUtu3pv3YCN0NZxioinzAIvnqhaUPB3j6C9m1'
-            aplication.client_secret = '15VmSMITKwQTOdDxSfUtFa6SGhvSkhRbtumDSJssPaOvhL1BJAoql5SCM6EVGdEPEubougfrpR3f29GoPDhgeez3o9kWlSQFRsd03wiJiHz9Wlgp9V61y8tdom0XyZoj'
+            aplication.client_id = 'NxZCC1cyEC4EaKWTp0WOKI8AcfxoLympY6ESrQFi'
+            aplication.client_secret = 'gcogobaJ4lYihODys8U9ij7BUQBbx8Uta3GVo3AVpnFcSNtDi9rg1LElTOfttDMSqh3hyjEIHFyTzrD9J48yl5lEKOXShf13vPUrGQFLr7gRAZqu8264KWd5YrShqIby'
             aplication.client_type = 'confidential'
             aplication.redirect_uris = ''
             aplication.authorization_grant_type = 'password'
@@ -255,8 +255,8 @@ class Command(BaseCommand):
                 print(
                     '[+][+] Error en registro de QuienSomos defecto -> ' + quien_somos.__repr__())
 
-    def createUserBonus(self):
-        if BonoUsuario.objects.filter(id='03049354-6b93-47f4-a38c-34c39c4e62b8'):
+    def createSuperbono(self):
+        if BonoUsuario.objects.filter(usuario='1'):
             print('[+] createUserBonus defecto ya existe')
         else:
             user_bonus = BonoUsuario()

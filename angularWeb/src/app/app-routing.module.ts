@@ -11,6 +11,7 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { HeatmapComponent } from './heatmap/heatmap.component';
 import { AdminComponent } from './admin/admin.component';
 import { GestionBonosComponent } from './gestion-bonos/gestion-bonos.component';
+import { FormScrapyComponent } from './form-scrapy/form-scrapy.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent},
   {path: 'map', component: HeatmapComponent},
   {path: 'gest-bon', component: GestionBonosComponent},
+  {path: 'scrapy', component: FormScrapyComponent},
 ];
 
 @NgModule({

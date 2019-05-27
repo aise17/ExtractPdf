@@ -1,0 +1,290 @@
+.imagenP{
+    position: relative;
+    float: left;
+    top: 35px;
+    left: -32px;
+  
+    width: 18px;
+    height: 18px;
+  
+    background-image: url('/assets/pencil.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 18px;
+    text-indent: -9999em;
+    
+  }
+    
+  h2{
+    position: relative;
+
+    margin: auto;
+  }
+  
+  .imagenA{
+    position: relative;
+    float: left;
+    top: 85px;
+    left: -50px;
+  
+    width: 18px;
+    height: 18px;
+  
+    background-image: url('/assets/proceso.png'); 
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 18px;
+    text-indent: -9999em;
+  }
+  
+  .imagenPR{
+    position: relative;
+    float: left;
+    top: 180px;
+    left: -69px;
+    width: 18px;
+    height: 18px;
+  
+    background-image: url('/assets/file.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 18px;
+    text-indent: -9999em;
+  }
+  
+  .progress{
+  
+    height: 100px;
+    width: 50% !important;
+  
+  
+  }
+  
+  
+  
+  .contenedor2{
+    display: table-row;
+    
+      
+    }
+  
+  input::-webkit-input-placeholder, input[type="file"]::-webkit-input-placeholder {
+    color: orangered;
+    font-size: 0.875em;
+  }
+  
+  input:focus::-webkit-input-placeholder, input[type="file"]:focus::-webkit-input-placeholder {
+    color: #bbb5af;
+  }
+  
+  input::-moz-placeholder, input[type="file"]::-moz-placeholder {
+    color: orangered;
+    font-size: 0.875em;
+  }
+  
+  input:focus::-moz-placeholder, input[type="file"]:focus::-moz-placeholder {
+    color: orangered;
+  }
+  
+  input::placeholder, input[type="file"]::placeholder {
+    color: orangered;
+    font-size: 0.875em;
+  }
+  
+  input:focus::placeholder, input[type="file"]:focus:placeholder {
+    color: orangered;
+  }
+  
+  input::-ms-placeholder, input[type="file"]::-ms-placeholder {
+    color: orangered;
+    font-size: 0.875em;
+  }
+  
+  input:focus::-ms-placeholder, input[type="file"]:focus::-ms-placeholder {
+    color: orangered;
+  }
+  
+  /* on hover placeholder */
+  
+  input:hover::-webkit-input-placeholder, input[type="file"]:hover::-webkit-input-placeholder {
+    color: orangered;
+    font-size: 0.875em;
+  }
+  
+  input:hover:focus::-webkit-input-placeholder, input[type="file"]:hover:focus::-webkit-input-placeholder {
+    color: orangered;
+  }
+  
+  input:hover::-moz-placeholder, input[type="file"]:hover::-moz-placeholder {
+    color: orangered;
+    font-size: 0.875em;
+  }
+  
+  input:hover:focus::-moz-placeholder, input[type="file"]:hover:focus::-moz-placeholder {
+    color: orangered;
+  }
+  
+  input:hover::placeholder, input[type="file"]:hover::placeholder {
+    color: orangered;
+    font-size: 0.875em;
+  }
+  
+  input:hover:focus::placeholder, input[type="file"]:hover:focus::placeholder {
+    color: orangered;
+  }
+  
+  input:hover::placeholder, input[type="file"]:hover::placeholder {
+    color: orangered;
+    font-size: 0.875em;
+  }
+  
+  input:hover:focus::-ms-placeholder, input[type="file"]:hover:focus:-ms-placeholder {
+    color: orangered;
+  }
+  
+  header {
+    position: relative;
+    float: left;
+    left: 190px;
+    margin: 0px 0 25px 0;
+    font-size: 2.3em;
+    text-align: center;
+    letter-spacing: 7px;
+  }
+  
+  #form {
+    position: relative;
+    width: 500px;
+    margin: 50px auto 100px auto;
+    left: 30px;
+  }
+  
+  input {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875em;
+    width: 470px;
+    height: 50px;
+    padding: 0px 15px 0px 15px;
+    
+    background: transparent;
+    outline: none;
+    color: orangered;
+    
+    border: solid 1px orangered;
+    border-bottom: none;
+    
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+  }
+  
+  input:hover {
+    background: #b3aca7;
+    color: orangered;
+  }
+  
+  input[type="file"] {
+    width: 470px;
+    max-width: 470px;
+    height: 110px;
+    max-height: 110px;
+    padding: 15px;
+    
+    background: transparent;
+    outline: none;
+    
+    color: #726659;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875em;
+    
+    border: solid 1px #ff4500;
+    
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+  }
+  select{
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875em;
+    width: 502px;
+    height: 50px;
+    padding: 0px 15px 0px 15px;
+    
+    background: transparent;
+    outline: none;
+    color: orangered;
+    
+    border: solid 1px orangered;
+    border-bottom: none;
+    
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+  }
+  
+  input[type="file"]:hover {
+    background: #b3aca7;
+    color: orangered;
+  }
+  
+  select:hover {
+      background: #b3aca7;
+      color: orangered;
+  }
+  
+  #submit {
+    width: 502px;
+    
+    padding: 0;
+    margin: -5px 0px 0px 0px;
+    
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875em;
+    color: orangered;
+    
+    outline:none;
+    cursor: pointer;
+    
+    border: solid 1px orangered;
+    border-top: none;
+  }
+  
+  #submit:hover {
+    color: orangered;
+  }
+  
+  ::-webkit-file-upload-button {
+    display: none;
+  }
+  
+  @media only screen and (max-width: 600px) {
+  
+    input[type="file"] {
+      width: 50%;
+    }
+    select{
+      
+      width: 56.4%; 
+    }
+    #submit {
+      width: 56.5%;    
+    }
+    input {
+      width: 50%;    
+    }
+    
+  
+  
+  
+  }
+  
+  .titulo{
+      margin: auto;
+      text-align: center;
+      align-self: center;
+      align-items: center;
+  }
+  
