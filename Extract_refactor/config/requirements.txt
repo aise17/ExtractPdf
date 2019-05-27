@@ -26,3 +26,7 @@ django-cors-headers
 coreapi
 pygments
 markdown
+beautifulsoup4
+six
+unicodecsv
+

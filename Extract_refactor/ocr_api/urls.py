@@ -7,12 +7,16 @@ from .views import FileView, RequestForMonth, RequestForYear, RequestForDay, \
 from . import views
 
 
-post_list = views.FileView.as_view({
+ocr = views.FileView.as_view({
+    'post': 'upload'
+})
+scrapy = views.WebScrapyView.as_view({
     'post': 'upload'
 })
 
 urlpatterns = [
-    path('upload/', post_list, name='file-upload'),
+    path('upload/', ocr, name='file-upload'),
+    path('scrapy/', scrapy, name='scrapy'),
     path('request-day/', RequestForDay.as_view(), name='dia'),
     path('request-mes/', RequestForMonth.as_view(), name='mes'),
     path('request-ano/', RequestForYear.as_view(), name='ano'),

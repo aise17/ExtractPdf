@@ -37,7 +37,7 @@ services:
     build: .
     working_dir: /code/Extract_refactor
 
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py InitialData && gunicorn Extract_refactor.wsgi -b 0.0.0.0:8000"     #production mode
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py InitialData && gunicorn Extract_refactor.wsgi -b 0.0.0.0:8000 --timeout 1200000"     #production mode
 
     #command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn Extract_refactor.wsgi -b 0.0.0.0:8000"     #production mode
 

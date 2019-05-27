@@ -1,4 +1,5 @@
 from datetime import date
+import time
 
 from rest_framework import generics, viewsets
 from rest_framework.decorators import permission_classes, detail_route
@@ -9,12 +10,11 @@ from rest_framework import status
 from .permissions import IsAuthenticatedOrPost
 from .serializers import ArchivoSerializer, IpsFileSerializers
 from .models import File, IpsFiles
-from .tasks import orc
+from .tasks import orc, scrapy
 from .utils import fileIpCreate, servicioTraza, restarPeticion
 
 
 @permission_classes([IsAuthenticatedOrPost])
-#@detail_route(methods=['post'])
 class FileView(viewsets.ModelViewSet):
     queryset = File.objects.all()
     serializer_class = ArchivoSerializer
@@ -62,6 +62,48 @@ class FileView(viewsets.ModelViewSet):
             salida['error'] = e.__repr__()
 
         return Response(salida, status=status.HTTP_201_CREATED)
+
+
+@permission_classes([AllowAny])
+class WebScrapyView(viewsets.ModelViewSet):
+    queryset = File.objects.all()
+    serializer_class = ArchivoSerializer
+
+    def upload(self, request, *args, **kwargs):
+        salida = dict()
+
+        file_serializer = ArchivoSerializer(data=request.data)
+        if file_serializer.is_valid():
+            f = file_serializer.save()
+
+            fileIpCreate(request, f)
+
+
+            nombre = file_serializer.data.get('documento').__str__()
+
+            nombre = nombre.split('/')[-1]
+
+            salida['salida'] =list()
+
+            result = scrapy.delay(nombre)
+
+            salida['salida'] = result.get()
+
+            if salida['salida'] is not None:
+
+                salida['ok'] = True
+                servicioTraza(request, salida, WebScrapyView.__name__)
+            else:
+                salida['ok'] = False
+
+
+
+
+        return Response(salida, status=status.HTTP_201_CREATED)
+
+
+
+
 
 
 @permission_classes([IsAuthenticated])
