@@ -1,6 +1,7 @@
 
 from rest_framework import serializers
-from .models import AnuncioInferior, AnuncioSuperior, AnuncioLateral, QuienSomos, Bono, Explicacion, Faqs
+from .models import AnuncioInferior, AnuncioSuperior, AnuncioLateral, QuienSomos, Bono, Explicacion, Faqs, \
+     ExplicacionScrapy
 
 
 class AnuncioLateralSerializer(serializers.ModelSerializer):
@@ -42,6 +43,13 @@ class ExplicaionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model= Explicacion
+        fields = "__all__"
+
+
+class ExplicaionScrapySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model= ExplicacionScrapy
         fields = "__all__"
 
 

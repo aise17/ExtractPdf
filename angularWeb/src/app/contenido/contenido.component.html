@@ -2,23 +2,16 @@
 <app-menu>
 
 
-  <div>
-    <div text-aling="center" class="contenedor" >
+    <div text-aling="center" class="base" >
   
-      <mat-card class="card" *ngFor="let explicacion of result">
-        <mat-card-header>
-          <mat-card-title>{{ explicacion.titulo | uppercase }}</mat-card-title>
-        </mat-card-header>
-            <img class="imagen" mat-card-image src="{{ explicacion.imagen }}" alt="{{ explicacion.titulo_imagen }}">
-          <mat-card-content>
-            <p [innerHtml]='explicacion.contenido'></p>
-          </mat-card-content>
-      </mat-card>
-  
-    </div>
-      
-      <app-ir-ocr></app-ir-ocr>
+      <div class="contenedor">
+        <app-ocr-contenido></app-ocr-contenido>
+      </div>
+      <div class="contenedor">
+        <app-scrapy-contenido></app-scrapy-contenido>
+      </div>
     
     </div>
-      </app-menu>
+
+</app-menu>
   

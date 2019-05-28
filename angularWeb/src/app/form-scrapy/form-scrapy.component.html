@@ -16,7 +16,7 @@
         <input id="name" type="text" [(ngModel)]="formulario.descripcion" [ngModelOptions]="{standalone: true}" placeholder="TITULO">
   
   
-        <input id="name" type="file" #fileInput   placeholder="DOCUMENTO">
+        <input id="name" type="file" accept=".csv" #fileInput   placeholder="DOCUMENTO">
                             
         <input (click)="send()" id="submit" type="submit" value="PROCESAR PDF..."  hint="DOCUMENTO">
     </form>

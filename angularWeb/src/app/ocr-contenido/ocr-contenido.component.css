@@ -1,0 +1,51 @@
+.card {
+    max-width: 350px;
+    margin: 20px;
+
+  }
+  
+
+.contenedor{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px;
+  margin: auto;
+  background-color: #3f51b5;
+
+ 
+}
+
+@media only screen and (max-width: 600px) {
+  /* reglas CSS */
+  .contenedor{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+    margin: auto;
+   
+  }
+  
+
+}
+
+img{
+  width: 200px;
+  height: 200px;
+  
+}
+.cont-prin{
+  height: 100%;
+}
+
+.imagen{
+  display:block;
+  margin:auto;
+  
+}
+
+
+
+  
+

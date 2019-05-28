@@ -13,7 +13,7 @@ sys.path.append("../..")
 
 
 from ocr_api.models import MinSizeDocumento
-from contenido.models import Explicacion, Bono, QuienSomos
+from contenido.models import Explicacion, Bono, QuienSomos, ExplicacionScrapy
 from usuarios.models import BonoUsuario
 
 
@@ -33,6 +33,9 @@ class Command(BaseCommand):
         self.crearMinSizeDocumentoDefault()
         self.crearQuienSomos()
         self.createSuperbono()
+        self.crearExplicacion1Scrapy()
+        self.crearExplicacion2Scrapy()
+        self.crearExplicacion3Scrapy()
 
     def crearSuperuser(self):
         if (User.objects.filter(username='admin')):
@@ -73,7 +76,7 @@ class Command(BaseCommand):
 
     def crearExplicacion2Inicial(self):
         if (Explicacion.objects.filter(titulo='Convertir PDF a Word')):
-            print('[+] Primera explicacion ya existe')
+            print('[+] Segunda explicacion ya existe')
 
         else:
             explicacion = Explicacion()
@@ -275,3 +278,70 @@ class Command(BaseCommand):
                 print('[+][+] Registro de UsuarioBono no es valida')
                 print(
                     '[+][+] Error en registro de UsuarioBono defecto -> ' + user_bonus.__repr__())
+
+
+    def crearExplicacion1Scrapy(self):
+        if (ExplicacionScrapy.objects.filter(titulo='Análisis de una tienda online o e-commerce')):
+            print('[+] Primera explicacion Scrapy ya existe')
+
+        else:
+            explicacion = ExplicacionScrapy()
+            explicacion.titulo = 'Análisis de una tienda online o e-commerce'
+            explicacion.contenido = 'Consige informacion de ESTADO de la web, RANKING ALEXA, IDIOMA, EMAIL, PLATAFORMA utilizadas de fomra automatizada de paginas e-commerce con solo aportar un csv con las urls a analizar'
+            explicacion.publicado = True
+            explicacion.titulo_imagen = 'imagen1'
+            explicacion.imagen = 'https://sell.emprendepyme.net/wp-content/uploads/2017/12/analitica-de-ventas.jpg'
+
+            try:
+
+                explicacion.save()
+
+                print('[+] Primera explicacion Scrapy creada')
+            except:
+                print('[+][+] Primera Explicacion Scrapy no es valida')
+                print('[+][+] Error producido -> ' + explicacion.contenido.__repr__())
+
+    def crearExplicacion2Scrapy(self):
+        if (ExplicacionScrapy.objects.filter(titulo='Aumenta tu eficiencia')):
+            print('[+] Segunda explicacion Scrapy ya existe')
+
+        else:
+            explicacion = ExplicacionScrapy()
+            explicacion.titulo = 'Aumenta tu eficiencia'
+            explicacion.contenido = 'Ahorra destinar recursos o timpo en buscar informacion de contacto de sitios e-commerce. Automatiza tiodas estas tediosas tareas utilizando nuestro servicio Scrapy '
+            explicacion.fecha_publicacion = timezone.now()
+            explicacion.fecha_creacion = timezone.now()
+            explicacion.publicado = True
+            explicacion.titulo_imagen = 'imagen2'
+            explicacion.imagen = 'https://telematics.tomtom.com/es_es/webfleet/blog/wp-content/uploads/sites/21/2018/01/flota-comercial.jpg'
+
+            try:
+
+                explicacion.save()
+
+                print('[+] Segunda explicacion Scrapy creada')
+            except:
+                print('[+][+] Segunda Explicacion Scrapy no es valida')
+                print('[+][+] Error producido -> ' + explicacion.contenido.__repr__())
+
+    def crearExplicacion3Scrapy(self):
+        if (ExplicacionScrapy.objects.filter(titulo='Tarifas Competitivas')):
+            print('[+] Tercera explicacion Scrapy ya existe')
+
+        else:
+            explicacion = ExplicacionScrapy()
+            explicacion.titulo = 'Tarifas Competitivas'
+            explicacion.contenido = 'Servicio de Analisis gratuito en un "modo de invitado" (sin registro) que le permite procesar archivos csv de hasta 40 Kb. El registro y la posterior comra de bonos le daran acceso a nuestos servicios. Si tiene alguna necesidad de sistema de tarifa plana, por fabor contacte con nosotros'
+            explicacion.fecha_publicacion = timezone.now()
+            explicacion.publicado = True
+            explicacion.titulo_imagen = 'imagen3'
+            explicacion.imagen = 'https://img-aws.ehowcdn.com/877x500p/photos.demandstudios.com/getty/article/142/136/89684413.jpg'
+
+            try:
+
+                explicacion.save()
+
+                print('[+] Tercera explicacion Scrapy creada')
+            except:
+                print('[+][+] Tercera Explicacion Scrapy no es valida')
+                print('[+][+] Error producido -> ' + explicacion.contenido.__repr__())

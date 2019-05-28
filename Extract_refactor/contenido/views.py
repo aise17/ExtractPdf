@@ -7,9 +7,11 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer
 
-from .models import AnuncioLateral, AnuncioInferior, AnuncioSuperior, Bono, Explicacion, QuienSomos, Faqs
+from .models import AnuncioLateral, AnuncioInferior, AnuncioSuperior, Bono, Explicacion, QuienSomos, Faqs, \
+    ExplicacionScrapy
 from .serializers import AnuncioLateralSerializer, AnuncioInferiroSerializer, \
-    AnuncioSuperiorSerializer, BonoSerializer, ExplicaionSerializer, QuienSomosSerializer, FaqsSerializer
+    AnuncioSuperiorSerializer, BonoSerializer, ExplicaionSerializer, QuienSomosSerializer, FaqsSerializer, \
+    ExplicaionScrapySerializer
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -116,6 +118,18 @@ class ExplicacionInicio(generics.ListAPIView):
     '''
     queryset = Explicacion.objects.filter(publicado=True).order_by('fecha_publicacion')[:3]
     serializer_class = ExplicaionSerializer
+
+
+
+
+@permission_classes([AllowAny])
+class ExplicacionScrapyView(generics.ListAPIView):
+    '''
+    get:
+    Return a list of contents for index page. These will try to explain the contents of the services
+    '''
+    queryset = ExplicacionScrapy.objects.filter(publicado=True).order_by('fecha_publicacion')[:3]
+    serializer_class = ExplicaionScrapySerializer
 
 @permission_classes([AllowAny])
 class QuienesSomosView(generics.ListAPIView):

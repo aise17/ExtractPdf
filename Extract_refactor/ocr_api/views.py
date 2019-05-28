@@ -78,7 +78,6 @@ class WebScrapyView(viewsets.ModelViewSet):
 
             fileIpCreate(request, f)
 
-
             nombre = file_serializer.data.get('documento').__str__()
 
             nombre = nombre.split('/')[-1]
@@ -92,12 +91,12 @@ class WebScrapyView(viewsets.ModelViewSet):
             if salida['salida'] is not None:
 
                 salida['ok'] = True
+
+                if request.data.get('usuario'):
+                    restarPeticion(request)
                 servicioTraza(request, salida, WebScrapyView.__name__)
             else:
                 salida['ok'] = False
-
-
-
 
         return Response(salida, status=status.HTTP_201_CREATED)
 
@@ -134,8 +133,9 @@ class CoordenadasWithRequest(generics.ListAPIView):
     def get(self, request, *args, **kwargs):
         salida = {}
         salida['salida'] = list()
-        for ip in IpsFiles.objects.all():
-            salida['salida'].append({'usuario': ip.usuario.__str__(), 'lat': ip.lat, 'lon': ip.lon})
+        ip = IpsFiles.objects.all()
+        ser = IpsFileSerializers(instance=ip, many=True)
+        salida['salida'] = ser.data
         if len(salida['salida']) > 0:
             salida['ok'] = True
         else:

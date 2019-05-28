@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import AnuncioInferior, AnuncioLateral, AnuncioSuperior, Explicacion, QuienSomos, Bono, Faqs
+from .models import AnuncioInferior, AnuncioLateral, AnuncioSuperior, Explicacion, QuienSomos, Bono, Faqs, \
+    ExplicacionScrapy
 
 
 # Register your models here.
@@ -48,6 +49,11 @@ class FaqsAdmin(admin.ModelAdmin):
     list_editable = ['publicado']
     search_fields = ['titulo']
 
+class ExplicacionScrapyAdmin(admin.ModelAdmin):
+    list_display = ['titulo', 'fecha_creacion', 'fecha_publicacion', 'publicado' ]
+    list_filter =['publicado', 'fecha_creacion', 'fecha_publicacion']
+    list_editable = ['publicado']
+    search_fields = ['titulo']
 
 
 
@@ -57,6 +63,8 @@ admin.site.register(AnuncioSuperior, AnuncioSuperiorAdmin)
 admin.site.register(AnuncioInferior, AnuncioInferiorAdmin)
 
 admin.site.register(Explicacion, ExplicacionAdmin)
+admin.site.register(ExplicacionScrapy, ExplicacionScrapyAdmin)
+
 admin.site.register(Faqs, FaqsAdmin)
 admin.site.register(QuienSomos, QuienSomosAdmin)
 admin.site.register(Bono, BonoAdmin)

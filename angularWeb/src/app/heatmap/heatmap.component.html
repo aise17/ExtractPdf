@@ -26,7 +26,11 @@
       (dragEnd)="markerDragEnd(m, $event)">
       
         <agm-info-window>
-        <strong>usuario: {{m.usuario}}</strong>
+        <strong>Usuario: {{m.usuario}}</strong><br>
+        <strong>Ip: {{m.ip}}</strong><br>
+        <strong>Archivo: {{m.file}}</strong><br>
+        <strong>Latitud: {{m.lat}}</strong><br>
+        <strong>Longitud: {{m.lon}}</strong><br>
         </agm-info-window>
         
         <agm-circle [latitude]="m.lat" [longitude]="m.lon" 
@@ -48,7 +52,7 @@
                Peticiones
               </mat-panel-title>
               <mat-panel-description>
-                El numero de solicitudes realizadas a nuestor servicios asciende a {{ipfiles.length}} peticiones
+                Numero de solicitudes realizadas {{ipfiles.length}} peticiones
               </mat-panel-description>
             </mat-expansion-panel-header>
 

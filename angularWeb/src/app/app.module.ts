@@ -30,6 +30,9 @@ import { AdminComponent } from './admin/admin.component';
 import { CompraBonosEstadisticaAdminComponent } from './compra-bonos-estadistica-admin/compra-bonos-estadistica-admin.component';
 import { GestionBonosComponent } from './gestion-bonos/gestion-bonos.component';
 import { FormScrapyComponent } from './form-scrapy/form-scrapy.component';
+import { OcrContenidoComponent } from './ocr-contenido/ocr-contenido.component';
+import { ScrapyContenidoComponent } from './scrapy-contenido/scrapy-contenido.component';
+import { IrScrapyComponent } from './ir-scrapy/ir-scrapy.component';
 
 
 
@@ -54,6 +57,9 @@ import { FormScrapyComponent } from './form-scrapy/form-scrapy.component';
     CompraBonosEstadisticaAdminComponent,
     GestionBonosComponent,
     FormScrapyComponent,
+    OcrContenidoComponent,
+    ScrapyContenidoComponent,
+    IrScrapyComponent,
     
 
   ],
