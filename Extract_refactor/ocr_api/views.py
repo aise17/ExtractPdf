@@ -45,7 +45,8 @@ class FileView(viewsets.ModelViewSet):
 
                 proceso = self.request.data.get('proceso')
                 nombre = self.request.data.get('documento')
-
+                nombre = nombre.split('/')[-1]
+            print('[][][][] nombre y proceso -> {}'.format(nombre, proceso))
             text = orc.delay(nombre, proceso)
 
             text = text.get()
@@ -71,11 +72,9 @@ class WebScrapyView(viewsets.ModelViewSet):
 
     def upload(self, request, *args, **kwargs):
         salida = dict()
-
         file_serializer = ArchivoSerializer(data=request.data)
         if file_serializer.is_valid():
             f = file_serializer.save()
-
             fileIpCreate(request, f)
 
             nombre = file_serializer.data.get('documento').__str__()
@@ -97,6 +96,10 @@ class WebScrapyView(viewsets.ModelViewSet):
                 servicioTraza(request, salida, WebScrapyView.__name__)
             else:
                 salida['ok'] = False
+                salida['error'] = 'error salida nula'
+        else:
+            salida['ok'] = False
+            salida['error'] = file_serializer.error_messages
 
         return Response(salida, status=status.HTTP_201_CREATED)
 

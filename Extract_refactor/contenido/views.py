@@ -139,3 +139,23 @@ class QuienesSomosView(generics.ListAPIView):
     '''
     queryset = QuienSomos.objects.filter(publicado=True)
     serializer_class = QuienSomosSerializer
+
+
+@permission_classes([AllowAny])
+class AndroidIndex(generics.ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        salida= [{
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.juanfe.withapi",
+            "sha256_cert_fingerprints":
+            ["99:50:A3:1B:E3:8D:32:44:A1:94:91:49:36:CA:07:9E:78:54:05:35:95:0C:B2:78:5D:D2:5D:0A:D1:17:ED:06"]
+        }
+        }]
+
+        servicioTraza(request, salida, FaqsView.__name__)
+
+        return Response(salida, status=status.HTTP_200_OK)
+

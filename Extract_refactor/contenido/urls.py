@@ -3,7 +3,7 @@ from django.urls import path
 from rest_framework.documentation import include_docs_urls
 
 from .views import AnuncioInferiorView, AnuncioLateralView, AnuncioSuperiroView, BonosView, ExplicacionInicio, \
-    QuienesSomosView, FaqsView, ExplicacionScrapyView
+    QuienesSomosView, FaqsView, ExplicacionScrapyView, AndroidIndex
 
 urlpatterns = [
 
@@ -15,5 +15,6 @@ urlpatterns = [
     path('explicacion-scrapy/', ExplicacionScrapyView.as_view(), name='contenido_inicio'),
     path('quien-somos/', QuienesSomosView.as_view(), name='quienSomos'),
     path('faqs/', FaqsView.as_view(), name='faqs'),
+    path('.well-known/assetlinks.json/', AndroidIndex.as_view() , name='faqs'),
 
 ]

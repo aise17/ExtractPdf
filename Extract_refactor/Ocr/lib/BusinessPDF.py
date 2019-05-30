@@ -17,7 +17,7 @@ class BusinessPDF():
         """
         print('*******************************************')
 
-        with Img(filename= IMAGENES_PATH + ruta, resolution=150) as img:
+        with Img(filename= IMAGENES_PATH + ruta.__str__(), resolution=150) as img:
             #img.compression_quality = 99
             img.save(filename= JPG_PATH +'image_name.jpg')
 
