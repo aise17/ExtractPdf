@@ -65,7 +65,7 @@ class FileView(viewsets.ModelViewSet):
         return Response(salida, status=status.HTTP_201_CREATED)
 
 
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticatedOrPost])
 class WebScrapyView(viewsets.ModelViewSet):
     queryset = File.objects.all()
     serializer_class = ArchivoSerializer
@@ -128,7 +128,7 @@ class RequestForYear(generics.ListAPIView):
 
 
 
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 class CoordenadasWithRequest(generics.ListAPIView):
     serializer_class = IpsFileSerializers
     queryset = IpsFiles.objects.all()

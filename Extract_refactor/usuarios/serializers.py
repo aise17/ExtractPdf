@@ -72,7 +72,7 @@ class BonoUsuarioSerializer(serializers.ModelSerializer):
         instance.usuario = validated_data.get('usuario', instance.usuario)
         instance.bono = validated_data.get('bono', instance.bono)
         instance.activado = validated_data.get('activado', instance.activado)
-        instance.peticiones_consumidas = validated_data.get('peticiones_consumidas', instance.peticiones_consumidas)
+        instance.peticiones_restantes = validated_data.get('peticiones_consumidas', instance.peticiones_consumidas)
 
         instance.save()
 
@@ -83,7 +83,7 @@ class BonoUsuarioSerializer(serializers.ModelSerializer):
         instance.usuario = validated_data.get('usuario', instance.usuario)
         instance.bono = validated_data.get('bono', instance.bono)
         instance.activado = validated_data.get('activado', instance.activado)
-        instance.peticiones_consumidas = self.peticomesByBono(validated_data.get('bono').id)
+        instance.peticiones_restantes = self.peticomesByBono(validated_data.get('bono').id)
 
         instance.save()
 
