@@ -51,6 +51,7 @@ export class FormScrapyComponent implements OnInit {
       console.log('Objeto vacio');
       return;
     }
+    orc.proceso = 'T';
     this.is_progres = true;
     this.ver_form = false;
 
