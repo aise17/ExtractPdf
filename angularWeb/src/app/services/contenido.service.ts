@@ -13,7 +13,7 @@ import { Faqs } from '../models/faqs.model';
 export class ContenidoService {
 
   private contenidoUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
-  private contenidoScrapyUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
+  private contenidoScrapyUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-scrapy/';
   private faqsUrl = 'http://' + environment.ip+ ':80/contenido/faqs/';
   private anuncios_superiorUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
   private anuncios_lateralrUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
