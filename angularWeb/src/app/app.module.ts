@@ -33,6 +33,7 @@ import { FormScrapyComponent } from './form-scrapy/form-scrapy.component';
 import { OcrContenidoComponent } from './ocr-contenido/ocr-contenido.component';
 import { ScrapyContenidoComponent } from './scrapy-contenido/scrapy-contenido.component';
 import { IrScrapyComponent } from './ir-scrapy/ir-scrapy.component';
+import { RequestByYearEstadisticaAdminComponent } from './request-by-year-estadistica-admin/request-by-year-estadistica-admin.component';
 
 
 
@@ -60,6 +61,7 @@ import { IrScrapyComponent } from './ir-scrapy/ir-scrapy.component';
     OcrContenidoComponent,
     ScrapyContenidoComponent,
     IrScrapyComponent,
+    RequestByYearEstadisticaAdminComponent,
     
 
   ],

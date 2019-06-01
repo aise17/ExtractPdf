@@ -56,11 +56,12 @@ class FileView(viewsets.ModelViewSet):
             if request.data.get('usuario'):
                 restarPeticion(request)
 
-            servicioTraza(request, salida, FileView.__name__)
         except Exception as e:
             print(e.__repr__())
             salida['ok'] = False
             salida['error'] = e.__repr__()
+
+        servicioTraza(request, salida, FileView.__name__)
 
         return Response(salida, status=status.HTTP_201_CREATED)
 
@@ -72,13 +73,22 @@ class WebScrapyView(viewsets.ModelViewSet):
 
     def upload(self, request, *args, **kwargs):
         salida = dict()
-        file_serializer = ArchivoSerializer(data=request.data)
-        if file_serializer.is_valid():
-            f = file_serializer.save()
-            fileIpCreate(request, f)
+        nombre: str = None
+        if not request.data.get('id'):
+            print('[-][-][-] No lleva id ')
+            file_serializer = ArchivoSerializer(data=request.data)
+            if file_serializer.is_valid():
+                f = file_serializer.save()
+                fileIpCreate(request, f)
 
-            nombre = file_serializer.data.get('documento').__str__()
+                nombre = file_serializer.data.get('documento').__str__()
 
+                nombre = nombre.split('/')[-1]
+        else:
+            print('[+][+][+] Lleva id ')
+
+            nombre = self.request.data.get('documento')
+            print('[+][+][+] ' + nombre)
             nombre = nombre.split('/')[-1]
 
             salida['salida'] =list()
@@ -87,24 +97,20 @@ class WebScrapyView(viewsets.ModelViewSet):
 
             salida['salida'] = result.get()
 
-            if salida['salida'] is not None:
+        if salida['salida'] is not None:
 
-                salida['ok'] = True
+            salida['ok'] = True
 
-                if request.data.get('usuario'):
-                    restarPeticion(request)
-                servicioTraza(request, salida, WebScrapyView.__name__)
-            else:
-                salida['ok'] = False
-                salida['error'] = 'error salida nula'
+            if request.data.get('usuario'):
+                restarPeticion(request)
         else:
             salida['ok'] = False
-            salida['error'] = file_serializer.error_messages
+            salida['error'] = 'error salida nula'
+
+
+        servicioTraza(request, salida, WebScrapyView.__name__)
 
         return Response(salida, status=status.HTTP_201_CREATED)
-
-
-
 
 
 
@@ -118,14 +124,6 @@ class RequestForMonth(generics.ListAPIView):
 class RequestForDay(generics.ListAPIView):
     serializer_class = IpsFileSerializers
     queryset = IpsFiles.objects.filter(fecha_conexion=date.today())
-
-
-@permission_classes([IsAuthenticated])
-class RequestForYear(generics.ListAPIView):
-    serializer_class = IpsFileSerializers
-    queryset = IpsFiles.objects.filter(fecha_conexion__year=date.today().year)
-
-
 
 
 @permission_classes([IsAuthenticated])
@@ -144,13 +142,9 @@ class CoordenadasWithRequest(generics.ListAPIView):
         else:
             salida['ok'] = False
 
-
-
         servicioTraza(request, salida, CoordenadasWithRequest.__name__)
 
         return Response(salida, status=status.HTTP_200_OK)
-
-
 
 
 

@@ -28,7 +28,7 @@ export class MenuComponent implements OnInit {
   password: string;
   usuario: Usuario;
   constructor(public dialog: MatDialog, private userService: UsuarioService, private oauthService: Oauth2Service) {
-  if(sessionStorage.getItem('username')== 'admin'){
+  if(sessionStorage.getItem('is_staff')== 'true'){
     this.is_admin = true;
   } 
   }
@@ -60,6 +60,7 @@ export class MenuComponent implements OnInit {
           sessionStorage.setItem('email', this.user.email);
           sessionStorage.setItem('first_name', this.user.first_name);
           sessionStorage.setItem('last_name', this.user.last_name);
+          sessionStorage.setItem('is_staff', this.user.is_staff);
           console.log('enviando peticion de token')
           this.peticionToken(this.username, this.password);
         }

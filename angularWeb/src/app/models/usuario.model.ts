@@ -7,6 +7,7 @@ export class Usuario {
     email: string;
     access_token: string;
     usuario:string;
+    is_staff:string;
 
     constructor(username?: string, password?: string) {
         this.username = username;

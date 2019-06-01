@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Ocr } from '../models/ocr.model';
 import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { JsonOcr } from '../models/JsonOcr.model';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,29 @@ export class ScrapyService {
       catchError(this.handleError<Response>('addFile'))
     );
   }
+
+
+
+  addFileJson (orc: JsonOcr, authorization: string): Observable<Response> {
+
+
+    const headers = new HttpHeaders({"Authorization": "Bearer " + authorization});
+    headers.append('Access-Control-Allow-Methods', 'POST');
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Headers', 'Content-Type');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'plain/text');
+    headers.append('responseType', 'blob');
+
+
+
+    console.log(orc);
+    return this.http.post<Response>(this.scrapyUrl, orc, {headers: headers}  ).pipe(
+      tap((res: Response) => this.log(`added file w/ id=${res}`)),
+      catchError(this.handleError<Response>('addFile'))
+    );
+  }
+
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

@@ -14,6 +14,7 @@ export class AdminService {
   
   private contactoUrl = 'http://' + environment.ip+ ':80/file/coor/';
   private bonosUsuariosbyYearUrl = 'http://' + environment.ip+ ':80/usuarios/bono_comprados_by_year/';
+  private requesbyYearUrl = 'http://' + environment.ip+ ':80/usuarios/request-by-year/';
 
 
   constructor(private http: HttpClient) { }
@@ -39,7 +40,7 @@ export class AdminService {
   }
 
 
-  getRequesbyYear( authorization: string): Observable<BonoUsuario> {
+  getUserBonusByYear( authorization: string): Observable<BonoUsuario> {
 
 
     const headers = new HttpHeaders({"Authorization": "Bearer " + authorization});
@@ -53,6 +54,25 @@ export class AdminService {
 
     
     return this.http.get<BonoUsuario>(this.bonosUsuariosbyYearUrl, {headers: headers}  ).pipe(
+      tap((res: BonoUsuario) => this.log(`bonos de usuarios recivido=${res}`)),
+      catchError(this.handleError<BonoUsuario>('error de recivo de bonos de usuario'))
+    );
+  }
+
+  getRequesbyYear( authorization: string): Observable<BonoUsuario> {
+
+
+    const headers = new HttpHeaders({"Authorization": "Bearer " + authorization});
+    headers.append('Access-Control-Allow-Methods', 'POST');
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Headers', 'Content-Type');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'plain/text');
+    headers.append('responseType', 'blob');
+
+
+    
+    return this.http.get<BonoUsuario>(this.requesbyYearUrl, {headers: headers}  ).pipe(
       tap((res: BonoUsuario) => this.log(`bonos de usuarios recivido=${res}`)),
       catchError(this.handleError<BonoUsuario>('error de recivo de bonos de usuario'))
     );

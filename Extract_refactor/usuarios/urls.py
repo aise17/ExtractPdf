@@ -43,12 +43,17 @@ shopUserBonus = views.BonosShop.as_view({
 
 getUserBonus = views.BonosByUserListView.as_view({
 
-    'post': 'getUserBonus'
+    'post': 'getUserBonus',
+    'put': 'changeUserBonusAvtivate'
 })
 
 get_user_bonus_for_year = views.BonosComprodosbyYear.as_view({
     'get': 'bonosConpardosbyYear'
 })
+request_by_year = views.RequestByYear.as_view({
+    'get': 'requestbyYear'
+})
+
 
 urlpatterns = [
     path('register/', register_uesr, name='register'),
@@ -61,5 +66,6 @@ urlpatterns = [
     path('comprar_bono/', shopUserBonus, name='bono_usuario'),
     path('bono_comprados_by_year/', get_user_bonus_for_year, name='bono_comprados'),
     path('getUserBonus/', getUserBonus, name='bono_comprados'),
+    path('request-by-year/', request_by_year, name='request_by_year'),
 
 ]

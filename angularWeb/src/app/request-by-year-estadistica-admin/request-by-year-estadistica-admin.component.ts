@@ -5,13 +5,11 @@ import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
 import { BonoUsuario } from '../models/Bonousuario.model';
 
 @Component({
-  selector: 'app-compra-bonos-estadistica-admin',
-  templateUrl: './compra-bonos-estadistica-admin.component.html',
-  styleUrls: ['./compra-bonos-estadistica-admin.component.css']
+  selector: 'app-request-by-year-estadistica-admin',
+  templateUrl: './request-by-year-estadistica-admin.component.html',
+  styleUrls: ['./request-by-year-estadistica-admin.component.css']
 })
-export class CompraBonosEstadisticaAdminComponent implements OnInit {
-
-
+export class RequestByYearEstadisticaAdminComponent implements OnInit {
 
   public dict: {} = {};
 
@@ -58,7 +56,7 @@ export class CompraBonosEstadisticaAdminComponent implements OnInit {
 
 
   getBonosUsuariobyYear(){
-    this.adminService.getUserBonusByYear(sessionStorage.getItem('api_token'))
+    this.adminService.getRequesbyYear(sessionStorage.getItem('api_token'))
     .subscribe(res => {
       if(res != undefined){
         if(res['ok'] == true){

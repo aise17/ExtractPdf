@@ -193,6 +193,40 @@ class BonosComprodosbyYear(viewsets.ModelViewSet):
         return Response(salida, status=status.HTTP_200_OK)
 
 
+
+@permission_classes([IsAuthenticated])
+class RequestByYear(viewsets.ModelViewSet):
+    serializer_class = IpsFileSerializers
+    queryset = IpsFiles.objects.filter(fecha_conexion__year=datetime.date.today().year)
+
+    def requestbyYear(self, request, *args, **kwargs):
+        salida = dict()
+
+        if len(self.queryset) > 0:
+
+            salida['ok'] = True
+
+            salida['enero'] = len(self.queryset.filter(fecha_conexion__month='01'))
+            salida['febrero'] = len(self.queryset.filter(fecha_conexion__month='02'))
+            salida['marzo'] = len(self.queryset.filter(fecha_conexion__month='03'))
+            salida['abril'] = len(self.queryset.filter(fecha_conexion__month='04'))
+            salida['mayo'] = len(self.queryset.filter(fecha_conexion__month='05'))
+            salida['junio'] = len(self.queryset.filter(fecha_conexion__month='06'))
+            salida['julio'] = len(self.queryset.filter(fecha_conexion__month='07'))
+            salida['agosto'] = len(self.queryset.filter(fecha_conexion__month='08'))
+            salida['septiembre'] = len(self.queryset.filter(fecha_conexion__month='09'))
+            salida['octubre'] = len(self.queryset.filter(fecha_conexion__month='10'))
+            salida['noviembre'] = len(self.queryset.filter(fecha_conexion__month='11'))
+            salida['diciembre'] = len(self.queryset.filter(fecha_conexion__month='12'))
+
+        else:
+            salida['ok'] = False
+            salida['error'] = 'fallo en la optencion del usuario'
+
+        servicioTraza(request, salida, RequestByYear.__name__)
+
+        return Response(salida, status=status.HTTP_200_OK)
+
 @permission_classes([IsAuthenticated])
 class FilesForUser(viewsets.ModelViewSet):
     serializer_class = ArchivoSerializer
@@ -295,6 +329,29 @@ class BonosByUserListView(viewsets.ModelViewSet):
         else:
             salida['ok'] = False
             salida['error'] = 'fallo al obtener usuario'
+
+        servicioTraza(request, salida, BonosByUserListView.__name__)
+
+        return Response(salida, status=status.HTTP_200_OK)
+
+    def changeUserBonusAvtivate(self, request):
+        salida: dict = dict()
+
+        id_bono_in = request.data.get('id')
+
+        bono = self.get_queryset().filter(id= id_bono_in).get()
+
+        if not bono.activado:
+            otros = BonoUsuario.objects.filter(activado=True).exclude(id=id_bono_in)
+            if otros:
+                otros.update(activado=False)
+        try:
+            bono.activado = True
+            bono.save()
+            salida['ok'] = True
+        except Exception as ex:
+            salida['ok'] = False
+            salida['error'] = repr(ex)
 
         servicioTraza(request, salida, BonosByUserListView.__name__)
 
