@@ -19,6 +19,8 @@ export class ContenidoService {
   private anuncios_lateralrUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
   private anuncio_inferiorUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
   private bonosUrl = 'http://' + environment.ip+ ':80/contenido/bonos/';
+  private normas_ocrUrl = 'http://' + environment.ip+ ':80/contenido/normas-ocr/';
+  private normas_scrapyURL = 'http://' + environment.ip+ ':80/contenido/normas-scrapy/';
 
 
   constructor(private http: HttpClient) { }
@@ -70,6 +72,23 @@ export class ContenidoService {
         catchError(this.handleError('getAnuncioInferior', []))
       );
     }
+
+  getNormasOcr (): Observable<Contenido[]> {
+    return this.http.get<Contenido[]>(this.normas_ocrUrl)
+      .pipe(
+        tap(normas_ocr => this.log('fetched normas ocr')),
+        catchError(this.handleError('getNormasOcr', []))
+      );
+    }
+
+  getNormasScrapy (): Observable<Contenido[]> {
+    return this.http.get<Contenido[]>(this.normas_scrapyURL)
+      .pipe(
+        tap(normas_scrapy => this.log('fetched normas scrapy')),
+        catchError(this.handleError('getNormasScrapy', []))
+      );
+    }
+
 
   getBonos (): Observable<Bonos[]> {
     return this.http.get<Bonos[]>(this.bonosUrl)

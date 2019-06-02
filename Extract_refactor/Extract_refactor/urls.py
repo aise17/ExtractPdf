@@ -24,6 +24,11 @@ from rest_framework.schemas import SchemaGenerator
 from rest_framework.schemas.views import SchemaView
 from rest_framework.settings import api_settings
 
+import sys
+sys.path.append('../')
+
+from contenido.views import AndroidIndex
+
 API_TITLE = 'API Extract Pdf Documentation'
 API_DESCRIPTION = 'documentacion basada en el api Extract Pdf para apoyo a desarrolladores que deseen implemetar nuestros servicios en sus sistemas'
 
@@ -36,7 +41,9 @@ urlpatterns = [
     path('usuarios/', include('usuarios.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path('.well-known/assetlinks.json/', AndroidIndex.as_view(), name='faqs'),
+
     path('docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION,  authentication_classes = [],
-                                    permission_classes = [], public=True))
+                    permission_classes = [], public=True))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

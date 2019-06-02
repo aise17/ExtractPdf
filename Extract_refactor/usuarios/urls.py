@@ -54,6 +54,12 @@ request_by_year = views.RequestByYear.as_view({
     'get': 'requestbyYear'
 })
 
+campaing = views.MarketingCampaignView.as_view({
+    'post': 'lanzarMarketingCampaign',
+    'get': 'getMarketingCampaigns'
+})
+
+
 
 urlpatterns = [
     path('register/', register_uesr, name='register'),
@@ -67,5 +73,6 @@ urlpatterns = [
     path('bono_comprados_by_year/', get_user_bonus_for_year, name='bono_comprados'),
     path('getUserBonus/', getUserBonus, name='bono_comprados'),
     path('request-by-year/', request_by_year, name='request_by_year'),
+    path('campaing/', campaing, name='campaing'),
 
 ]

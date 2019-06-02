@@ -34,6 +34,11 @@ import { OcrContenidoComponent } from './ocr-contenido/ocr-contenido.component';
 import { ScrapyContenidoComponent } from './scrapy-contenido/scrapy-contenido.component';
 import { IrScrapyComponent } from './ir-scrapy/ir-scrapy.component';
 import { RequestByYearEstadisticaAdminComponent } from './request-by-year-estadistica-admin/request-by-year-estadistica-admin.component';
+import { MarcoFormOcrComponent } from './marco-form-ocr/marco-form-ocr.component';
+import { MarcoFormScrapyComponent } from './marco-form-scrapy/marco-form-scrapy.component';
+import { NormasOcrComponent } from './normas-ocr/normas-ocr.component';
+import { NormasScrapyComponent } from './normas-scrapy/normas-scrapy.component';
+import { GestionCampaingsComponent } from './gestion-campaings/gestion-campaings.component';
 
 
 
@@ -62,6 +67,11 @@ import { RequestByYearEstadisticaAdminComponent } from './request-by-year-estadi
     ScrapyContenidoComponent,
     IrScrapyComponent,
     RequestByYearEstadisticaAdminComponent,
+    MarcoFormOcrComponent,
+    MarcoFormScrapyComponent,
+    NormasOcrComponent,
+    NormasScrapyComponent,
+    GestionCampaingsComponent,
     
 
   ],

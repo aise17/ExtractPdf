@@ -1,0 +1,17 @@
+<mat-list> 
+  <mat-divider></mat-divider>
+    <h3 mat-subheader>Capaings</h3>
+    <mat-divider></mat-divider>
+    <mat-list-item *ngFor="let campaing of campaings">
+      <mat-icon mat-list-icon>folder</mat-icon>
+      <h4 mat-line>Asunto de la campaña: {{campaing.asunto}}</h4>
+      <button mat-raised-button (click)="selected(campaing)">Lanzar</button>
+
+      <p mat-line> Fecha de creacion: {{campaing.fecha_creacion | date}} </p>
+      <p mat-line> Campaña lanzada: {{campaing.lanzada}} </p>
+      <p mat-line [innerHTML]="campaing.contenido"></p>
+
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  
+  </mat-list>

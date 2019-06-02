@@ -11,8 +11,8 @@ from rest_framework import status
 from django.core.serializers import serialize
 
 from .serializers import ArchivoSerializer, UserSerializer, IpsFileSerializers, IncidenciaSerializers, \
-    BonoUsuarioSerializer
-from .models import Incidencia, BonoUsuario
+    BonoUsuarioSerializer, MarketingCampaignSerializers
+from .models import Incidencia, BonoUsuario, MarketingCampaign
 
 import sys
 sys.path.append("..")
@@ -98,6 +98,7 @@ class UserDetail(viewsets.ModelViewSet):
 
         return Response(salida, status=status.HTTP_200_OK)
 
+
 @permission_classes([AllowAny])
 class AuthentificacionUsuario(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -155,8 +156,6 @@ class RequestProcessOcrByUser(viewsets.ModelViewSet):
         servicioTraza(request, salida, RequestProcessOcrByUser.__name__)
 
         return Response(salida, status=status.HTTP_200_OK)
-
-
 
 
 @permission_classes([IsAuthenticated])
@@ -226,6 +225,7 @@ class RequestByYear(viewsets.ModelViewSet):
         servicioTraza(request, salida, RequestByYear.__name__)
 
         return Response(salida, status=status.HTTP_200_OK)
+
 
 @permission_classes([IsAuthenticated])
 class FilesForUser(viewsets.ModelViewSet):
@@ -307,6 +307,7 @@ class BonosShop(viewsets.ModelViewSet):
 
         return Response(salida, status=status.HTTP_201_CREATED)
 
+
 @permission_classes([AllowAny])
 class BonosByUserListView(viewsets.ModelViewSet):
     queryset = BonoUsuario.objects.all()
@@ -356,3 +357,77 @@ class BonosByUserListView(viewsets.ModelViewSet):
         servicioTraza(request, salida, BonosByUserListView.__name__)
 
         return Response(salida, status=status.HTTP_200_OK)
+
+
+@permission_classes([AllowAny])
+class ContactoView(viewsets.ModelViewSet):
+    queryset = Incidencia.objects.all()
+    serializer_class = IncidenciaSerializers
+
+    def sendCommunication(self, request, *args, **kwargs):
+        salida = dict()
+        incidencia = IncidenciaSerializers(data=request.data)
+        if (incidencia.is_valid()):
+
+            i = incidencia.save()
+
+            email = EmailMessage(incidencia.data.get('asunto'), incidencia.data.get('contenido'),
+                                 to=['sergio.martinez-g@hotmail.com'])
+            email.send()
+
+            salida['ok'] = True
+            salida['salida'] = incidencia.data
+        else:
+            salida['ok'] = False
+            salida['error'] = incidencia.error_messages
+
+        servicioTraza(request, salida, ContactoView.__name__)
+
+        return Response(salida, status=status.HTTP_201_CREATED)
+
+
+@permission_classes([AllowAny])
+class MarketingCampaignView(viewsets.ModelViewSet):
+    queryset = MarketingCampaign.objects.all()
+    serializer_class = MarketingCampaignSerializers
+
+    def lanzarMarketingCampaign(self, request):
+        salida:dict = dict()
+        if 'id' in request.data.keys():
+
+            id_campaing = request.data.get('id')
+            campaing = MarketingCampaign.objects.get(id=id_campaing)
+            user_list = campaing.usuarios.all().values('email')
+            user_list_query: iter = iter(user_list)
+            email_list: list = list()
+
+            for element_query in user_list_query:
+                email_list.append(element_query['email'])
+
+
+            try:
+                email = EmailMessage(campaing.asunto, campaing.contenido,
+                                     to=email_list)
+                email.send()
+
+                salida['ok'] = True
+                salida['salida'] = email_list
+            except Exception as ex:
+                salida['ok'] = False
+                salida['error'] = repr(ex)
+
+            return Response(salida, status=status.HTTP_201_CREATED)
+
+    def getMarketingCampaigns(self, request):
+        salida: dict = dict()
+        try:
+            campaings_list = self.serializer_class( self.get_queryset(), many=True )
+
+            salida['ok'] = True
+            salida['salida'] = campaings_list.data
+
+        except Exception as ex:
+            salida['error'] = repr(ex)
+
+        return Response(salida, status=status.HTTP_201_CREATED)
+

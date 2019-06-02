@@ -8,7 +8,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer
 
 from .models import AnuncioLateral, AnuncioInferior, AnuncioSuperior, Bono, Explicacion, QuienSomos, Faqs, \
-    ExplicacionScrapy
+    ExplicacionScrapy, NormasScrapy, NormasOcr
 from .serializers import AnuncioLateralSerializer, AnuncioInferiroSerializer, \
     AnuncioSuperiorSerializer, BonoSerializer, ExplicaionSerializer, QuienSomosSerializer, FaqsSerializer, \
     ExplicaionScrapySerializer
@@ -20,6 +20,25 @@ import sys
 sys.path.append('../')
 
 from ocr_api.utils import servicioTraza
+
+
+
+def procesarSalidaContenido(serializer_class, queryset):
+    salida = dict()
+
+    ser = serializer_class(queryset.all(), many=True)
+
+    salida['salida'] = ser.data
+
+    if salida['salida'].__len__() is queryset.all().__len__():
+        salida['ok'] = True
+    else:
+        salida['ok'] = False
+        salida['error'] = 'Fallo en la serializacion de archivos'
+
+    return salida
+
+
 
 @permission_classes([AllowAny])
 class AnuncioSuperiroView(generics.ListAPIView):
@@ -48,6 +67,18 @@ class AnuncioLateralView(generics.ListAPIView):
     queryset = AnuncioLateral.objects.filter(publicado=True)
     serializer_class = AnuncioLateralSerializer
 
+    def get(self, request, *args, **kwargs):
+        '''
+        get:
+        Return one list of bono's availables
+        '''
+
+        salida = procesarSalidaContenido(self.get_serializer_class(), self.get_queryset())
+
+        servicioTraza(request, salida, FaqsView.__name__)
+
+        return Response(salida, status=status.HTTP_200_OK)
+
 
 @permission_classes([AllowAny])
 class FaqsView(generics.ListAPIView):
@@ -60,26 +91,11 @@ class FaqsView(generics.ListAPIView):
         Return one list of bono's availables
         '''
 
-        salida = dict()
-
-        ser = FaqsSerializer(self.queryset.all(), many=True)
-
-        salida['salida'] = ser.data
-
-        if salida['salida'].__len__() is self.queryset.all().__len__():
-            salida['ok'] = True
-        else:
-            salida['ok'] = False
-            salida['error'] = 'Fallo en la serializacion de archivos'
+        salida = procesarSalidaContenido(self.get_serializer_class(), self.get_queryset())
 
         servicioTraza(request, salida, FaqsView.__name__)
 
         return Response(salida, status=status.HTTP_200_OK)
-
-
-
-
-# Todo
 
 
 @permission_classes([AllowAny])
@@ -93,17 +109,7 @@ class BonosView(generics.ListAPIView):
         Return one list of bono's availables
         '''
 
-        salida = dict()
-
-        ser = BonoSerializer(self.queryset.all(), many=True)
-
-        salida['salida'] = ser.data
-
-        if salida['salida'].__len__() is self.queryset.all().__len__():
-            salida['ok'] = True
-        else:
-            salida['ok'] = False
-            salida['error'] = 'Fallo en la serializacion de archivos'
+        salida = procesarSalidaContenido(self.get_serializer_class(), self.get_queryset())
 
         servicioTraza(request, salida, BonosView.__name__)
 
@@ -119,6 +125,18 @@ class ExplicacionInicio(generics.ListAPIView):
     queryset = Explicacion.objects.filter(publicado=True).order_by('fecha_publicacion')[:3]
     serializer_class = ExplicaionSerializer
 
+    def get(self, request, *args, **kwargs):
+        '''
+        get:
+        Return one list of bono's availables
+        '''
+
+        salida = procesarSalidaContenido(self.get_serializer_class(), self.get_queryset())
+
+        servicioTraza(request, salida, FaqsView.__name__)
+
+        return Response(salida, status=status.HTTP_200_OK)
+
 
 
 
@@ -131,6 +149,62 @@ class ExplicacionScrapyView(generics.ListAPIView):
     queryset = ExplicacionScrapy.objects.filter(publicado=True).order_by('fecha_publicacion')[:3]
     serializer_class = ExplicaionScrapySerializer
 
+    def get(self, request, *args, **kwargs):
+        '''
+        get:
+        Return one list of bono's availables
+        '''
+
+        salida = procesarSalidaContenido(self.get_serializer_class(), self.get_queryset())
+
+        servicioTraza(request, salida, FaqsView.__name__)
+
+        return Response(salida, status=status.HTTP_200_OK)
+
+
+@permission_classes([AllowAny])
+class NormasOcrView(generics.ListAPIView):
+    '''
+    get:
+    Return a list of contents for index page. These will try to explain the contents of the services
+    '''
+    queryset = NormasOcr.objects.filter(publicado=True).order_by('fecha_publicacion')[:3]
+    serializer_class = ExplicaionScrapySerializer
+
+    def get(self, request, *args, **kwargs):
+        '''
+        get:
+        Return one list of bono's availables
+        '''
+
+        salida = procesarSalidaContenido(self.get_serializer_class(), self.get_queryset())
+
+        servicioTraza(request, salida, FaqsView.__name__)
+
+        return Response(salida, status=status.HTTP_200_OK)
+
+
+@permission_classes([AllowAny])
+class NormasScrapyView(generics.ListAPIView):
+    '''
+    get:
+    Return a list of contents for index page. These will try to explain the contents of the services
+    '''
+    queryset = NormasScrapy.objects.filter(publicado=True).order_by('fecha_publicacion')[:3]
+    serializer_class = ExplicaionScrapySerializer
+
+    def get(self, request, *args, **kwargs):
+        '''
+        get:
+        Return one list of bono's availables
+        '''
+
+        salida = procesarSalidaContenido(self.get_serializer_class(), self.get_queryset())
+
+        servicioTraza(request, salida, FaqsView.__name__)
+
+        return Response(salida, status=status.HTTP_200_OK)
+
 @permission_classes([AllowAny])
 class QuienesSomosView(generics.ListAPIView):
     '''
@@ -140,12 +214,22 @@ class QuienesSomosView(generics.ListAPIView):
     queryset = QuienSomos.objects.filter(publicado=True)
     serializer_class = QuienSomosSerializer
 
+    def get(self, request, *args, **kwargs):
+        '''
+        get:
+        Return one list of bono's availables
+        '''
+
+        salida = procesarSalidaContenido(self.get_serializer_class(), self.get_queryset())
+
+        servicioTraza(request, salida, FaqsView.__name__)
+
+        return Response(salida, status=status.HTTP_200_OK)
+
 
 @permission_classes([AllowAny])
 class AndroidIndex(generics.ListAPIView):
-
-    def get(self, request, *args, **kwargs):
-        salida= [{
+    queryset = [{
         "relation": ["delegate_permission/common.handle_all_urls"],
         "target": {
             "namespace": "android_app",
@@ -155,6 +239,8 @@ class AndroidIndex(generics.ListAPIView):
         }
         }]
 
+    def get(self, request, *args, **kwargs):
+        salida = self.get_queryset()
         servicioTraza(request, salida, FaqsView.__name__)
 
         return Response(salida, status=status.HTTP_200_OK)

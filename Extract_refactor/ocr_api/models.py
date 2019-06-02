@@ -3,17 +3,7 @@ import uuid
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
 
-from ckeditor.fields import RichTextField, CKEditorWidget
 
-import sys
-sys.path.append('..')
-
-
-
-class Salida():
-    ok = False
-    errores = []
-    resut_text_ocr = ''
 
 
 

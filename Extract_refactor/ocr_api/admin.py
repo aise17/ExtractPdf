@@ -13,13 +13,13 @@ admin.site.site_title = 'HTML title from adminsitration'
 class FileAdmin(admin.ModelAdmin):
     list_display = ['id', 'descripcion','documento','dateTimeUp','proceso', 'usuario']
     list_filter = ('dateTimeUp', 'proceso')
-    search_fields = ['descripcion', 'id']
+    search_fields = ['descripcion', 'id','usuario']
 
 
 class IpsFilesAdmin(admin.ModelAdmin):
     list_display = ['id', 'file_id', 'fecha_conexion', 'ip', 'usuario', 'lat', 'lon', 'is_routeable' ]
     list_filter =['fecha_conexion']
-    search_fields = ['ip', 'id']
+    search_fields = ['ip', 'id', 'usuario']
 
 
 

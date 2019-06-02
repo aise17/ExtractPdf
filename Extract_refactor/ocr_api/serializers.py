@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from .models import File, IpsFiles, Traza, Salida
+from .models import File, IpsFiles, Traza
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
@@ -46,11 +46,6 @@ class IpsFileSerializers(serializers.ModelSerializer):
         model= IpsFiles
         fields = "__all__"
 
-
-class SalidaSerializers(serializers.ModelSerializer):
-    class Meta:
-        model= Salida
-        fields = "__all__"
 
 
 

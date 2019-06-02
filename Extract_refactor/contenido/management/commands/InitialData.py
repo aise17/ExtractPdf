@@ -7,13 +7,14 @@ from oauth2_provider.models import Application
 import  sys
 
 
+
 sys.path.append("../..")
 #from Extract_refactor.ocr_api.models import Explicacion
 #from Extract_refactor.ocr_api.serializers import ExplicaionSerializer
 
 
 from ocr_api.models import MinSizeDocumento
-from contenido.models import Explicacion, Bono, QuienSomos, ExplicacionScrapy
+from contenido.models import Explicacion, Bono, QuienSomos, ExplicacionScrapy, NormasOcr, NormasScrapy, Faqs
 from usuarios.models import BonoUsuario
 
 
@@ -36,6 +37,13 @@ class Command(BaseCommand):
         self.crearExplicacion1Scrapy()
         self.crearExplicacion2Scrapy()
         self.crearExplicacion3Scrapy()
+        self.crearNormaOcr1()
+        self.crearNormaOcr2()
+        self.crearNormaOcr3()
+        self.crearNormaScrapy1()
+        self.crearNormaScrapy2()
+        self.crearFaqs1()
+        self.crearFaqs2()
 
     def crearSuperuser(self):
         if (User.objects.filter(username='admin')):
@@ -345,3 +353,170 @@ class Command(BaseCommand):
             except:
                 print('[+][+] Tercera Explicacion Scrapy no es valida')
                 print('[+][+] Error producido -> ' + explicacion.contenido.__repr__())
+
+
+    def crearNormaOcr1(self):
+        if (NormasOcr.objects.filter(titulo='Extension de ficheros')):
+            print('[-] Primera Norma Ocr ya existe')
+
+        else:
+            norma = NormasOcr()
+            norma.titulo = 'Extension de ficheros'
+            norma.contenido = 'Los archivos que se suban solo podran ser PDF '
+            norma.fecha_publicacion = timezone.now()
+            norma.publicado = True
+            norma.titulo_imagen = 'imagen3'
+            norma.imagen = 'https://img-aws.ehowcdn.com/877x500p/photos.demandstudios.com/getty/article/142/136/89684413.jpg'
+
+            try:
+
+                norma.save()
+
+                print('[+] Primera Norma Ocr creada')
+            except:
+                print('[-][-] Primera Norma Ocr no es valida')
+                print('[-][-] Error al insertar norma -> ' + norma.contenido.__repr__())
+
+
+    def crearNormaOcr2(self):
+        if (NormasOcr.objects.filter(titulo='Tipo de proceso')):
+            print('[-] Segunda Norma Ocr ya existe')
+
+        else:
+            norma = NormasOcr()
+            norma.titulo = 'Tipo de proceso'
+            norma.contenido = 'En el despeglabe con el dibujo de engranaje se seleccionara el proceso por el que se pasara el documento para su mejor comprension. Se aconseja probar entre los tres ya que esta herramienta todavía eseta en proceso de desarroyo y dependera del tipo de imagen que se quiera procesar'
+            norma.fecha_publicacion = timezone.now()
+            norma.publicado = True
+            norma.titulo_imagen = 'imagen3'
+            norma.imagen = 'https://img-aws.ehowcdn.com/877x500p/photos.demandstudios.com/getty/article/142/136/89684413.jpg'
+
+            try:
+
+                norma.save()
+
+                print('[+] Segundo Norma Ocr creada')
+            except:
+                print('[-][-] Segunda Norma Ocr no es valida')
+                print('[-][-] Error al insertar norma -> ' + norma.contenido.__repr__())
+
+
+    def crearNormaOcr3(self):
+        if (NormasOcr.objects.filter(titulo='Acceso al servicio')):
+            print('[-] Tercera Norma Ocr ya existe')
+
+        else:
+            norma = NormasOcr()
+            norma.titulo = 'Acceso al servicio'
+            norma.contenido = 'los usuarios anonimos, o sin bonos podran subir ficheros de hasta 40kb gratuitamente, para acceder a este servicio ilimitadamente solo tiene que registrarse y adquirir uno de nuestros bonos con un bajo conste '
+            norma.fecha_publicacion = timezone.now()
+            norma.publicado = True
+            norma.titulo_imagen = 'imagen3'
+            norma.imagen = 'https://img-aws.ehowcdn.com/877x500p/photos.demandstudios.com/getty/article/142/136/89684413.jpg'
+
+            try:
+
+                norma.save()
+
+                print('[+] Tercera norma Ocr creada')
+            except:
+                print('[-][-] Tercera Norma Ocr no es valida')
+                print('[-][-] Error al insertar norma -> ' + norma.contenido.__repr__())
+
+
+
+    def crearNormaScrapy1(self):
+        if (NormasScrapy.objects.filter(titulo='Extension de ficheros')):
+            print('[-] Primera Norma Ocr ya existe')
+
+        else:
+            norma = NormasScrapy()
+            norma.titulo = 'Extension de ficheros'
+            norma.contenido = 'Los archivos que se suban solo podran ser Csv y contendras en la primera columna las urls que se van ha analizar '
+            norma.fecha_publicacion = timezone.now()
+            norma.publicado = True
+            norma.titulo_imagen = 'imagen3'
+            norma.imagen = 'https://img-aws.ehowcdn.com/877x500p/photos.demandstudios.com/getty/article/142/136/89684413.jpg'
+
+            try:
+
+                norma.save()
+
+                print('[+] Primera Norma Scrapy creada')
+            except:
+                print('[-][-] Primera Norma Scrapy no es valida')
+                print('[-][-] Error al insertar norma' + norma.contenido.__repr__())
+
+
+
+
+    def crearNormaScrapy2(self):
+        if (NormasScrapy.objects.filter(titulo='Acceso al servicio')):
+            print('[-] Segunda Norma Scrapy ya existe')
+
+        else:
+            norma = NormasScrapy()
+            norma.titulo = 'Acceso al servicio'
+            norma.contenido = 'los usuarios anonimos, o sin bonos podran subir ficheros de hasta 40kb gratuitamente, para acceder a este servicio ilimitadamente solo tiene que registrarse y adquirir uno de nuestros bonos con un bajo conste '
+            norma.fecha_publicacion = timezone.now()
+            norma.publicado = True
+            norma.titulo_imagen = 'imagen3'
+            norma.imagen = 'https://img-aws.ehowcdn.com/877x500p/photos.demandstudios.com/getty/article/142/136/89684413.jpg'
+
+            try:
+
+                norma.save()
+
+                print('[+] Segunda Norma Scrapy creada')
+            except:
+                print('[-][-] Segunda Noroma Scrapy no es valida')
+                print('[-][-] Error al insertar norma -> ' + norma.contenido.__repr__())
+
+
+
+    def crearFaqs1(self):
+        if (Faqs.objects.filter(titulo='Como usar nuestros servicios desde aplicaciones propias')):
+            print('[-] Primera Faq ya existe')
+
+        else:
+            faq = Faqs()
+            faq.titulo = 'Como usar nuestros servicios desde aplicaciones propias'
+            faq.contenido = 'Para usar nuestros servicios desde aplicacioines propias, hemos puesto a disposicion de los desarolladores una web swagger para facilitar la documetacion de nuestros servicios, en caso de dudas no dudes en contactar con nosotros atraves del apartado contacto de nuestra web'
+            faq.fecha_publicacion = timezone.now()
+            faq.publicado = True
+            faq.titulo_imagen = 'imagen3'
+            faq.imagen = 'https://img-aws.ehowcdn.com/877x500p/photos.demandstudios.com/getty/article/142/136/89684413.jpg'
+
+            try:
+
+                faq.save()
+
+                print('[+] Primera Faq creada')
+            except:
+                print('[-][-] Primera Faq no es valida')
+                print('[-][-] Error al insertar Faq' + faq.contenido.__repr__())
+
+
+
+
+    def crearFaqs2(self):
+        if (Faqs.objects.filter(titulo='Como contactar')):
+            print('[-] Segunda Faq ya existe')
+
+        else:
+            faq = Faqs()
+            faq.titulo = 'Como contactar'
+            faq.contenido = 'En el menu desplegable izquierdo podremos encontrar el apartado Contacto. No dude en contactar con nosotros para cualquier duda, no tardaremos en atender su mensaje'
+            faq.fecha_publicacion = timezone.now()
+            faq.publicado = True
+            faq.titulo_imagen = 'imagen3'
+            faq.imagen = 'https://img-aws.ehowcdn.com/877x500p/photos.demandstudios.com/getty/article/142/136/89684413.jpg'
+
+            try:
+
+                faq.save()
+
+                print('[+] Segunda Faq creada')
+            except:
+                print('[-][-] Segunda faq no es valida')
+                print('[-][-] Error al insertar Faq -> ' + faq.contenido.__repr__())

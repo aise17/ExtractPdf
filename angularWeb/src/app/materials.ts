@@ -19,6 +19,8 @@ import {ChartsModule} from 'ng2-charts';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 
@@ -32,10 +34,12 @@ import {MatExpansionModule} from '@angular/material/expansion';
   imports: [MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule,
      MatSidenavModule, MatCardModule, MatGridListModule, MatListModule, MatMenuModule,
      MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule, MatProgressBarModule,
-     MatDialogModule, ChartsModule, MatTableModule, MatPaginatorModule, MatExpansionModule],
+     MatDialogModule, ChartsModule, MatTableModule, MatPaginatorModule, MatExpansionModule, MatStepperModule,
+     MatTabsModule],
   exports: [MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule,
      MatSidenavModule, MatCardModule, MatGridListModule, MatListModule, MatMenuModule,
      MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule, MatProgressBarModule,
-     MatDialogModule, ChartsModule, MatTableModule, MatPaginatorModule, MatExpansionModule],
+     MatDialogModule, ChartsModule, MatTableModule, MatPaginatorModule, MatExpansionModule, MatStepperModule,
+     MatTabsModule],
 })
 export class MaterialModule { }

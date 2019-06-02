@@ -140,3 +140,30 @@ class Faqs(models.Model):
 
     def __str__(self):
         return self.titulo
+
+class NormasOcr(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    titulo = models.CharField(max_length=255, blank=True)
+    fecha_creacion = models.DateField(auto_now=True)
+    fecha_publicacion = models.DateField(null=True, blank=True)
+    publicado = models.BooleanField(default=False)
+    contenido = RichTextField(config_name='default')
+    titulo_imagen = models.CharField(max_length=255, blank=True)
+    imagen = models.URLField()
+
+    def __str__(self):
+        return self.titulo
+
+
+class NormasScrapy(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    titulo = models.CharField(max_length=255, blank=True)
+    fecha_creacion = models.DateField(auto_now=True)
+    fecha_publicacion = models.DateField(null=True, blank=True)
+    publicado = models.BooleanField(default=False)
+    contenido = RichTextField(config_name='default')
+    titulo_imagen = models.CharField(max_length=255, blank=True)
+    imagen = models.URLField()
+
+    def __str__(self):
+        return self.titulo

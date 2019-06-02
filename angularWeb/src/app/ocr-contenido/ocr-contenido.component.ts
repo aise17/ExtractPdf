@@ -22,9 +22,17 @@ export class OcrContenidoComponent implements OnInit {
     console.log('pulsado');
 
     this.service.getContenido()
-      .subscribe(entrada => {
-        if(entrada !== undefined)
-        this.result = entrada
+      .subscribe(res => {
+        if(res !== undefined)
+        console.log('resultado - >' + res['ok']);
+        console.log('resultado - >' + res['salida']);
+          if (res['ok'] === true){
+            this.result = res['salida'];
+            console.log(this.result)
+            console.log('Los bonos optenidos en la peticion son -> ' + this.result);
+          }else if(res['ok'] === false){
+            this.openDialogError(res['error'])
+          }
         else{
           this.openDialogError('error al consegir contenido')
         }

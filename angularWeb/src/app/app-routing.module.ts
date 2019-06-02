@@ -12,10 +12,12 @@ import { HeatmapComponent } from './heatmap/heatmap.component';
 import { AdminComponent } from './admin/admin.component';
 import { GestionBonosComponent } from './gestion-bonos/gestion-bonos.component';
 import { FormScrapyComponent } from './form-scrapy/form-scrapy.component';
+import { MarcoFormOcrComponent } from './marco-form-ocr/marco-form-ocr.component';
+import { MarcoFormScrapyComponent } from './marco-form-scrapy/marco-form-scrapy.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/index', pathMatch: 'full' },
-  {path: 'ocr', component: FormOcrComponent },
+  {path: 'ocr', component: MarcoFormOcrComponent },
   {path: 'index', component: ContenidoComponent },
   {path: 'usuario', component: UsuarioDetalleComponent },
   {path: 'gestio-archivos', component: GestionDocumentosComponent },
@@ -26,7 +28,7 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent},
   {path: 'map', component: HeatmapComponent},
   {path: 'gest-bon', component: GestionBonosComponent},
-  {path: 'scrapy', component: FormScrapyComponent},
+  {path: 'scrapy', component: MarcoFormScrapyComponent},
 ];
 
 @NgModule({

@@ -11,7 +11,7 @@ import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
 })
 export class QuienSomosComponent implements OnInit {
 
-  public contenido: QuienSomos;
+  public result: QuienSomos;
 
   constructor(public quienSomosService: QuienSomosService, public dialog: MatDialog) { }
 
@@ -22,8 +22,17 @@ export class QuienSomosComponent implements OnInit {
   getContenido() {
     this.quienSomosService.getContenido()
     .subscribe(res => {
-      console.log(res);
-      this.contenido = res[0];
+      if(res !== undefined)
+      console.log('resultado - >' + res['ok']);
+        if (res['ok'] === true){
+          this.result = res['salida'][0];
+          console.log(this.result)
+        }else if(res['ok'] === false){
+          this.openDialogError(res['error'])
+        }
+      else{
+        this.openDialogError('error al consegir contenido')
+      }
     });
   }
 

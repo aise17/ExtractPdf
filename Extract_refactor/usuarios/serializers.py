@@ -6,7 +6,7 @@ sys.path.append("..")
 
 from contenido.models import Bono
 from ocr_api.models import File, IpsFiles
-from .models import Incidencia, BonoUsuario
+from .models import Incidencia, BonoUsuario, MarketingCampaign
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -99,6 +99,10 @@ class BonoUsuarioSerializer(serializers.ModelSerializer):
         return int(num)
 
 
+class MarketingCampaignSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = MarketingCampaign
+        fields = "__all__"
 
 
 

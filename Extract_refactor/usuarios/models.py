@@ -6,6 +6,8 @@ sys.path.append('../')
 from django.db import models
 import uuid
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
+
 
 from contenido.models import Bono
 
@@ -39,4 +41,20 @@ class BonoUsuario(models.Model):
             otros.update(activado=False)
 
         super(BonoUsuario, self).save(*args, **kwargs)
+
+
+class MarketingCampaign(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    usuarios = models.ManyToManyField(User)
+    asunto = models.CharField(max_length=100)
+    contenido = RichTextField(config_name='default')
+    fecha_creacion = models.DateField(auto_now=True)
+    lanzada = models.BooleanField(default=True)
+    fecha_publicacion = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return self.asunto
+
+
+
 

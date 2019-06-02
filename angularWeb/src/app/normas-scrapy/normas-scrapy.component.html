@@ -1,0 +1,11 @@
+<mat-card>
+    <mat-card-title>Normas basicas de uso:</mat-card-title>
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <mat-step *ngFor="let norma of result">
+          <ng-template matStepLabel>{{norma.titulo}}</ng-template>
+        <p>{{norma.contenido}}</p>
+      </mat-step>
+  
+    </mat-horizontal-stepper>
+  </mat-card>
+  

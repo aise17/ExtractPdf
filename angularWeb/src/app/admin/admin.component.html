@@ -3,19 +3,28 @@
 
   <div class="base">
 
-    <div class="mapa-contenedor">
-      <app-heatmap></app-heatmap>
-    </div>
+    <mat-tab-group>
 
-    <div class="estadisticas">
-      <div class="estadisticas-contenedor">
-          <app-compra-bonos-estadistica-admin></app-compra-bonos-estadistica-admin>
-         
-      </div>
-      <div class="estadisticas-contenedor">
-        <app-request-by-year-estadistica-admin></app-request-by-year-estadistica-admin>
-      </div>
-    </div>
+      <mat-tab label="Estadisticas">
+        <div class="mapa-contenedor">
+          <app-heatmap></app-heatmap>
+        </div>
+
+        <div class="estadisticas">
+          <div class="estadisticas-contenedor">
+              <app-compra-bonos-estadistica-admin></app-compra-bonos-estadistica-admin>
+            
+          </div>
+          <div class="estadisticas-contenedor">
+            <app-request-by-year-estadistica-admin></app-request-by-year-estadistica-admin>
+          </div>
+        </div>
+
+      </mat-tab>
+      <mat-tab label="Marketing">
+        <app-gestion-campaings></app-gestion-campaings>
+      </mat-tab>
+    </mat-tab-group>
 
   </div>
 

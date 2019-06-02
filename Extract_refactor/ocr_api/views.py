@@ -1,5 +1,4 @@
 from datetime import date
-import time
 
 from rest_framework import generics, viewsets
 from rest_framework.decorators import permission_classes, detail_route
@@ -93,9 +92,9 @@ class WebScrapyView(viewsets.ModelViewSet):
 
             salida['salida'] =list()
 
-            result = scrapy.delay(nombre)
+        result = scrapy.delay(nombre)
 
-            salida['salida'] = result.get()
+        salida['salida'] = result.get()
 
         if salida['salida'] is not None:
 

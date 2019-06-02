@@ -25,7 +25,11 @@ export class ScrapyContenidoComponent implements OnInit {
     this.service.getContenidoScrapy()
       .subscribe(entrada => {
         if(entrada !== undefined)
-        this.result = entrada
+        if(entrada['ok'] == true){
+          this.result = entrada['salida']
+        }else if(entrada['ok'] == false){
+          this.openDialogError(entrada['error'])
+        }
         else{
           this.openDialogError('error al consegir contenido')
         }

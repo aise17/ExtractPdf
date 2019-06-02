@@ -1,7 +1,7 @@
 
 from rest_framework import serializers
 from .models import AnuncioInferior, AnuncioSuperior, AnuncioLateral, QuienSomos, Bono, Explicacion, Faqs, \
-     ExplicacionScrapy
+    ExplicacionScrapy, NormasOcr, NormasScrapy
 
 
 class AnuncioLateralSerializer(serializers.ModelSerializer):
@@ -57,4 +57,16 @@ class FaqsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model= Faqs
+        fields = "__all__"
+
+class NormasOcrSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model= NormasOcr
+        fields = "__all__"
+
+class NomrmasScrapyerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model= NormasScrapy
         fields = "__all__"
