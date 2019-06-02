@@ -14,6 +14,23 @@
 
 }
 
+@media only screen and (max-width: 1200px) {
+
+    .base{
+        top: -10px;
+    }
+
+    .estadisticas{
+        flex-direction: column;
+        
+    }
+    .estadisticas-contenedor{
+        width: 99%;
+        margin: 10px;
+    }
+
+}
+
 @media only screen and (max-width: 600px) {
 
     .base{
