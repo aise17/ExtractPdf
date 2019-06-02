@@ -60,8 +60,8 @@ export class CompraBonosEstadisticaAdminComponent implements OnInit {
   getBonosUsuariobyYear(){
     this.adminService.getUserBonusByYear(sessionStorage.getItem('api_token'))
     .subscribe(res => {
-      if(res != undefined){
-        if(res['ok'] == true){
+      if(res !== undefined){
+        if(res['ok'] === true){
           console.log(res)
           this.dict = res;
           for (const key in this.dict) {

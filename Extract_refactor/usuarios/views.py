@@ -319,7 +319,7 @@ class BonosByUserListView(viewsets.ModelViewSet):
 
         user = User.objects.get(id=request.data.get('usuario'))
         print('[]þ]þ]þ] usuario {} '.format(request.data.get('usuario')))
-        bonos = self.queryset.filter(usuario=user)
+        bonos = self.queryset.filter(usuario=user).order_by('activado').reverse()
 
         ser = BonoUsuarioSerializer(bonos, many=True)
 
