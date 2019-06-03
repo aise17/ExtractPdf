@@ -20,4 +20,4 @@ api
 
 Angular
 
-    ssh -vvv -i ec2.pem ec2-user@ec2-18-224-96-17.us-east-2.compute.amazonaws.com
+    ssh -vvv -i ec2.pem ec2-user@ec2-13-59-155-174.us-east-2.compute.amazonaws.com
