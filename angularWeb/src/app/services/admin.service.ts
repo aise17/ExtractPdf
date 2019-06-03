@@ -6,6 +6,7 @@ import { IpFile } from '../models/IpFile.model';
 import { Observable, of } from 'rxjs';
 import { BonoUsuario } from '../models/Bonousuario.model';
 import { Campaing } from '../models/campaing.model';
+import { envi } from '../env';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,11 @@ import { Campaing } from '../models/campaing.model';
 export class AdminService {
 
   
-  private contactoUrl = 'http://' + environment.ip+ ':80/file/coor/';
-  private bonosUsuariosbyYearUrl = 'http://' + environment.ip+ ':80/usuarios/bono_comprados_by_year/';
-  private requesbyYearUrl = 'http://' + environment.ip+ ':80/usuarios/request-by-year/';
-  private launchCampaingUrl = 'http://' + environment.ip+ ':80/usuarios/campaing/';
-  private getCampaingsrUrl = 'http://' + environment.ip+ ':80/usuarios/campaing/';
+  private contactoUrl = 'http://' + envi.ip+ ':80/file/coor/';
+  private bonosUsuariosbyYearUrl = 'http://' + envi.ip+ ':80/usuarios/bono_comprados_by_year/';
+  private requesbyYearUrl = 'http://' + envi.ip+ ':80/usuarios/request-by-year/';
+  private launchCampaingUrl = 'http://' + envi.ip+ ':80/usuarios/campaing/';
+  private getCampaingsrUrl = 'http://' + envi.ip+ ':80/usuarios/campaing/';
 
 
   constructor(private http: HttpClient) { }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { envi } from '../env';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class BonosService {
 
 
-  private BonosUrl = 'http://' + environment.ip+ ':80/contenido/bonos';
+  private BonosUrl = 'http://' + envi.ip+ ':80/contenido/bonos';
 
 
   constructor() { }

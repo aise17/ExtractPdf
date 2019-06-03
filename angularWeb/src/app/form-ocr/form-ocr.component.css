@@ -1,3 +1,9 @@
+
+.base{
+  min-height: 50%;
+}
+
+
 .imagenP{
   position: relative;
   float: left;

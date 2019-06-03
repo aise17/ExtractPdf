@@ -1,10 +1,4 @@
-export class env{
-    ip :string;
-    constructor(){
-        this.ip = 'localhost';
-    }
-
-    public getIp(){
-        return this.ip;
-    }
-}
+export const envi = {
+    ip: 'analyzer.tk',
+    //ip: "localhost"
+  };

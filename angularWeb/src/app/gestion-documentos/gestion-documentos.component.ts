@@ -67,7 +67,7 @@ export class GestionDocumentosComponent implements OnInit {
     this.usuario.first_name = sessionStorage.getItem('first_name');
     this.usuario.last_name = sessionStorage.getItem('last_name');
     this.usuario.email = sessionStorage.getItem('email');
-    this.usuario.usuario = this.usuario.id;
+    this.usuario.usuario = sessionStorage.getItem('id');
     this.getFiles();
   }
 

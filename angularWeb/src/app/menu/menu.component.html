@@ -9,6 +9,8 @@
         <mat-icon  class="icon">menu</mat-icon>
       </button>
       <span>Platform Analyzer</span>
+      
+      <img src="../../assets/logo.png" class="imagen">
       <span class="spacer"></span>
       <span *ngIf='user'>{{user.username }}</span>
       <button mat-button [matMenuTriggerFor]="menu" *ngIf='user; else notUser'>

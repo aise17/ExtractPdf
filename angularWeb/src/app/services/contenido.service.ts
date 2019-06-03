@@ -6,21 +6,22 @@ import { tap, catchError } from 'rxjs/operators';
 import { Bonos } from '../models/bonos.model.';
 import { environment } from 'src/environments/environment';
 import { Faqs } from '../models/faqs.model';
+import { envi } from '../env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContenidoService {
 
-  private contenidoUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
-  private contenidoScrapyUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-scrapy/';
-  private faqsUrl = 'http://' + environment.ip+ ':80/contenido/faqs/';
-  private anuncios_superiorUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
-  private anuncios_lateralrUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
-  private anuncio_inferiorUrl = 'http://' + environment.ip+ ':80/contenido/explicacion-inicio/';
-  private bonosUrl = 'http://' + environment.ip+ ':80/contenido/bonos/';
-  private normas_ocrUrl = 'http://' + environment.ip+ ':80/contenido/normas-ocr/';
-  private normas_scrapyURL = 'http://' + environment.ip+ ':80/contenido/normas-scrapy/';
+  private contenidoUrl = 'http://' + envi.ip+ ':80/contenido/explicacion-inicio/';
+  private contenidoScrapyUrl = 'http://' + envi.ip+ ':80/contenido/explicacion-scrapy/';
+  private faqsUrl = 'http://' + envi.ip+ ':80/contenido/faqs/';
+  private anuncios_superiorUrl = 'http://' + envi.ip+ ':80/contenido/explicacion-inicio/';
+  private anuncios_lateralrUrl = 'http://' + envi.ip+ ':80/contenido/explicacion-inicio/';
+  private anuncio_inferiorUrl = 'http://' + envi.ip+ ':80/contenido/explicacion-inicio/';
+  private bonosUrl = 'http://' + envi.ip+ ':80/contenido/bonos/';
+  private normas_ocrUrl = 'http://' + envi.ip+ ':80/contenido/normas-ocr/';
+  private normas_scrapyURL = 'http://' + envi.ip+ ':80/contenido/normas-scrapy/';
 
 
   constructor(private http: HttpClient) { }

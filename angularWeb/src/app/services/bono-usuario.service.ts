@@ -5,6 +5,7 @@ import { Contacto } from '../models/contacto.model';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { BonoUsuario } from '../models/Bonousuario.model';
 import { environment } from 'src/environments/environment';
+import { envi } from '../env';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class BonoUsuarioService {
 
    
-  private bono_usuarioUrl = 'http://' + environment.ip+ ':80/usuarios/comprar_bono/';
+  private bono_usuarioUrl = 'http://' + envi.ip+ ':80/usuarios/comprar_bono/';
 
 
   constructor(private http: HttpClient) { }

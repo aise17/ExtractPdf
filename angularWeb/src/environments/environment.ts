@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  ip: 'analyzer.tk',
-  //ip: "localhost"
+
 };
 
 /*

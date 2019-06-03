@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { QuienSomos } from '../models/quienSomos.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { envi } from '../env';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ import { environment } from 'src/environments/environment';
 export class QuienSomosService {
 
   
-  private explicacionUrl = 'http://' + environment.ip+ ':80/contenido/quien-somos/';
+  private explicacionUrl = 'http://' + envi.ip+ ':80/contenido/quien-somos/';
 
 
   constructor(private http: HttpClient) { }

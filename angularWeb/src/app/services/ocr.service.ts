@@ -5,6 +5,7 @@ import { Ocr } from '../models/ocr.model';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { JsonOcr } from '../models/JsonOcr.model';
 import { environment } from 'src/environments/environment';
+import { envi } from '../env';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ import { environment } from 'src/environments/environment';
 export class OcrService {
 
   
-  private fileUrl = 'http://' + environment.ip+ ':80/file/upload/';
-  private explicacionUrl = 'http://' + environment.ip+ ':80/file/explicacion/?format=json';
+  private fileUrl = 'http://' + envi.ip+ ':80/file/upload/';
+  private explicacionUrl = 'http://' + envi.ip+ ':80/file/explicacion/?format=json';
 
 
   constructor(private http: HttpClient) { }

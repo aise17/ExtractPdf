@@ -15,6 +15,9 @@ import { FormScrapyComponent } from './form-scrapy/form-scrapy.component';
 import { MarcoFormOcrComponent } from './marco-form-ocr/marco-form-ocr.component';
 import { MarcoFormScrapyComponent } from './marco-form-scrapy/marco-form-scrapy.component';
 
+
+
+
 const routes: Routes = [
   {path: '', redirectTo: '/index', pathMatch: 'full' },
   {path: 'ocr', component: MarcoFormOcrComponent },

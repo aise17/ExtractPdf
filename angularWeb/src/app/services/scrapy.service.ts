@@ -5,6 +5,7 @@ import { Ocr } from '../models/ocr.model';
 import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { JsonOcr } from '../models/JsonOcr.model';
+import { envi } from '../env';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { JsonOcr } from '../models/JsonOcr.model';
 export class ScrapyService {
 
 
-  private scrapyUrl = 'http://' + environment.ip+ ':80/file/scrapy/';
+  private scrapyUrl = 'http://' + envi.ip+ ':80/file/scrapy/';
 
 
   constructor(private http: HttpClient) { }

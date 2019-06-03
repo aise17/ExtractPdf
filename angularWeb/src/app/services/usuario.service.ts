@@ -7,6 +7,7 @@ import { UserRequest } from '../models/userRequest.model';
 
 import { environment } from 'src/environments/environment';
 import { BonoUsuario } from '../models/Bonousuario.model';
+import { envi } from '../env';
 
 
 
@@ -21,14 +22,14 @@ export class UsuarioService {
   
   constructor(private http: HttpClient) { }
 
-  private loginUrl = 'http://' + environment.ip+ ':80/usuarios/login/';
-  private userChangeUrl = 'http://' + environment.ip + ':80/usuarios/user/';
-  private userRequestUrl = 'http://' + environment.ip + ':80/usuarios/request_for_user/';
-  private logoutUrl = 'http://' + environment.ip + ':80/usuarios/logout/'; 
-  private filesUrl = 'http://' + environment.ip + ':80/usuarios/list_files/';
-  private registerUrl = 'http://' + environment.ip + ':80/usuarios/register/';
-  private userBonusUrl = 'http://' + environment.ip + ':80/usuarios/getUserBonus/';
-  private changeBonusActiveUrl = 'http://' + environment.ip + ':80/usuarios/getUserBonus/';
+  private loginUrl = 'http://' + envi.ip+ ':80/usuarios/login/';
+  private userChangeUrl = 'http://' + envi.ip + ':80/usuarios/user/';
+  private userRequestUrl = 'http://' + envi.ip + ':80/usuarios/request_for_user/';
+  private logoutUrl = 'http://' + envi.ip + ':80/usuarios/logout/'; 
+  private filesUrl = 'http://' + envi.ip + ':80/usuarios/list_files/';
+  private registerUrl = 'http://' + envi.ip + ':80/usuarios/register/';
+  private userBonusUrl = 'http://' + envi.ip + ':80/usuarios/getUserBonus/';
+  private changeBonusActiveUrl = 'http://' + envi.ip + ':80/usuarios/getUserBonus/';
 
 
 
