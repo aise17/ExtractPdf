@@ -11,5 +11,5 @@ python:
   - "3.6"
 install:
   - pip install -r Extract_refactor/config/requirements.txt
-#script:
- # - "pytest"
+script:
+  - "python manage.py"
