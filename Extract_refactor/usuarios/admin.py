@@ -16,10 +16,10 @@ class MarketingCampaignAdmin(admin.ModelAdmin):
 
 
 class BonoUsuarioAdmin(admin.ModelAdmin):
-    list_display = ['id', 'usuario', 'bono', 'activado', 'fecha_creacion' ]
-    list_filter =['usuario', 'bono', 'fecha_creacion']
+    list_display = ['id', 'usuario', 'bono', 'activado', 'fecha_creacion','peticiones_restantes']
+    list_filter =['bono', 'fecha_creacion']
     list_editable = ['activado']
-    search_fields = ['usuario', 'bono', 'fecha_creacion', 'peticiones_consumidas']
+    search_fields = ['usuario__username', 'bono__id', 'fecha_creacion', 'peticiones_restantes']
 
 
 admin.site.register(MarketingCampaign, MarketingCampaignAdmin)

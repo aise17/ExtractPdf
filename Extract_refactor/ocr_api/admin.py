@@ -13,13 +13,13 @@ admin.site.site_title = 'HTML title from adminsitration'
 class FileAdmin(admin.ModelAdmin):
     list_display = ['id', 'descripcion','documento','dateTimeUp','proceso', 'usuario']
     list_filter = ('dateTimeUp', 'proceso')
-    search_fields = ['descripcion', 'id','usuario']
+    search_fields = ['descripcion', 'id','usuario__username']
 
 
 class IpsFilesAdmin(admin.ModelAdmin):
     list_display = ['id', 'file_id', 'fecha_conexion', 'ip', 'usuario', 'lat', 'lon', 'is_routeable' ]
     list_filter =['fecha_conexion']
-    search_fields = ['ip', 'id', 'usuario']
+    search_fields = ['ip', 'id', 'usuario__username']
 
 
 
@@ -27,7 +27,7 @@ class TrazaAdmin(admin.ModelAdmin):
     list_display = ['id', 'funcion_llamada', 'datos_in', 'datos_out', 'usuario', 'fecha_creacion', 'error' ]
     list_filter =['funcion_llamada', 'fecha_creacion']
     list_editable = ['error']
-    search_fields = ['usuario', 'fecha_creacion']
+    search_fields = ['usuario__username', 'fecha_creacion']
 
 
 

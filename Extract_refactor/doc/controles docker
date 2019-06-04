@@ -6,6 +6,30 @@ controles para docker
 
     docker rm $(docker ps -a -q)
 
-->
+-> Eliminar todas las imagenes
 
     docker rmi $(docker images -a)
+
+
+-> Crear imagen angular
+
+
+        docker build . -t myapp
+
+
+-> tagear imagen
+
+
+        docker tag myapp aise17/angular
+
+
+-> suibir proyecto a repositorio docker
+
+
+        docker push aise17/angular
+
+
+-> correr imagen angular
+
+
+        docker run aise17/angular
